@@ -4,10 +4,18 @@
   grid-template-columns: 15vw 1fr;
 }
 
-nav {
+sidebar {
   grid-column: 1/2;
   background: navy;
   color: #fff;
   position: sticky;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+sidebar a {
+  margin-top: 20px;
+  color: #fff;
+  text-decoration: none;
 }

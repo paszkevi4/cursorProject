@@ -1,4 +1,7 @@
-import React from 'react';
+import React from "react";
+import { NavLink, Route, HashRouter } from "react-router-dom";
+import Charges from "./Charges";
+import Incomes from "./Incomes";
 
 // in props you have two arrays of objects:
 
@@ -14,9 +17,36 @@ import React from 'react';
 
 const Categories = (props) => {
   return (
-    <>
-      <div>CATEGORIES</div>
-    </>
+    <HashRouter>
+      <div>
+        <div>
+          <div>
+            <h2>Categories</h2>
+          </div>
+          <div>
+            <div>Balance</div>
+            <div>$2,652.07</div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <NavLink to="/categories/charges">Charges</NavLink>
+            <NavLink to="/categories/incomes">Incomes</NavLink>
+          </div>
+          <button>Add more</button>
+        </div>
+        <div>
+          <Route
+            path="/categories/charges"
+            render={() => <Charges props={props.chargeCategories} />}
+          />
+          <Route
+            path="/categories/incomes"
+            render={() => <Incomes props={props.incomeCategories}/>}
+          />
+        </div>
+      </div>
+    </HashRouter>
   );
 };
 

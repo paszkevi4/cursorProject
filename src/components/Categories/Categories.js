@@ -1,7 +1,5 @@
-
-import React from "react";
-import { NavLink, Route, HashRouter, Redirect } from "react-router-dom";
-
+import React from 'react';
+import { NavLink, Route, HashRouter, Redirect } from 'react-router-dom';
 
 import Charges from './Charges';
 import Incomes from './Incomes';
@@ -15,10 +13,16 @@ import { makeStyles } from '@material-ui/core/styles';
 //
 //
 //
-// to set new object use the following:
+// for charge CRUD use the following:
+
+// props.createChargeCategory({newObj})
+// props.updateChargeCategory(2, {newObj});
+// props.deleteChargeCategory(2);
+//
+//
+// for income CRUD use the following:
 
 // props.setIncomeCategory({newObj})
-// props.setChargeCategory({newObj})
 
 const useStyles = makeStyles({
   Categories: {
@@ -89,14 +93,8 @@ const Categories = (props) => {
           <Route exact path="/categories/">
             <Redirect to="/categories/charges" />
           </Route>
-          <Route
-            path="/categories/charges"
-            render={() => <Charges props={props} />}
-          />
-          <Route
-            path="/categories/incomes"
-            render={() => <Incomes props={props} />}
-          />
+          <Route path="/categories/charges" render={() => <Charges props={props} />} />
+          <Route path="/categories/incomes" render={() => <Incomes props={props} />} />
         </div>
       </div>
     </HashRouter>

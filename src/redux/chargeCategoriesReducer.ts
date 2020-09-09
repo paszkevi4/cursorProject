@@ -1,3 +1,5 @@
+import { icons } from './iconsReducer';
+
 const SET_CATEGORY = 'SET_CATEGORY';
 const UPDATE_CATEGORY = 'UPDATE_CATEGORY';
 const DELETE_CATEGORY = 'DELETE_CATEGORY';
@@ -6,7 +8,7 @@ type chargeCategoryType = {
   name: string;
   description: string;
   date: Date | string;
-  icon: number;
+  icon: typeof icons.Waves;
 };
 
 type createChargeCategoryACType = {
@@ -31,16 +33,26 @@ type actionType =
   | deleteChargeCategoryACType;
 
 let initialState: Array<chargeCategoryType> = [
-  { name: 'Food', description: 'For food', date: '22/08/20', icon: 12 },
-  { name: 'Clothes', description: 'For clothes', date: '23/08/20', icon: 7 },
-  { name: 'Restoraunts', description: '', date: '24/08/20', icon: 8 },
+  {
+    name: 'Food',
+    description: 'For food',
+    date: new Date(2020, 7, 26),
+    icon: icons.LocalDining,
+  },
+  {
+    name: 'Clothes',
+    description: 'For clothes',
+    date: new Date(2020, 7, 25),
+    icon: icons.EmojiSymbols,
+  },
+  { name: 'Restoraunts', description: '', date: new Date(2020, 7, 24), icon: icons.Fastfood },
   {
     name: 'Utility bills',
     description: 'Its a looooooooooooooooooooooooooooooong description',
-    date: '25/08/20',
-    icon: 2,
+    date: new Date(2020, 7, 23),
+    icon: icons.AllInbox,
   },
-  { name: 'Pets', description: 'For smth else', date: '26/08/20', icon: 14 },
+  { name: 'Pets', description: 'For smth else', date: new Date(2020, 7, 21), icon: icons.Pets },
 ];
 
 const chargeCategoriesReducer = (

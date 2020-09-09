@@ -1,5 +1,7 @@
 import React from "react";
+import ReactDOM from 'react-dom'
 
+import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -7,24 +9,50 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 
+const useStyles = makeStyles({
+  categoryNameBlock: {
+    display: "flex",
+    alignItems: "center",
+  },
+  categoryIcon: {
+    marginRight: "10px",
+    display: "flex",
+    alignItems: "center",
+    color: "grey",
+  },
+  categoryName: {
+    display: "flex",
+  },
+});
+
 const Category = ({ name, description, date, icon }) => {
+  const classes = useStyles();
+
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (e) => {
     setAnchorEl(e.currentTarget);
-    console.log(e.currentTarget);
+    console.log(e.target.closest('th'))
   };
 
   const handleClose = (e) => {
     console.log(e.currentTarget);
+    if (e.target.innerText === "Delete") {
+      console.log(e.target.parentNode.parentNode.parentNode);
+      // console.log(ReactDOM.findDOMNode(this))
+
+    }
+
     setAnchorEl(null);
   };
 
   return (
     <TableRow>
       <TableCell component="th" scope="row">
-        {icon}
-        {name}
+        <div className={classes.categoryNameBlock}>
+          <div className={classes.categoryIcon}>{icon}</div>
+          <div className={classes.categoryName}>{name}</div>
+        </div>
       </TableCell>
       <TableCell>{description}</TableCell>
       <TableCell>{date}</TableCell>

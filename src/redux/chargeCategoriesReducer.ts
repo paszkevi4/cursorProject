@@ -9,7 +9,7 @@ type chargeCategoryType = {
   icon: number;
 };
 
-type setChargeCategoryACType = {
+type createChargeCategoryACType = {
   type: typeof SET_CATEGORY;
   category: chargeCategoryType;
 };
@@ -25,6 +25,11 @@ type deleteChargeCategoryACType = {
   index: number;
 };
 
+type actionType =
+  | createChargeCategoryACType
+  | updateChargeCategoryACType
+  | deleteChargeCategoryACType;
+
 let initialState: Array<chargeCategoryType> = [
   { name: 'Food', description: 'For food', date: '22/08/20', icon: 12 },
   { name: 'Clothes', description: 'For clothes', date: '23/08/20', icon: 7 },
@@ -38,7 +43,10 @@ let initialState: Array<chargeCategoryType> = [
   { name: 'Pets', description: 'For smth else', date: '26/08/20', icon: 14 },
 ];
 
-const chargeCategoriesReducer = (state = initialState, action: any): Array<chargeCategoryType> => {
+const chargeCategoriesReducer = (
+  state = initialState,
+  action: actionType,
+): Array<chargeCategoryType> => {
   switch (action.type) {
     case SET_CATEGORY:
       return [...state, action.category];
@@ -53,7 +61,9 @@ const chargeCategoriesReducer = (state = initialState, action: any): Array<charg
   }
 };
 
-export const createChargeCategoryAC = (category: chargeCategoryType): setChargeCategoryACType => ({
+export const createChargeCategoryAC = (
+  category: chargeCategoryType,
+): createChargeCategoryACType => ({
   type: SET_CATEGORY,
   category,
 });

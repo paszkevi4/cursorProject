@@ -15,14 +15,16 @@ import { makeStyles } from '@material-ui/core/styles';
 //
 // for charge CRUD use the following:
 
-// props.createChargeCategory({newObj})
-// props.updateChargeCategory(2, {newObj});
-// props.deleteChargeCategory(2);
+// props.createChargeCategory({newCategory})
+// props.updateChargeCategory(index, {updatedCategory});
+// props.deleteChargeCategory(index);
 //
 //
 // for income CRUD use the following:
 
-// props.setIncomeCategory({newObj})
+// props.createIncomeCategory({newCategory})
+// props.updateIncomeCategory(index, {updatedCategory})
+// props.deleteIncomeCategory(index)
 
 const useStyles = makeStyles({
   Categories: {

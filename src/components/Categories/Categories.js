@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, Route, HashRouter } from "react-router-dom";
+import { NavLink, Route, HashRouter, Redirect } from "react-router-dom";
 
 import Charges from "./Charges";
 import Incomes from "./Incomes";
@@ -86,6 +86,9 @@ const Categories = (props) => {
           </Button>
         </div>
         <div>
+          <Route exact path="/categories/">
+            <Redirect to="/categories/charges" />
+          </Route>
           <Route
             path="/categories/charges"
             render={() => <Charges props={props} />}
@@ -94,9 +97,6 @@ const Categories = (props) => {
             path="/categories/incomes"
             render={() => <Incomes props={props} />}
           />
-          {/*<Route exact path="/">
-              <Redirect to="/categories/charges" render={() => <Charges props={props} />}/>
-          </Route>*/}
         </div>
       </div>
     </HashRouter>

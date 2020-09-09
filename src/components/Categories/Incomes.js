@@ -52,9 +52,9 @@ const Incomes = ({ props }) => {
                 <Category
                   name={el.name}
                   description={el.description}
-                  date={el.date}
-                  //icon={el.icon}
-                  icon={Object.values(props.icons)[el.icon]}
+                  date={el.date.toString()}
+                  icon={el.icon}
+                  //icon={Object.values(props.icons)[el.icon]}
                   key={i}
                 />
               )),

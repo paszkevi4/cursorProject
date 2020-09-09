@@ -1,6 +1,8 @@
 import React from "react";
+import ReactDOM from 'react-dom'
 
-import { makeStyles } from '@material-ui/core/styles';
+
+import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -31,11 +33,17 @@ const Category = ({ name, description, date, icon }) => {
 
   const handleClick = (e) => {
     setAnchorEl(e.currentTarget);
-    console.log(e.currentTarget);
+    console.log(e.target.closest('th'))
   };
 
   const handleClose = (e) => {
     console.log(e.currentTarget);
+    if (e.target.innerText === "Delete") {
+      console.log(e.target.parentNode.parentNode.parentNode);
+      // console.log(ReactDOM.findDOMNode(this))
+
+    }
+
     setAnchorEl(null);
   };
 

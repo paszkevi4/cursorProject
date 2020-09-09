@@ -1,27 +1,27 @@
-import React from 'react';
+import React from "react";
 
-import Category from './Category';
+import Category from "./Category";
 
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import AddIcon from '@material-ui/icons/Add';
+import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+import AddIcon from "@material-ui/icons/Add";
 
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
   tableHead: {
-    backgroundColor: 'lightcyan',
+    backgroundColor: "lightcyan",
   },
   addButton: {
-    float: 'right',
+    float: "right",
   },
 });
 
@@ -33,7 +33,8 @@ const Charges = ({ props }) => {
         className={classes.addButton}
         variant="contained"
         color="primary"
-        startIcon={<AddIcon />}>
+        startIcon={<AddIcon />}
+      >
         Add more
       </Button>
       <TableContainer component={Paper}>
@@ -53,7 +54,7 @@ const Charges = ({ props }) => {
                   name={el.name}
                   description={el.description}
                   date={el.date}
-                  //icon={el.icon}
+                  icon={el.icon}
                   icon={Object.values(props.icons)[el.icon]}
                   key={i}
                 />

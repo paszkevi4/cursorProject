@@ -5,6 +5,7 @@ import { setNewIncomeAC } from '../../redux/incomesReducer';
 
 let mapStateToProps = (state) => {
   return {
+    icons: state.icons,
     incomes: state.incomes,
     charges: state.charges,
   };

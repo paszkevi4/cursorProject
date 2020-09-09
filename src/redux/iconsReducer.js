@@ -45,8 +45,4 @@ const initialState = {
   WorkOutline: <WorkOutline />,
 };
 
-const iconsReducer = (state = initialState, _) => {
-  return state;
-};
-
-export default iconsReducer;
+export default (state = initialState, _) => state;

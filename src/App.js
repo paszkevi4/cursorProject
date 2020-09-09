@@ -8,6 +8,9 @@ import HomePage from './components/HomePage/HomePageContainer';
 import Charts from './components/Charts/ChartsContainer';
 import Categories from './components/Categories/CategoriesContainer';
 
+// delete this component
+import Temp from './components/TemporaryComponent/TempContainer';
+
 import './App.css';
 
 class App extends React.Component {
@@ -21,6 +24,7 @@ class App extends React.Component {
               <Route path="/homepage" render={() => <HomePage />} />
               <Route path="/charts" render={() => <Charts />} />
               <Route path="/categories" render={() => <Categories />} />
+              <Route path="/temp" render={() => <Temp />} />
             </div>
           </div>
         </Provider>

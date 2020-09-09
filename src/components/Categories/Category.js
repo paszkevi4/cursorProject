@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from 'react-dom'
 
+
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
@@ -10,22 +11,22 @@ import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 
 const useStyles = makeStyles({
-  categoryNameBlock: {
-    display: "flex",
-    alignItems: "center",
+  categoryNameBlock:{
+    display: 'flex',
+    alignItems: 'center'
   },
-  categoryIcon: {
-    marginRight: "10px",
-    display: "flex",
-    alignItems: "center",
-    color: "grey",
+  categoryIcon:{
+    display: 'flex',
+    marginRight: '10px',
+    color: 'grey'
   },
-  categoryName: {
-    display: "flex",
-  },
+  categoryName:{
+    display: 'flex',
+  }
 });
 
 const Category = ({ name, description, date, icon }) => {
+
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = React.useState(null);

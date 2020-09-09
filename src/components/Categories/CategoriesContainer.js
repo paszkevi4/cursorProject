@@ -5,6 +5,7 @@ import { setChargeCategoryAC } from '../../redux/chargeCategoriesReducer';
 
 let mapStateToProps = (state) => {
   return {
+    icons: state.icons,
     incomeCategories: state.incomeCategories,
     chargeCategories: state.chargeCategories,
   };

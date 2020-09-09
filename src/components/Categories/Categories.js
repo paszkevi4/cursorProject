@@ -1,10 +1,10 @@
-import React from "react";
-import { NavLink, Route, HashRouter } from "react-router-dom";
+import React from 'react';
+import { NavLink, Route, HashRouter, Redirect } from 'react-router-dom';
 
-import Charges from "./Charges";
-import Incomes from "./Incomes";
-import Button from "@material-ui/core/Button";
-import { makeStyles } from "@material-ui/core/styles";
+import Charges from './Charges';
+import Incomes from './Incomes';
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
 
 // in props you have two arrays of objects:
 
@@ -20,34 +20,34 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
   Categories: {
-    padding: "20px",
+    padding: '20px',
   },
   sectionToggle: {
-    float: "left",
-    marginBottom: "20px",
+    float: 'left',
+    marginBottom: '20px',
   },
   toggleButton: {
-    textDecoration: "none",
-    color: "inherit",
-    letterSpacing: "1px",
+    textDecoration: 'none',
+    color: 'inherit',
+    letterSpacing: '1px',
   },
   toggleButtonActive: {
-    borderBottom: "1px solid cornflowerblue",
+    borderBottom: '1px solid cornflowerblue',
   },
   headerBlock: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: "100px",
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: '100px',
   },
   balanceTitle: {
-    textAlign: "right",
-    fontSize: "1.2em",
-    marginBottom: "10px",
+    textAlign: 'right',
+    fontSize: '1.2em',
+    marginBottom: '10px',
   },
   balanceAmount: {
-    fontSize: "1.7em",
-    fontWeight: "bold",
+    fontSize: '1.7em',
+    fontWeight: 'bold',
   },
 });
 
@@ -70,8 +70,7 @@ const Categories = (props) => {
             <NavLink
               to="/categories/charges"
               className={classes.toggleButton}
-              activeClassName={classes.toggleButtonActive}
-            >
+              activeClassName={classes.toggleButtonActive}>
               Charges
             </NavLink>
           </Button>
@@ -79,24 +78,17 @@ const Categories = (props) => {
             <NavLink
               to="/categories/incomes"
               className={classes.toggleButton}
-              activeClassName={classes.toggleButtonActive}
-            >
+              activeClassName={classes.toggleButtonActive}>
               Incomes
             </NavLink>
           </Button>
         </div>
         <div>
-          <Route
-            path="/categories/charges"
-            render={() => <Charges props={props} />}
-          />
-          <Route
-            path="/categories/incomes"
-            render={() => <Incomes props={props} />}
-          />
-          {/*<Route exact path="/">
-              <Redirect to="/categories/charges" render={() => <Charges props={props} />}/>
-          </Route>*/}
+          <Route path="/categories/charges" render={() => <Charges props={props} />} />
+          <Route path="/categories/incomes" render={() => <Incomes props={props} />} />
+          <Route exact path="/categories/">
+            <Redirect to="/categories/charges" />
+          </Route>
         </div>
       </div>
     </HashRouter>

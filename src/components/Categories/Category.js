@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 
-import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import TableCell from "@material-ui/core/TableCell";
-import TableRow from "@material-ui/core/TableRow";
+import { makeStyles } from "@material-ui/core/styles";
+import {
+  Button,
+  Menu,
+  MenuItem,
+  TableCell,
+  TableRow,
+} from "@material-ui/core/";
 
 const useStyles = makeStyles({
   categoryNameBlock: {

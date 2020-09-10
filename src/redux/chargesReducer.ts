@@ -28,16 +28,16 @@ type deleteChargeACType = {
 type actionType = createChargeACType | updateChargeACType | deleteChargeACType;
 
 let initialState: Array<chargeType> = [
-  { category: 0, description: 'Diner with John', date: '22/08/20', money: 300 },
-  { category: 1, description: 'For clothes', date: '23/08/20', money: 500 },
-  { category: 2, description: '', date: '24/08/20', money: 470 },
+  { category: 0, description: 'Diner with John', date: new Date(2020, 8, 2), money: 300 },
+  { category: 1, description: 'For clothes', date: new Date(2020, 7, 28), money: 500 },
+  { category: 2, description: '', date: new Date(2020, 7, 26), money: 470 },
   {
     category: 3,
     description: 'Its a looooooooooooooooooooooooooooooong description',
-    date: '25/08/20',
+    date: new Date(2020, 7, 24),
     money: 390,
   },
-  { category: 4, description: '', date: '26/08/20', money: 150 },
+  { category: 4, description: '', date: new Date(2020, 7, 22), money: 150 },
 ];
 
 const chargesReducer = (state = initialState, action: actionType): Array<chargeType> => {

@@ -55,7 +55,7 @@ const Incomes = ({ props }) => {
                   date={el.date.toString()}
                   icon={el.icon}
                   //icon={Object.values(props.icons)[el.icon]}
-                  key={i}
+                  key={el.name}
                 />
               )),
             ]}

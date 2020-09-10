@@ -1,7 +1,7 @@
 import HomePage from './HomePage';
 import { connect } from 'react-redux';
-import { setNewChargeAC } from '../../redux/chargesReducer';
-import { setNewIncomeAC } from '../../redux/incomesReducer';
+import { createChargeAC, updateChargeAC, deleteChargeAC } from '../../redux/chargesReducer';
+import { createIncomeAC, updateIncomeAC, deleteIncomeAC } from '../../redux/incomesReducer';
 
 let mapStateToProps = (state) => {
   return {
@@ -13,11 +13,23 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
   return {
-    setIncome: (income) => {
-      dispatch(setNewIncomeAC(income));
+    createIncome: (income) => {
+      dispatch(createIncomeAC(income));
     },
-    setCharge: (charge) => {
-      dispatch(setNewChargeAC(charge));
+    updateIncome: (index, income) => {
+      dispatch(updateIncomeAC(index, income));
+    },
+    deleteIncome: (index) => {
+      dispatch(deleteIncomeAC(index));
+    },
+    createCharge: (charge) => {
+      dispatch(createChargeAC(charge));
+    },
+    updateCharge: (index, charge) => {
+      dispatch(updateChargeAC(index, charge));
+    },
+    deleteCharge: (index) => {
+      dispatch(deleteChargeAC(index));
     },
   };
 };

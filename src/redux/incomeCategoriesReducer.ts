@@ -8,7 +8,7 @@ type incomeCategoryType = {
   name: string;
   description: string;
   date: Date | string;
-  icon: typeof icons.Waves;
+  icon: typeof icons[0];
 };
 
 type createIncomeCategoryACType = {
@@ -37,20 +37,20 @@ let initialState: Array<incomeCategoryType> = [
     name: 'My mom',
     description: 'Money from my mom',
     date: new Date(2020, 7, 25),
-    icon: icons.PlayForWork,
+    icon: icons[15],
   },
   {
     name: 'Sale book',
     description: 'Sold a book',
     date: new Date(2020, 7, 24),
-    icon: icons.MenuBook,
+    icon: icons[13],
   },
-  { name: 'Work', description: '', date: new Date(2020, 7, 23), icon: icons.WorkOutline },
+  { name: 'Work', description: '', date: new Date(2020, 7, 23), icon: icons[19] },
   {
     name: 'Donations',
     description: 'Its a looooooooooooooooooooooooooooooong description',
     date: new Date(2020, 7, 22),
-    icon: icons.PlayForWork,
+    icon: icons[15],
   },
 ];
 

@@ -78,7 +78,6 @@ const Charges = ({ props }) => {
                   description={el.description}
                   date={el.date.toString()}
                   icon={el.icon}
-                  //icon={Object.values(props.icons)[el.icon]}
                   key={el.name}
                 />
               )),

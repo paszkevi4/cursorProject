@@ -9,15 +9,23 @@ import { makeStyles } from '@material-ui/core/styles';
 
 // in props you have two arrays of objects:
 
-// props.incomes = [{category, description, date, icon}, {-||-} ... {-||-}]
-// props.charges = [{category, description, date, icon}, {-||-} ... {-||-}]
+// props.incomes = [{category, description, date, money}, {-||-} ... {-||-}]
+// props.charges = [{category, description, date, money}, {-||-} ... {-||-}]
 //
 //
 //
-// to set new object use the following:
-
-// props.setIncome({newObj})
-// props.setCharge({newObj})
+// for charge CRUD use the following:
+//
+// props.createIncome({newIncome})
+// props.updateIncome(index, {updatedIncome})
+// props.deleteIncome(index)
+//
+//
+// for income CRUD use the following:
+//
+// props.createCharge({newCharge})
+// props.updateCharge(index, {updatedCharge})
+// props.deleteCharge(index)
 
 const useStyles = makeStyles({
   home: {
@@ -92,17 +100,20 @@ const HomePage = (props) => {
             </Button>
           </div>
           <div>
-            <Route
-                path="/homepage/charges"
-                render={() => <Charges props={props.charges}/>}
-            />
-            <Route
-                path="/homepage/incomes"
-                render={() => <Incomes props={props.incomes}/>}
-            />
+            <div>
+              {/*<h4>{props.title}</h4>*/}
+              <h4>Charges</h4>
+              {/*<HomeSelect />*/}
+            </div>
+            <button>Add more</button>
           </div>
         </div>
-      </HashRouter>
+        <div>
+          <Route path="/homepage/charges" render={() => <Charges props={props.charges} />} />
+          <Route path="/homepage/incomes" render={() => <Incomes props={props.incomes} />} />
+        </div>
+      </div>
+    </HashRouter>
   );
 };
 

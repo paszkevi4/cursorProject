@@ -1,7 +1,15 @@
 import Categories from './Categories';
 import { connect } from 'react-redux';
-import { setIncomeCategoryAC } from '../../redux/incomeCategoriesReducer';
-import { setChargeCategoryAC } from '../../redux/chargeCategoriesReducer';
+import {
+  createIncomeCategoryAC,
+  updateIncomeCategoryAC,
+  deleteIncomeCategoryAC,
+} from '../../redux/incomeCategoriesReducer';
+import {
+  createChargeCategoryAC,
+  updateChargeCategoryAC,
+  deleteChargeCategoryAC,
+} from '../../redux/chargeCategoriesReducer';
 
 let mapStateToProps = (state) => {
   return {
@@ -13,11 +21,23 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
   return {
-    setIncomeCategory: (category) => {
-      dispatch(setIncomeCategoryAC(category));
+    createIncomeCategory: (category) => {
+      dispatch(createIncomeCategoryAC(category));
     },
-    setChargeCategory: (category) => {
-      dispatch(setChargeCategoryAC(category));
+    updateIncomeCategory: (index, category) => {
+      dispatch(updateIncomeCategoryAC(index, category));
+    },
+    deleteIncomeCategory: (index) => {
+      dispatch(deleteIncomeCategoryAC(index));
+    },
+    createChargeCategory: (category) => {
+      dispatch(createChargeCategoryAC(category));
+    },
+    updateChargeCategory: (index, category) => {
+      dispatch(updateChargeCategoryAC(index, category));
+    },
+    deleteChargeCategory: (index) => {
+      dispatch(deleteChargeCategoryAC(index));
     },
   };
 };

@@ -80,6 +80,8 @@ const Incomes = ({ props }) => {
                   icon={el.icon}
                   //icon={Object.values(props.icons)[el.icon]}
                   key={el.name}
+                  deleteCategory={props.deleteIncomeCategory}
+                  index={i}
                 />
               )),
             ]}

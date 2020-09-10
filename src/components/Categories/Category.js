@@ -25,7 +25,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Category = ({ name, description, date, icon }) => {
+const Category = ({ name, description, date, icon, deleteCategory, index }) => {
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -38,7 +38,8 @@ const Category = ({ name, description, date, icon }) => {
   const handleClose = (e) => {
     console.log(e.currentTarget);
     if (e.target.innerText === "Delete") {
-      console.log(e.target.parentNode.parentNode.parentNode);
+      console.log(index)
+      deleteCategory(index)
       // console.log(ReactDOM.findDOMNode(this))
     }
     setAnchorEl(null);

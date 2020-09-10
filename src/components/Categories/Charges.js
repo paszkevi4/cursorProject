@@ -79,6 +79,8 @@ const Charges = ({ props }) => {
                   date={el.date.toString()}
                   icon={el.icon}
                   key={el.name}
+                  deleteCategory={props.deleteChargeCategory}
+                  index={i}
                 />
               )),
             ]}

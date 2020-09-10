@@ -30,7 +30,8 @@ const useStyles = makeStyles({
     padding: '20px',
   },
   sectionToggle: {
-    float: 'left',
+    // float: 'left',
+    display: 'flex',
     marginBottom: '20px',
   },
   toggleButton: {

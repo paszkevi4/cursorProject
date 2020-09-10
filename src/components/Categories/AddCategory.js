@@ -1,20 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
 import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
+import {
+  MenuItem,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  TextField,
+} from "@material-ui/core";
 
 const useStyles = makeStyles({
   dialogWindow: {
     minWidth: "350px",
   },
+  iconSelect: {
+    color: "grey",
+  },
+  pickersBlock: {},
+  iconPicker: {
+    color: "grey",
+  },
 });
 
-const AddCategory = ({ open, handleClose, createChargeCategory }) => {
+const AddCategory = ({ open, handleClose, createCategory, icons }) => {
   const classes = useStyles();
   const today = new Date();
 
@@ -26,10 +36,38 @@ const AddCategory = ({ open, handleClose, createChargeCategory }) => {
     }-${today.getDate()}`,
   };
 
-  const [icon, setCurrency] = React.useState("");
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [date, setDate] = useState(values.currentDate);
+  const [icon, setIcon] = useState("");
+
+  const handleCloseDialog = (e) => {
+    console.log(e.target);
+    if (e.target.innerText === "ADD") {
+      if(name && icon){
+        createCategory({name: name, description: description, date: date, icon: icons[icon]})
+        handleClose();
+      }
+      console.log("added");
+    } else if (e.target.innerText === "CANCEL") {
+      setName("");
+      setDescription("");
+      setDate(values.currentDate);
+      setIcon("");
+      console.log("canceled");
+    }
+  };
 
   const handleChange = (event) => {
-    setCurrency(event.target.value);
+    if (event.target.id === "nameInput") {
+      setName(event.target.value);
+    } else if (event.target.id === "descriptionInput") {
+      setDescription(event.target.value);
+    } else if (typeof event.target.value === "number") {
+      setIcon(event.target.value);
+    } else if (event.target.id === "datePicker") {
+      setDate(event.target.value);
+    }
   };
 
   return (
@@ -46,15 +84,30 @@ const AddCategory = ({ open, handleClose, createChargeCategory }) => {
             <TextField
               autoFocus
               margin="dense"
-              id="name"
+              id="nameInput"
               label="Category name"
               type="text"
               fullWidth
+              onChange={handleChange}
+              value={name}
             />
           </div>
+
           <div>
             <TextField
-              id="select-category-icon"
+              margin="dense"
+              id="descriptionInput"
+              label="Category description"
+              type="text"
+              fullWidth
+              onChange={handleChange}
+              value={description}
+            />
+          </div>
+          <div className={classes.pickersBlock}>
+            <TextField
+              className={classes.iconPicker}
+              id="selectIcon"
               select
               margin="dense"
               label="Select category icon"
@@ -63,38 +116,31 @@ const AddCategory = ({ open, handleClose, createChargeCategory }) => {
               //   helperText="Select category icon"
               fullWidth
             >
-              {/* {icons.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))} */}
+              {[
+                ...icons.map((el, i) => (
+                  <MenuItem key={i} value={i} className={classes.iconSelect}>
+                    {el}
+                  </MenuItem>
+                )),
+              ]}
             </TextField>
-          </div>
-          <div>
             <TextField
+              className={classes.datePicker}
               margin="dense"
-              id="description"
-              label="Category description"
-              type="text"
-              fullWidth
-            />
-          </div>
-          <div>
-            <TextField
-              margin="dense"
-              id="description"
+              id="datePicker"
               label="Current date"
               type="date"
-              defaultValue={values.currentDate}
               fullWidth
+              onChange={handleChange}
+              value={date}
             />
           </div>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleCloseDialog} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleClose} color="primary" autoFocus>
+          <Button onClick={handleCloseDialog} color="primary" autoFocus>
             Add
           </Button>
         </DialogActions>

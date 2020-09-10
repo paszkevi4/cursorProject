@@ -4,16 +4,17 @@ import AddCategory from "./AddCategory";
 import Category from "./Category";
 
 import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
+import {
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@material-ui/core/";
 import AddIcon from "@material-ui/icons/Add";
-import { AccountBalance, AccountBalanceWallet, AllInbox } from "@material-ui/icons";
 
 const useStyles = makeStyles({
   table: {
@@ -22,8 +23,10 @@ const useStyles = makeStyles({
   tableHead: {
     backgroundColor: "lightcyan",
   },
-  addButton: {
-    float: "right",
+  addButtonWrapper: {
+    display: "flex",
+    justifyContent: "flex-end",
+    paddingBottom: "20px",
   },
 });
 
@@ -41,19 +44,21 @@ const Charges = ({ props }) => {
   const classes = useStyles();
   return (
     <div>
-      <Button
-        className={classes.addButton}
-        variant="contained"
-        color="primary"
-        startIcon={<AddIcon />}
-        onClick={handleClickOpen}
-      >
-        Add more
-      </Button>
+      <div className={classes.addButtonWrapper}>
+        <Button
+          variant="contained"
+          color="primary"
+          startIcon={<AddIcon />}
+          onClick={handleClickOpen}
+        >
+          Add more
+        </Button>
+      </div>
       <AddCategory
         open={open}
         handleClose={handleClose}
-        createChargeCategory={props.createChargeCategory}
+        createCategory={props.createChargeCategory}
+        icons={props.icons}
       />
       <TableContainer component={Paper}>
         <Table className={classes.table}>

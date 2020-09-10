@@ -99,15 +99,6 @@ const HomePage = (props) => {
               </NavLink>
             </Button>
           </div>
-          <div>
-            <div>
-              {/*<h4>{props.title}</h4>*/}
-              <h4>Charges</h4>
-              {/*<HomeSelect />*/}
-            </div>
-            <button>Add more</button>
-          </div>
-        </div>
         <div>
           <Route path="/homepage/charges" render={() => <Charges props={props.charges} />} />
           <Route path="/homepage/incomes" render={() => <Incomes props={props.incomes} />} />

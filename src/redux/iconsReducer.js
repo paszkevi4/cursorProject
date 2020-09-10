@@ -22,7 +22,7 @@ import {
   WorkOutline,
 } from '@material-ui/icons';
 
-const initialState = {
+export const icons = {
   AccountBalance: <AccountBalance />,
   AccountBalanceWallet: <AccountBalanceWallet />,
   AllInbox: <AllInbox />,
@@ -45,4 +45,4 @@ const initialState = {
   WorkOutline: <WorkOutline />,
 };
 
-export default (state = initialState, _) => state;
+export default (state = icons, _) => state;

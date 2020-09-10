@@ -1,24 +1,29 @@
-
-import React from "react";
-import { NavLink, Route, HashRouter, Redirect } from "react-router-dom";
-
+import React from 'react';
+import { NavLink, Route, HashRouter, Redirect } from 'react-router-dom';
 
 import Charges from './Charges';
 import Incomes from './Incomes';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
-// in props you have two arrays of objects:
-
-// props.incomeCategories = [{name, description, date, icon}, {-||-} ... {-||-}]
-// props.chargeCategories = [{name, description, date, icon}, {-||-} ... {-||-}]
+//
+// У такому форматi redux очiкуе отримувати категорii. Дата може буди як датою, так i стрiнгою:
+// { name: 'Pets', description: 'For smth else', date: '26/08/20', icon: props.icons.Pets },
+//
+//
+// for charge CRUD use the following:
+//
+// props.createChargeCategory({newCategory})
+// props.updateChargeCategory(index, {updatedCategory});
+// props.deleteChargeCategory(index);
 //
 //
 //
-// to set new object use the following:
-
-// props.setIncomeCategory({newObj})
-// props.setChargeCategory({newObj})
+// for income CRUD use the following:
+//
+// props.createIncomeCategory({newCategory})
+// props.updateIncomeCategory(index, {updatedCategory})
+// props.deleteIncomeCategory(index)
 
 const useStyles = makeStyles({
   Categories: {
@@ -89,14 +94,8 @@ const Categories = (props) => {
           <Route exact path="/categories/">
             <Redirect to="/categories/charges" />
           </Route>
-          <Route
-            path="/categories/charges"
-            render={() => <Charges props={props} />}
-          />
-          <Route
-            path="/categories/incomes"
-            render={() => <Incomes props={props} />}
-          />
+          <Route path="/categories/charges" render={() => <Charges props={props} />} />
+          <Route path="/categories/incomes" render={() => <Incomes props={props} />} />
         </div>
       </div>
     </HashRouter>

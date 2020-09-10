@@ -41,20 +41,28 @@ const AddCategory = ({ open, handleClose, createCategory, icons }) => {
   const [date, setDate] = useState(values.currentDate);
   const [icon, setIcon] = useState("");
 
+  const resetInputs = () => {
+    setName("");
+    setDescription("");
+    setDate(values.currentDate);
+    setIcon("");
+  };
+
   const handleCloseDialog = (e) => {
-    console.log(e.target);
     if (e.target.innerText === "ADD") {
-      if(name && icon){
-        createCategory({name: name, description: description, date: date, icon: icons[icon]})
+      if (name && icon) {
+        createCategory({
+          name: name,
+          description: description,
+          date: Date(date),
+          icon: icons[icon],
+        });
         handleClose();
+        resetInputs();
       }
-      console.log("added");
-    } else if (e.target.innerText === "CANCEL") {
-      setName("");
-      setDescription("");
-      setDate(values.currentDate);
-      setIcon("");
-      console.log("canceled");
+    } else {
+      handleClose();
+      resetInputs();
     }
   };
 
@@ -85,7 +93,7 @@ const AddCategory = ({ open, handleClose, createCategory, icons }) => {
               autoFocus
               margin="dense"
               id="nameInput"
-              label="Category name"
+              label="Category name (required)"
               type="text"
               fullWidth
               onChange={handleChange}
@@ -110,7 +118,7 @@ const AddCategory = ({ open, handleClose, createCategory, icons }) => {
               id="selectIcon"
               select
               margin="dense"
-              label="Select category icon"
+              label="Select category icon (required)"
               value={icon}
               onChange={handleChange}
               //   helperText="Select category icon"

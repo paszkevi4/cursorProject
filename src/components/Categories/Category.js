@@ -41,8 +41,21 @@ const Category = ({ name, description, date, icon }) => {
       console.log(e.target.parentNode.parentNode.parentNode);
       // console.log(ReactDOM.findDOMNode(this))
     }
-
     setAnchorEl(null);
+  };
+
+  const propsDate = new Date(date);
+
+  const fullDate = {
+    year: propsDate.getFullYear(),
+    month:
+      propsDate.getMonth() + 1 < 10
+        ? `0${propsDate.getMonth() + 1}`
+        : propsDate.getMonth() + 1,
+    day:
+      propsDate.getDay() + 1 < 10
+        ? `0${propsDate.getDay() + 1}`
+        : propsDate.getDay() + 1,
   };
 
   return (
@@ -54,7 +67,7 @@ const Category = ({ name, description, date, icon }) => {
         </div>
       </TableCell>
       <TableCell>{description}</TableCell>
-      <TableCell>{date}</TableCell>
+      <TableCell>{`${fullDate.year}-${fullDate.month}-${fullDate.day}`}</TableCell>
       <TableCell>
         <Button
           aria-controls="category-menu"

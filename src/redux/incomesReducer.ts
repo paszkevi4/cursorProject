@@ -28,16 +28,16 @@ type deleteIncomeACType = {
 type actionType = createIncomeACType | updateIncomeACType | deleteIncomeACType;
 
 let initialState: Array<incomeType> = [
-  { category: 0, description: 'From mom', date: '22/08/20', money: 500 },
-  { category: 1, description: 'For selling a book', date: '23/08/20', money: 700 },
-  { category: 2, description: '', date: '24/08/20', money: 320 },
+  { category: 0, description: 'From mom', date: new Date(2020, 7, 29), money: 500 },
+  { category: 1, description: 'For selling a book', date: new Date(2020, 7, 28), money: 700 },
+  { category: 2, description: '', date: new Date(2020, 7, 25), money: 320 },
   {
     category: 0,
     description: 'Its a looooooooooooooooooooooooooooooong description',
-    date: '25/08/20',
+    date: new Date(2020, 7, 23),
     money: 740,
   },
-  { category: 0, description: 'Mom again', date: '26/08/20', money: 430 },
+  { category: 0, description: 'Mom again', date: new Date(2020, 7, 19), money: 430 },
 ];
 
 const incomesReducer = (state = initialState, action: actionType): Array<incomeType> => {

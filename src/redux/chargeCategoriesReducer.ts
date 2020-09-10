@@ -1,8 +1,8 @@
 import { icons } from './iconsReducer';
 
-const SET_CATEGORY = 'SET_CATEGORY';
-const UPDATE_CATEGORY = 'UPDATE_CATEGORY';
-const DELETE_CATEGORY = 'DELETE_CATEGORY';
+const SET_CATEGORY = 'SET_CHARGE_CATEGORY';
+const UPDATE_CATEGORY = 'UPDATE_CHARGE_CATEGORY';
+const DELETE_CATEGORY = 'DELETE_CHARGE_CATEGORY';
 
 type chargeCategoryType = {
   name: string;

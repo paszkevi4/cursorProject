@@ -1,8 +1,8 @@
 import { icons } from './iconsReducer';
 
-const CREATE_CATEGORY = 'CREATE_CATEGORY';
-const UPDATE_CATEGORY = 'UPDATE_CATEGORY';
-const DELETE_CATEGORY = 'DELETE_CATEGORY';
+const CREATE_CATEGORY = 'CREATE_INCOME_CATEGORY';
+const UPDATE_CATEGORY = 'UPDATE_INCOME_CATEGORY';
+const DELETE_CATEGORY = 'DELETE_INCOME_CATEGORY';
 
 type incomeCategoryType = {
   name: string;

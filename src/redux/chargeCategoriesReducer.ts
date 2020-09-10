@@ -8,7 +8,7 @@ type chargeCategoryType = {
   name: string;
   description: string;
   date: Date | string;
-  icon: typeof icons.Waves;
+  icon: typeof icons[0];
 };
 
 type createChargeCategoryACType = {
@@ -37,22 +37,22 @@ let initialState: Array<chargeCategoryType> = [
     name: 'Food',
     description: 'For food',
     date: new Date(2020, 7, 26),
-    icon: icons.LocalDining,
+    icon: icons[12],
   },
   {
     name: 'Clothes',
     description: 'For clothes',
     date: new Date(2020, 7, 25),
-    icon: icons.EmojiSymbols,
+    icon: icons[7],
   },
-  { name: 'Restoraunts', description: '', date: new Date(2020, 7, 24), icon: icons.Fastfood },
+  { name: 'Restoraunts', description: '', date: new Date(2020, 7, 24), icon: icons[8] },
   {
     name: 'Utility bills',
     description: 'Its a looooooooooooooooooooooooooooooong description',
     date: new Date(2020, 7, 23),
-    icon: icons.AllInbox,
+    icon: icons[2],
   },
-  { name: 'Pets', description: 'For smth else', date: new Date(2020, 7, 21), icon: icons.Pets },
+  { name: 'Pets', description: 'For smth else', date: new Date(2020, 7, 21), icon: icons[14] },
 ];
 
 const chargeCategoriesReducer = (

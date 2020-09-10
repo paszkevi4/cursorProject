@@ -8,7 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 //
 // У такому форматi redux очiкуе отримувати категорii. Дата може буди як датою, так i стрiнгою:
-// { name: 'Pets', description: 'For smth else', date: '26/08/20', icon: props.icons.Pets },
+// { name: 'Pets', description: 'For smth else', date: '26/08/20', icon: props.icons[0] },
 //
 //
 // for charge CRUD use the following:

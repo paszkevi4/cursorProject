@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from 'react-dom'
 
-
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
@@ -33,7 +32,7 @@ const Category = ({ name, description, date, icon }) => {
 
   const handleClick = (e) => {
     setAnchorEl(e.currentTarget);
-    console.log(e.target.closest('th'))
+    console.log(e.target.closest('table'))
   };
 
   const handleClose = (e) => {

@@ -7,6 +7,7 @@ import Navbar from './components/Navbar/Navbar';
 import HomePage from './components/HomePage/HomePageContainer';
 import Charts from './components/Charts/ChartsContainer';
 import Categories from './components/Categories/CategoriesContainer';
+import Settings from './components/Settings/SettingsContainer';
 
 // delete this component
 import Temp from './components/TemporaryComponent/TempContainer';
@@ -24,7 +25,8 @@ class App extends React.Component {
               <Route path="/homepage" render={() => <HomePage />} />
               <Route path="/charts" render={() => <Charts />} />
               <Route path="/categories" render={() => <Categories />} />
-              <Route path="/temp" render={() => <Temp />} />
+              <Route path="/settings" render={() => <Settings />} />
+              {/* <Route path="/temp" render={() => <Temp />} /> */}
             </div>
           </div>
         </Provider>

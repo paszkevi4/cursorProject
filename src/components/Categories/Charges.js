@@ -40,7 +40,6 @@ const Charges = ({ props }) => {
   const handleClose = () => {
     setOpen(false);
   };
-
   const classes = useStyles();
   return (
     <div>
@@ -72,7 +71,7 @@ const Charges = ({ props }) => {
           </TableHead>
           <TableBody>
             {[
-              ...props.chargeCategories.map((el, i) => (
+              ...props.chargeCategories.map((el, i, arr) => (
                 <Category
                   name={el.name}
                   description={el.description}
@@ -80,7 +79,9 @@ const Charges = ({ props }) => {
                   icon={el.icon}
                   key={el.name}
                   deleteCategory={props.deleteChargeCategory}
+                  updateCategory={props.updateChargeCategory}
                   index={i}
+                  icons={props.icons}
                 />
               )),
             ]}

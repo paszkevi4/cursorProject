@@ -24,9 +24,11 @@ const useStyles = makeStyles({
   },
 });
 
-const AddCategory = ({ open, handleClose, createCategory, icons }) => {
+const AddCategory = ({open,handleClose,createCategory,currentCategory,icons}) => {
   const classes = useStyles();
   const today = new Date();
+
+console.log(currentCategory);
 
   const values = {
     currentDate: `${today.getFullYear()}-${
@@ -36,10 +38,10 @@ const AddCategory = ({ open, handleClose, createCategory, icons }) => {
     }-${today.getDate()}`,
   };
 
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
   const [date, setDate] = useState(values.currentDate);
-  const [icon, setIcon] = useState("");
+  const [icon, setIcon] = useState('');
 
   const resetInputs = () => {
     setName("");

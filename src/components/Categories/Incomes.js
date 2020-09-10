@@ -40,7 +40,6 @@ const Incomes = ({ props }) => {
   const handleClose = () => {
     setOpen(false);
   };
-
   const classes = useStyles();
   return (
     <div>
@@ -72,16 +71,17 @@ const Incomes = ({ props }) => {
           </TableHead>
           <TableBody>
             {[
-              ...props.incomeCategories.map((el, i) => (
+              ...props.incomeCategories.map((el, i, arr) => (
                 <Category
                   name={el.name}
                   description={el.description}
                   date={el.date.toString()}
                   icon={el.icon}
-                  //icon={Object.values(props.icons)[el.icon]}
                   key={el.name}
                   deleteCategory={props.deleteIncomeCategory}
+                  updateCategory={props.updateIncomeCategory}
                   index={i}
+                  icons={props.icons}
                 />
               )),
             ]}

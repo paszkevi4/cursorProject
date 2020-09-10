@@ -9,6 +9,7 @@ import {
   TableCell,
   TableRow,
 } from "@material-ui/core/";
+import AddCategory from "./AddCategory";
 
 const useStyles = makeStyles({
   categoryNameBlock: {
@@ -25,24 +26,30 @@ const useStyles = makeStyles({
   },
 });
 
-const Category = ({ name, description, date, icon, deleteCategory, index }) => {
+const Category = ({
+  name,
+  description,
+  date,
+  icon,
+  deleteCategory,
+  index,
+  icons,
+}) => {
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const handleClick = (e) => {
-    setAnchorEl(e.currentTarget);
-    console.log(e.target.closest("table"));
+  const [open, setOpen] = useState(false);
+
+  const [currentCategory, setCurrentCategory] = useState({
+  });
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
-  const handleClose = (e) => {
-    console.log(e.currentTarget);
-    if (e.target.innerText === "Delete") {
-      console.log(index)
-      deleteCategory(index)
-      // console.log(ReactDOM.findDOMNode(this))
-    }
-    setAnchorEl(null);
+  const handleActionClick = (e) => {
+    setAnchorEl(e.currentTarget);
   };
 
   const propsDate = new Date(date);
@@ -59,6 +66,23 @@ const Category = ({ name, description, date, icon, deleteCategory, index }) => {
         : propsDate.getDay() + 1,
   };
 
+  const handleActionClose = (e) => {
+    if (e.target.innerText === "Delete") {
+      deleteCategory(index);
+    } else if (e.target.innerText === "Edit") {
+      setOpen(true);
+      setCurrentCategory({
+        name: name,
+        description: description,
+        icon: icon,
+        date: `${fullDate.year}-${fullDate.month}-${fullDate.day}`,
+      });
+    }
+    setAnchorEl(null);
+  };
+
+  
+
   return (
     <TableRow>
       <TableCell component="th" scope="row">
@@ -73,7 +97,7 @@ const Category = ({ name, description, date, icon, deleteCategory, index }) => {
         <Button
           aria-controls="category-menu"
           aria-haspopup="true"
-          onClick={handleClick}
+          onClick={handleActionClick}
           size="small"
         >
           <MoreVertIcon color="action" />
@@ -83,10 +107,16 @@ const Category = ({ name, description, date, icon, deleteCategory, index }) => {
           anchorEl={anchorEl}
           keepMounted
           open={Boolean(anchorEl)}
-          onClose={handleClose}
+          onClose={handleActionClose}
         >
-          <MenuItem onClick={handleClose}>Edit</MenuItem>
-          <MenuItem onClick={handleClose}>Delete</MenuItem>
+          <MenuItem onClick={handleActionClose}>Edit</MenuItem>
+          <MenuItem onClick={handleActionClose}>Delete</MenuItem>
+          <AddCategory
+            open={open}
+            handleClose={handleClose}
+            icons={icons}
+            currentCategory={currentCategory}
+          />
         </Menu>
       </TableCell>
     </TableRow>

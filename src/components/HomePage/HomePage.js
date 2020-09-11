@@ -1,11 +1,12 @@
 import React from 'react';
-import {HashRouter, NavLink, Redirect, Route} from "react-router-dom";
-import Charges from "./Charges";
-import Incomes from "./Incomes";
+import { HashRouter, NavLink, Redirect, Route } from 'react-router-dom';
+import Charges from './Charges';
+import Incomes from './Incomes';
 import './HomePage.css';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
+import Header from '../Common/Header/HedaerContainer';
 
 // in props you have two arrays of objects:
 
@@ -70,41 +71,48 @@ const useStyles = makeStyles({
 const HomePage = (props) => {
   const classes = useStyles();
   return (
-      <HashRouter>
-        <div className={classes.home}>
-          <div className={classes.headerBlock}>
-            <div>
-              <h2>HOMEPAGE</h2>
-            </div>
-            <div className={classes.headerBalance}>
-              <h2 className={classes.balanceTitle}>Balance</h2>
-              <h1 className={classes.balanceAmount}>$2,652.07</h1>
-            </div>
+    <HashRouter>
+      <div className={classes.home}>
+        <div className={classes.headerBlock}>
+          <div>
+            <h2>HOMEPAGE</h2>
           </div>
-          <div className={classes.sectionToggle}>
-            <Button color="primary">
-              <NavLink
-                  to="/homepage/charges"
-                  className={classes.toggleButton}
-                  activeClassName={classes.toggleButtonActive}>
-                Charges
-              </NavLink>
-            </Button>
-            <Button color="primary">
-              <NavLink
-                  to="/homepage/incomes"
-                  className={classes.toggleButton}
-                  activeClassName={classes.toggleButtonActive}>
-                Incomes
-              </NavLink>
-            </Button>
+          <div className={classes.headerBalance}>
+            <h2 className={classes.balanceTitle}>Balance</h2>
+            <h1 className={classes.balanceAmount}>$2,652.07</h1>
           </div>
+        </div>
+        <Header title="Homepage" />
+        <div className={classes.sectionToggle}>
+          <Button color="primary">
+            <NavLink
+              to="/homepage/charges"
+              className={classes.toggleButton}
+              activeClassName={classes.toggleButtonActive}>
+              Charges
+            </NavLink>
+          </Button>
+          <Button color="primary">
+            <NavLink
+              to="/homepage/incomes"
+              className={classes.toggleButton}
+              activeClassName={classes.toggleButtonActive}>
+              Incomes
+            </NavLink>
+          </Button>
+        </div>
         <div>
           <Route exact path="/homepage/">
             <Redirect to="/homepage/charges" />
           </Route>
-          <Route path="/homepage/charges" render={() => <Charges charges={props.charges} categories={props.chargeCategories} />} />
-          <Route path="/homepage/incomes" render={() => <Incomes incomes={props.incomes} categories={props.incomeCategories} />} />
+          <Route
+            path="/homepage/charges"
+            render={() => <Charges charges={props.charges} categories={props.chargeCategories} />}
+          />
+          <Route
+            path="/homepage/incomes"
+            render={() => <Incomes incomes={props.incomes} categories={props.incomeCategories} />}
+          />
         </div>
       </div>
     </HashRouter>

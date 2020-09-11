@@ -20,7 +20,7 @@ const useStyles = makeStyles({
 	}
 });
 
-const HomeTable = ({ category, description, date, money }) => {
+const HomeTable = ({ icon, name, description, date, money }) => {
 
 	const classes = useStyles();
 
@@ -29,6 +29,20 @@ const HomeTable = ({ category, description, date, money }) => {
 	const handleClick = (e) => {
 		setAnchorEl(e.currentTarget);
 		console.log(e.target.closest('th'))
+	};
+
+	const propsDate = new Date(date);
+
+	const fullDate = {
+		year: propsDate.getFullYear(),
+		month:
+				propsDate.getMonth() + 1 < 10
+						? `0${propsDate.getMonth() + 1}`
+						: propsDate.getMonth() + 1,
+		day:
+				propsDate.getDay() + 1 < 10
+						? `0${propsDate.getDay() + 1}`
+						: propsDate.getDay() + 1,
 	};
 
 	const handleClose = (e) => {
@@ -44,11 +58,14 @@ const HomeTable = ({ category, description, date, money }) => {
 			<TableRow>
 				<TableCell component="th" scope="row">
 					<div className={classes.categoryBlock}>
-						<div className={classes.categoryName}>{category}</div>
+						<div className={classes.categoryName}>{name}</div>
+							<div className={classes.categoryIcon}>{icon}</div>
+
+						{/*<div className={classes.categoryName}>{category}</div>*/}
 					</div>
 				</TableCell>
 				<TableCell>{description}</TableCell>
-				<TableCell>{date}</TableCell>
+				<TableCell>{`${fullDate.year}-${fullDate.month}-${fullDate.day}`}</TableCell>
 				<TableCell>{money}</TableCell>
 				<TableCell>
 					<Button

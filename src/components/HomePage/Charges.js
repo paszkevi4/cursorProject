@@ -52,7 +52,44 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Charges = ({ props }) => {
+//---sort table-------
+const useSortTableData = (items, config = null) => {
+
+  const [sortConfig, setSortConfig] = React.useState(config);
+
+  const sortedItems = React.useMemo(() => {
+    let sortableItems = [...items];
+    if (sortConfig !== null) {
+      sortableItems.sort((a, b) => {
+        if (a[sortConfig.key] < b[sortConfig.key]) {
+          return sortConfig.direction === 'ascending' ? -1 : 1;
+        }
+        if (a[sortConfig.key] > b[sortConfig.key]) {
+          return sortConfig.direction === 'ascending' ? 1 : -1;
+        }
+        return 0;
+      });
+    }
+    return sortableItems;
+  }, [items, sortConfig]);
+
+  const requestSort = (key) => {
+    let direction = 'ascending';
+    if (
+        sortConfig &&
+        sortConfig.key === key &&
+        sortConfig.direction === 'ascending'
+    ) {
+      direction = 'descending';
+    }
+    setSortConfig({ key, direction });
+  };
+
+  return { items: sortedItems, requestSort, sortConfig };
+};
+//----end
+
+const Charges = (props) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
@@ -62,11 +99,21 @@ const Charges = ({ props }) => {
     setOpen(false);
   };
 
+  //----sortСharges
+  const { items, requestSort, sortConfig } = useSortTableData(props.charges);
+  const getClassNamesFor = (name) => {
+    if (!sortConfig) {
+      return;
+    }
+    return sortConfig.key === name ? sortConfig.direction : undefined;
+  };
+  //---end
+
   return (
     <div>
       <div className={classes.homeMenu}>
         <div className={classes.homeSelect}>
-          <h3 className={classes.homeMenuTitle}>My Incomes</h3>
+          <h3 className={classes.homeMenuTitle}>My Charges</h3>
           <HomeSelect />
         </div>
         <Button
@@ -103,18 +150,42 @@ const Charges = ({ props }) => {
         <Table className={classes.table} aria-label="Table of Incomes">
           <TableHead className={classes.tableHead}>
             <TableRow>
-              <TableCell>Category</TableCell>
-              <TableCell>Description</TableCell>
-              <TableCell>Date</TableCell>
-              <TableCell>Money</TableCell>
+              <TableCell>
+                <button
+                  type="button"
+                  onClick={() => requestSort('category')}
+                  className={getClassNamesFor('category')}> Category
+                </button>
+              </TableCell>
+              <TableCell>
+                <button
+                    type="button"
+                    onClick={() => requestSort('description')}
+                    className={getClassNamesFor('description')}> Description
+                </button>
+              </TableCell>
+              <TableCell>
+                <button
+                    type="button"
+                    onClick={() => requestSort('date')}
+                    className={getClassNamesFor('date')}>  Date
+                </button>
+               </TableCell>
+              <TableCell>
+                <button
+                    type="button"
+                    onClick={() => requestSort('money')}
+                    className={getClassNamesFor('money')}> Money
+                </button>
+              </TableCell>
               <TableCell>Action</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {[
-              ...props.map((el, i) => (
+            {[...items.map((el, i) => (
                 <HomeTable
-                  name={el.category}
+                  icon={props.categories[el.category].icon}
+                  name={props.categories[el.category].name}
                   description={el.description}
                   date={el.date.toString()}
                   money={el.money}

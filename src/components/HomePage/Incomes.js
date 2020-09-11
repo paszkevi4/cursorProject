@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Incomes = ({ props }) => {
+const Incomes = ({ incomes, categories }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
@@ -112,9 +112,10 @@ const Incomes = ({ props }) => {
           </TableHead>
           <TableBody>
             {[
-              ...props.map((el, i) => (
+              ...categories.map((el, i) => (
                 <HomeTable
-                  name={el.category}
+                  name={el.name}
+                  icon={el.icon}
                   description={el.description}
                   date={el.date.toString()}
                   money={el.money}

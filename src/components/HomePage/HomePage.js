@@ -1,5 +1,5 @@
 import React from 'react';
-import {HashRouter, NavLink, Route} from "react-router-dom";
+import {HashRouter, NavLink, Redirect, Route} from "react-router-dom";
 import Charges from "./Charges";
 import Incomes from "./Incomes";
 import './HomePage.css';
@@ -100,8 +100,11 @@ const HomePage = (props) => {
             </Button>
           </div>
         <div>
-          <Route path="/homepage/charges" render={() => <Charges props={props.charges} />} />
-          <Route path="/homepage/incomes" render={() => <Incomes props={props.incomes} />} />
+          <Route exact path="/homepage/">
+            <Redirect to="/homepage/charges" />
+          </Route>
+          <Route path="/homepage/charges" render={() => <Charges charges={props.charges} categories={props.chargeCategories} />} />
+          <Route path="/homepage/incomes" render={() => <Incomes incomes={props.incomes} categories={props.incomeCategories} />} />
         </div>
       </div>
     </HashRouter>

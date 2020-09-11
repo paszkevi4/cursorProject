@@ -26,10 +26,15 @@ import React from "react";
 //
 // React.render(<MySelect />, document.body);
 
+// handlePeriodChange(selVal) {
+// 	this.props.handlePeriodChange(selVal);
+// 	if (selVal===Date.now()){return selVal.filter()}
+// }
+
 
 const HomeSelect = ()=>{
 return (
-<select onChange={(val) => this.handlePeriodChange(val.target.value)}
+	<select onChange={(val) => this.handlePeriodChange(val.target.value)}
 				className="btn btn-sm btn-outline-secondary dropdown-toggle">
 	<option value="TODAY">Today</option>
 	<option value="THIS_WEEK">This Week</option>

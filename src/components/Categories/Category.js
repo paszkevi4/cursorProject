@@ -37,10 +37,10 @@ const Category = ({ name, description, date, icon, deleteCategory, updateCategor
   };
 
   const [currentCategory, setCurrentCategory] = useState({
-    currentName: '',
-    currentDescription: '',
-    currentIcon: '',
-    currentDate: `${fullDate.year}-${fullDate.month}-${fullDate.day}`,
+    currentName: name,
+    currentDescription: description,
+    currentIcon: icon,
+    currentDate: null,
   });
 
   const handleClose = () => {
@@ -93,13 +93,15 @@ const Category = ({ name, description, date, icon, deleteCategory, updateCategor
           onClose={handleActionClose}>
           <MenuItem onClick={handleActionClose}>Edit</MenuItem>
           <MenuItem onClick={handleActionClose}>Delete</MenuItem>
-          <AddCategory
-            open={open}
-            handleClose={handleClose}
-            icons={icons}
-            currentCategory={currentCategory}
-            updateCategory={updateCategory}
-          />
+          {open && (
+            <AddCategory
+              open={open}
+              handleClose={handleClose}
+              icons={icons}
+              currentCategory={currentCategory}
+              updateCategory={updateCategory}
+            />
+          )}
         </Menu>
       </TableCell>
     </TableRow>

@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import AddCategory from "./AddCategory";
-import Category from "./Category";
+import AddCategory from './AddCategory';
+import Category from './Category';
 
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles';
 import {
   Button,
   Table,
@@ -13,20 +13,20 @@ import {
   TableHead,
   TableRow,
   Paper,
-} from "@material-ui/core/";
-import AddIcon from "@material-ui/icons/Add";
+} from '@material-ui/core/';
+import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
   tableHead: {
-    backgroundColor: "lightcyan",
+    backgroundColor: 'lightcyan',
   },
   addButtonWrapper: {
-    display: "flex",
-    justifyContent: "flex-end",
-    paddingBottom: "20px",
+    display: 'flex',
+    justifyContent: 'flex-end',
+    paddingBottom: '20px',
   },
 });
 
@@ -48,8 +48,7 @@ const Incomes = ({ props }) => {
           variant="contained"
           color="primary"
           startIcon={<AddIcon />}
-          onClick={handleClickOpen}
-        >
+          onClick={handleClickOpen}>
           Add more
         </Button>
       </div>
@@ -78,8 +77,12 @@ const Incomes = ({ props }) => {
                   date={el.date.toString()}
                   icon={el.icon}
                   key={el.name}
-                  deleteCategory={props.deleteIncomeCategory}
-                  updateCategory={props.updateIncomeCategory}
+                  deleteCategory={() => {
+                    props.deleteIncomeCategory(i);
+                  }}
+                  updateCategory={(category) => {
+                    props.updateIncomeCategory(i, category);
+                  }}
                   index={i}
                   icons={props.icons}
                 />

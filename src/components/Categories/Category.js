@@ -41,17 +41,6 @@ const Category = ({
 
   const [open, setOpen] = useState(false);
 
-  const [currentCategory, setCurrentCategory] = useState({
-  });
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleActionClick = (e) => {
-    setAnchorEl(e.currentTarget);
-  };
-
   const propsDate = new Date(date);
 
   const fullDate = {
@@ -66,22 +55,36 @@ const Category = ({
         : propsDate.getDay() + 1,
   };
 
+  const [currentCategory, setCurrentCategory] = useState({
+    currentName: "",
+    currentDescription: "",
+    currentIcon: "",
+    currentDate: `${fullDate.year}-${fullDate.month}-${fullDate.day}`,
+  });
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleActionClick = (e) => {
+    setAnchorEl(e.currentTarget);
+  };
+
   const handleActionClose = (e) => {
     if (e.target.innerText === "Delete") {
       deleteCategory(index);
     } else if (e.target.innerText === "Edit") {
       setOpen(true);
       setCurrentCategory({
-        name: name,
-        description: description,
-        icon: icon,
-        date: `${fullDate.year}-${fullDate.month}-${fullDate.day}`,
+        currentName: name,
+        currentDescription: description,
+        currentIcon: icon,
+        currentDate: `${fullDate.year}-${fullDate.month}-${fullDate.day}`,
       });
     }
+
     setAnchorEl(null);
   };
-
-  
 
   return (
     <TableRow>

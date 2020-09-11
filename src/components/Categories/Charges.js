@@ -18,7 +18,7 @@ import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 650,
+    minWidth: 300,
   },
   tableHead: {
     backgroundColor: 'lightcyan',

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 import {
   MenuItem,
   Button,
@@ -9,18 +9,17 @@ import {
   DialogContent,
   DialogTitle,
   TextField,
-} from '@material-ui/core';
+} from "@material-ui/core";
 
 const useStyles = makeStyles({
   dialogWindow: {
-    minWidth: '350px',
+    minWidth: "350px",
   },
   iconSelect: {
-    color: 'grey',
+    color: "grey",
   },
-  pickersBlock: {},
   iconPicker: {
-    color: 'grey',
+    color: "grey",
   },
 });
 
@@ -29,10 +28,10 @@ const AddCategory = ({
   handleClose,
   createCategory,
   currentCategory = {
-    currentName: '',
-    currentDescription: '',
-    currentDate: '',
-    currentIcon: '',
+    currentName: "",
+    currentDescription: "",
+    currentDate: "",
+    currentIcon: "",
   },
   updateCategory,
   icons,
@@ -40,18 +39,22 @@ const AddCategory = ({
   const classes = useStyles();
   const today = new Date();
 
-  console.log(currentCategory);
-
   const values = {
     currentDate: `${today.getFullYear()}-${
-      today.getMonth() + 1 < 10 ? `0${today.getMonth() + 1}` : today.getMonth() + 1
+      today.getMonth() + 1 < 10
+        ? `0${today.getMonth() + 1}`
+        : today.getMonth() + 1
     }-${today.getDate()}`,
   };
 
   const [name, setName] = useState(`${currentCategory.currentName}`);
-  const [description, setDescription] = useState(currentCategory.currentDescription);
+  const [description, setDescription] = useState(
+    currentCategory.currentDescription
+  );
   const [date, setDate] = useState(
-    currentCategory.currentDate ? currentCategory.currentDate : values.currentDate,
+    currentCategory.currentDate
+      ? currentCategory.currentDate
+      : values.currentDate
   );
   const [icon, setIcon] = useState(currentCategory.currentIcon);
 
@@ -63,7 +66,7 @@ const AddCategory = ({
   };
 
   const handleCloseDialog = (e) => {
-    if (e.target.innerText === 'ADD') {
+    if (e.target.innerText === "ADD") {
       if (name && icon) {
         updateCategory({
           name: name,
@@ -76,18 +79,18 @@ const AddCategory = ({
       }
     } else {
       handleClose();
-      // resetInputs();
+      resetInputs();
     }
   };
 
   const handleChange = (event) => {
-    if (event.target.id === 'nameInput') {
+    if (event.target.id === "nameInput") {
       setName(event.target.value);
-    } else if (event.target.id === 'descriptionInput') {
+    } else if (event.target.id === "descriptionInput") {
       setDescription(event.target.value);
-    } else if (typeof event.target.value === 'number') {
+    } else if (typeof event.target.value === "number") {
       setIcon(event.target.value);
-    } else if (event.target.id === 'datePicker') {
+    } else if (event.target.id === "datePicker") {
       setDate(event.target.value);
     }
   };
@@ -98,8 +101,9 @@ const AddCategory = ({
         open={open}
         onClose={handleClose}
         aria-labelledby="add-category-title"
-        aria-describedby="add-category-description">
-        <DialogTitle id="add-category-title">{'ADD NEW CATEGORY'}</DialogTitle>
+        aria-describedby="add-category-description"
+      >
+        <DialogTitle id="add-category-title">{"ADD NEW CATEGORY"}</DialogTitle>
         <DialogContent className={classes.dialogWindow}>
           <div>
             <TextField
@@ -135,7 +139,8 @@ const AddCategory = ({
               value={icon}
               onChange={handleChange}
               //   helperText="Select category icon"
-              fullWidth>
+              fullWidth
+            >
               {[
                 ...icons.map((el, i) => (
                   <MenuItem key={i} value={i} className={classes.iconSelect}>

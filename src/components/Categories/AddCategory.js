@@ -56,10 +56,10 @@ const AddCategory = ({
   const [icon, setIcon] = useState(currentCategory.currentIcon);
 
   const resetInputs = () => {
-    setName('');
-    setDescription('');
+    setName(name);
+    setDescription(description);
     setDate(values.currentDate);
-    setIcon('');
+    setIcon(icon);
   };
 
   const handleCloseDialog = (e) => {

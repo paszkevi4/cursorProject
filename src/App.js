@@ -1,38 +1,157 @@
-import React from 'react';
-import { HashRouter, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import store from './redux/store';
+import React from "react";
+import { HashRouter, Route } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./redux/store";
+import logo from "./assets/img/logo_white.png";
 
-import Navbar from './components/Navbar/Navbar';
-import HomePage from './components/HomePage/HomePageContainer';
-import Charts from './components/Charts/ChartsContainer';
-import Categories from './components/Categories/CategoriesContainer';
-import Settings from './components/Settings/SettingsContainer';
+import PropTypes from "prop-types";
 
-// delete this component
-import Temp from './components/TemporaryComponent/TempContainer';
+import {
+  AppBar,
+  CssBaseline,
+  Drawer,
+  Hidden,
+  IconButton,
+  Toolbar,
+  Typography,
+} from "@material-ui/core";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import MenuIcon from "@material-ui/icons/Menu";
 
-import './App.css';
+import HomePage from "./components/HomePage/HomePageContainer";
+import Charts from "./components/Charts/ChartsContainer";
+import Categories from "./components/Categories/CategoriesContainer";
+import Settings from "./components/Settings/SettingsContainer";
+import Sidebar from "./components/Navbar/Navbar";
 
-class App extends React.Component {
-  render() {
-    return (
-      <HashRouter>
-        <Provider store={store}>
-          <div className="App">
-            <Navbar />
-            <div className="mainContent">
-              <Route path="/homepage" render={() => <HomePage />} />
-              <Route path="/charts" render={() => <Charts />} />
-              <Route path="/categories" render={() => <Categories />} />
-              <Route path="/settings" render={() => <Settings />} />
-              {/* <Route path="/temp" render={() => <Temp />} /> */}
-            </div>
-          </div>
-        </Provider>
-      </HashRouter>
-    );
-  }
-}
+const drawerWidth = 240;
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+  },
+  drawer: {
+    [theme.breakpoints.up("sm")]: {
+      width: drawerWidth,
+      flexShrink: 0,
+    },
+  },
+  appBar: {
+    [theme.breakpoints.up("sm")]: {
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth,
+      paddingTop: "10px",
+    },
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up("sm")]: {
+      display: "none",
+    },
+  },
+  // necessary for content to be below app bar
+  // toolbar: theme.mixins.toolbar,
+
+  drawerPaper: {
+    width: drawerWidth,
+    backgroundColor: "#3f51b5",
+    border: "none",
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
+    paddingTop: "100px",
+  },
+  mainLogo: {
+    maxWidth: "50px",
+  },
+}));
+
+const App = (props) => {
+  const { window } = props;
+  const classes = useStyles();
+  const theme = useTheme();
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
+
+  return (
+    <HashRouter>
+      <Provider store={store}>
+        <div className={classes.root}>
+          <CssBaseline />
+          <AppBar position="fixed" className={classes.appBar}>
+            <Toolbar>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                edge="start"
+                onClick={handleDrawerToggle}
+                className={classes.menuButton}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h3" noWrap>
+                <img src={logo} alt="main_logo" className={classes.mainLogo} />
+                Money Tracker
+              </Typography>
+            </Toolbar>
+          </AppBar>
+          <nav className={classes.drawer} aria-label="mailbox folders">
+            {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+            <Hidden smUp implementation="css">
+              <Drawer
+                container={container}
+                variant="temporary"
+                anchor={theme.direction === "rtl" ? "right" : "left"}
+                open={mobileOpen}
+                onClose={handleDrawerToggle}
+                classes={{
+                  paper: classes.drawerPaper,
+                }}
+                ModalProps={{
+                  keepMounted: true, // Better open performance on mobile.
+                }}
+              >
+                <Sidebar />
+              </Drawer>
+            </Hidden>
+            <Hidden xsDown implementation="css">
+              <Drawer
+                classes={{
+                  paper: classes.drawerPaper,
+                }}
+                variant="permanent"
+                open
+              >
+                <Sidebar />
+              </Drawer>
+            </Hidden>
+          </nav>
+          <main className={classes.content}>
+            {/* <div className={classes.toolbar} /> */}
+            <Route path="/homepage" render={() => <HomePage />} />
+            <Route path="/charts" render={() => <Charts />} />
+            <Route path="/categories" render={() => <Categories />} />
+            <Route path="/settings" render={() => <Settings />} />
+          </main>
+        </div>
+      </Provider>
+    </HashRouter>
+  );
+};
+
+// ResponsiveDrawer.propTypes = {
+//   /**
+//    * Injected by the documentation to work in an iframe.
+//    * You won't need it on your project.
+//    */
+//   window: PropTypes.func,
+// };
 
 export default App;

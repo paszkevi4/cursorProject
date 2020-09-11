@@ -24,11 +24,22 @@ const useStyles = makeStyles({
   },
 });
 
-const AddCategory = ({open,handleClose,createCategory,currentCategory,icons}) => {
+const AddCategory = ({
+  open,
+  handleClose,
+  createCategory,
+  currentCategory = {
+    currentName: "",
+    currentDescription: "",
+    currentDate: "",
+    currentIcon: "",
+  },
+  icons,
+}) => {
   const classes = useStyles();
   const today = new Date();
 
-console.log(currentCategory);
+  console.log(currentCategory);
 
   const values = {
     currentDate: `${today.getFullYear()}-${
@@ -38,10 +49,16 @@ console.log(currentCategory);
     }-${today.getDate()}`,
   };
 
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [date, setDate] = useState(values.currentDate);
-  const [icon, setIcon] = useState('');
+  const [name, setName] = useState(`${currentCategory.currentName}`);
+  const [description, setDescription] = useState(
+    currentCategory.currentDescription
+  );
+  const [date, setDate] = useState(
+    currentCategory.currentDate
+      ? currentCategory.currentDate
+      : values.currentDate
+  );
+  const [icon, setIcon] = useState(currentCategory.currentIcon);
 
   const resetInputs = () => {
     setName("");
@@ -64,7 +81,7 @@ console.log(currentCategory);
       }
     } else {
       handleClose();
-      resetInputs();
+      // resetInputs();
     }
   };
 

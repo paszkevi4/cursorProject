@@ -3,7 +3,7 @@
   display: grid;
   grid-template-columns: 15vw 1fr;
 }
-
+/* 
 nav {
   grid-column: 1/2;
   background: navy;
@@ -12,10 +12,10 @@ nav {
   height: 100vh;
   display: flex;
   flex-direction: column;
-}
+}*/
 
 nav a {
-  margin-top: 20px;
-  color: #fff;
+  /* margin-top: 20px; */
+  color: #2b2b2b;
   text-decoration: none;
-}
+} 

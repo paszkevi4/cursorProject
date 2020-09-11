@@ -1,14 +1,15 @@
 const UPDATE_USER_NAME = 'UPDATE_USER_NAME';
 const UPDATE_PHONE_NUMBER = 'UPDATE_PHONE_NUMBER';
 const TOGGLE_WARNING = 'TOGGLE_WARNING';
-const SET_LIMIT = 'SET_LIMIT';
+const SET_MONEY_LIMIT = 'SET_LIMIT';
 
 type stateType = {
   avatar: any;
   userName: string | null;
   phoneNumber: any;
   showWarning: boolean;
-  limit: number;
+  moneyLimit: number;
+  percentLimit?: number;
 };
 
 type updateUserNameACType = {
@@ -27,7 +28,7 @@ type toggleWarningACType = {
 };
 
 type setLimitACType = {
-  type: typeof SET_LIMIT;
+  type: typeof SET_MONEY_LIMIT;
   newLimit: number;
 };
 
@@ -42,7 +43,8 @@ const initialState: stateType = {
   userName: 'Ivan',
   phoneNumber: '+380991234567',
   showWarning: true,
-  limit: 5000,
+  moneyLimit: 800,
+  percentLimit: 40,
 };
 
 const settingsReducer = (state = initialState, action: actionType): stateType => {
@@ -53,8 +55,8 @@ const settingsReducer = (state = initialState, action: actionType): stateType =>
       return { ...state, phoneNumber: action.newPhoneNumber };
     case TOGGLE_WARNING:
       return { ...state, showWarning: action.showWarning };
-    case SET_LIMIT:
-      return { ...state, limit: action.newLimit };
+    case SET_MONEY_LIMIT:
+      return { ...state, moneyLimit: action.newLimit };
     default:
       return state;
   }
@@ -76,7 +78,7 @@ export const toggleWarningAC = (showWarning = !initialState.showWarning): toggle
 });
 
 export const setLimitACType = (newLimit: number): setLimitACType => ({
-  type: SET_LIMIT,
+  type: SET_MONEY_LIMIT,
   newLimit,
 });
 

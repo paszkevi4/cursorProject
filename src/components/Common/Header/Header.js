@@ -12,7 +12,7 @@ const Header = (props) => {
     setIncomes(
       props.incomes.reduce((prev, curr) => {
         return prev + curr.money;
-      }, incomes),
+      }, 0),
     );
   }, [props.incomes]);
 
@@ -20,7 +20,7 @@ const Header = (props) => {
     setCharges(
       props.charges.reduce((prev, curr) => {
         return prev + curr.money;
-      }, charges),
+      }, 0),
     );
   }, [props.charges]);
 
@@ -30,7 +30,7 @@ const Header = (props) => {
 
   useEffect(() => {
     // prettier-ignore
-    if (props.settings.showWarning && total < props.settings.moneyLimit || (total / incomes) * 100 < props.settings.percentLimit) {
+    if (props.settings.showWarning && (total < props.settings.moneyLimit || (total / incomes) * 100 < props.settings.percentLimit)) {
       setToWarn(true);
     } else {
       setToWarn(false);

@@ -1,5 +1,5 @@
 import React from "react";
-import { HashRouter, Route } from "react-router-dom";
+import { HashRouter, Route , Redirect} from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import logo from "./assets/img/logo_white.png";
@@ -135,6 +135,9 @@ const App = (props) => {
           </nav>
           <main className={classes.content}>
             {/* <div className={classes.toolbar} /> */}
+            <Route exact path="/">
+              <Redirect to="/homepage"/>
+            </Route>
             <Route path="/homepage" render={() => <HomePage />} />
             <Route path="/charts" render={() => <Charts />} />
             <Route path="/categories" render={() => <Categories />} />

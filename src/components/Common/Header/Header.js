@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import style from './Header.module.sass';
+import style from './Header.module.css';
 import Alert from '@material-ui/lab/Alert';
 
 const Header = (props) => {

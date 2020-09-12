@@ -2,6 +2,9 @@ import React from 'react';
 
 import {Bar, Doughnut, Line} from 'react-chartjs-2';
 
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+
 import './Charts.css';
 
 // in props you have four arrays of objects:
@@ -11,96 +14,109 @@ import './Charts.css';
 // props.incomeCategories = [{name, description, date, icon}, {-||-} ... {-||-}]
 // props.chargeCategories = [{name, description, date, icon}, {-||-} ... {-||-}]
 
-const divLineStyle = {
-    width: '99%',
-    height: '400px'
-};
+const useStyles = makeStyles({
+    root: {
+      marginLeft: '3%',
+      width: '150px'
+    },
+    label: {
+        textTransform: 'capitalize',
+    },
+  });
 
-const divBarStyle = {
-    width: '100%',
-    height: '400px'
-}
-
-const divDoughnutStyle = {
-    width: '100%',
-    height: '400px'
-}
+const Charts = (props) => {
+    let categoriesBar = [];
+    let categoriesDoughnut = [];
+    let incomeDates = [];
 
 
-const startDataLine = (canvas) => {
-    const ctx = canvas.getContext('2d');
-    const gradient = ctx.createLinearGradient(0,0,0,400);
-    gradient.addColorStop(0, 'rgb(205,221,249)');
-    gradient.addColorStop(1, 'rgb(255,255,255)');
+    props.incomeCategories.map( item => categoriesBar.push(item.name) );
+    props.chargeCategories.map( item =>  categoriesDoughnut.push(item.name) );
+    props.incomes.map( item =>  incomeDates.push(item.date) );
 
-    return {
-        labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+    const startDataLine = (canvas) => {
+        const ctx = canvas.getContext('2d');
+        const gradient = ctx.createLinearGradient(0,0,0,400);
+        gradient.addColorStop(0, 'rgb(205,221,249)');
+        gradient.addColorStop(1, 'rgb(255,255,255)');
+    
+        return {
+            labels: incomeDates,
+            datasets: [
+                {
+                    lineTension: 0.5,
+                    backgroundColor: gradient,
+                    borderColor: 'rgb(93,143,238)',
+                    borderWidth: 4,
+                    pointBackgroundColor: 'rgba(0,0,0,0)',
+                    pointBorderColor: 'rgba(0,0,0,0)',
+                    data: [12, 11, 13, 9, 11]
+                },
+                {
+                    lineTension: 0.5,
+                    backgroundColor: 'rgb(222,232,251)',
+                    borderColor: 'rgb(222,232,251)',
+                    borderWidth: 4,
+                    borderDash: [15, 5],
+                    pointBackgroundColor: 'rgba(0,0,0,0)',
+                    pointBorderColor: 'rgba(0,0,0,0)',
+                    data: [12, 14, 11, 9, 13],
+                    fill: false
+                }
+            ]
+        }
+    }
+
+    const startDataBar = {
+        labels: categoriesBar,
         datasets: [
             {
-                lineTension: 0.5,
-                backgroundColor: gradient,
-                borderColor: 'rgb(93,143,238)',
-                borderWidth: 4,
-                pointBackgroundColor: 'rgba(0,0,0,0)',
-                pointBorderColor: 'rgba(0,0,0,0)',
-                data: [12, 11, 13, 9, 11, 12, 9]
-            },
-            {
-                lineTension: 0.5,
-                backgroundColor: 'rgb(222,232,251)',
-                borderColor: 'rgb(222,232,251)',
-                borderWidth: 4,
-                borderDash: [15, 5],
-                pointBackgroundColor: 'rgba(0,0,0,0)',
-                pointBorderColor: 'rgba(0,0,0,0)',
-                data: [12, 14, 11, 9, 13, 12, 10],
-                fill: false
+                backgroundColor: 'rgba(75,192,192,1)',
+                hoverBackgroundColor:'rgba(75,192,192,0.6)',
+                borderColor: 'rgba(0,0,0,1)',
+                borderWidth: 0,
+                barPercentage: 0.4,
+                data: [500,450,410,400]
             }
         ]
-    }
-}
+    };
 
-const startDataBar = {
-    labels: ['My mom', 'Sale book', 'Donations', 'Work'],
-    datasets: [
-        {
-            backgroundColor: 'rgba(75,192,192,1)',
-            hoverBackgroundColor:'rgba(75,192,192,0.6)',
-            borderColor: 'rgba(0,0,0,1)',
-            borderWidth: 0,
-            barPercentage: 0.4,
-            data: [500,450,410,400]
-        }
-    ]
-}
+    const startDataDoughnut = {
+        labels: categoriesDoughnut,
+        datasets: [
+            {
+                backgroundColor: [
+                    'rgb(197,218,3)',
+                    'rgb(6,120,207)',
+                    'rgb(253,40,36)',
+                    'rgb(254,132,2)'
+                ],
+                hoverBackgroundColor: [
+                    'rgba(197,218,3,0.6)',
+                    'rgba(6,120,207,0.6)',
+                    'rgba(253,40,36,0.6)',
+                    'rgba(254,132,2,0.6)'
+                ],
+                borderWidth: 0,
+                data: [100,100, 100, 100, 100]
+            }
+        ]
+    };
 
-const startDataDoughnut = {
-    labels: ['Pets', 'Food', 'Restoraunts', 'Clothes'],
-    datasets: [
-        {
-            backgroundColor: [
-                'rgb(197,218,3)',
-                'rgb(6,120,207)',
-                'rgb(253,40,36)',
-                'rgb(254,132,2)'
-            ],
-            hoverBackgroundColor: [
-                'rgba(197,218,3,0.6)',
-                'rgba(6,120,207,0.6)',
-                'rgba(253,40,36,0.6)',
-                'rgba(254,132,2,0.6)'
-            ],
-            borderWidth: 0,
-            data: [100,100, 100, 100]
-        }
-    ]
-}
-
-class Charts extends React.Component {
-    render() {
-        return (
+    const classes = useStyles();
+    
+    return (
+        <>
+            <div className="btn-wrapper">
+                <Button variant="outlined" classes={{ root: classes.root,label: classes.label }}>
+                    Month
+                </Button>
+                <Button variant="contained" color="primary" classes={{ root: classes.root, label: classes.label }}>
+                    Week
+                </Button>
+            </div>
             <div className="charts">
-                <div className="line-chart" style={divLineStyle}>
+                <div className="line-chart">
                     <Line
                         data={startDataLine}
                         options = {{
@@ -133,7 +149,7 @@ class Charts extends React.Component {
                         }}
                     />
                 </div>
-                <div className="bar-chart" style={divBarStyle}>
+                <div className="bar-chart">
                     <Bar
                         data={startDataBar}
                         options={{
@@ -166,7 +182,7 @@ class Charts extends React.Component {
                         }}
                     />
                 </div>
-                <div className="doughnut-chart" style={divDoughnutStyle}>
+                <div className="doughnut-chart">
                     <Doughnut
                         data={startDataDoughnut}
                         options={{
@@ -184,8 +200,8 @@ class Charts extends React.Component {
                     />
                 </div>
             </div>
-        )
-    }
+        </>
+    )
 }
 
 // const Charts = (props) => {

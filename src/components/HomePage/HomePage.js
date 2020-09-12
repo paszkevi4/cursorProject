@@ -105,14 +105,12 @@ const HomePage = (props) => {
           <Route exact path="/homepage/">
             <Redirect to="/homepage/charges" />
           </Route>
-          <Route
-            path="/homepage/charges"
-            render={() => <Charges charges={props.charges} categories={props.chargeCategories} />}
-          />
-          <Route
-            path="/homepage/incomes"
-            render={() => <Incomes incomes={props.incomes} categories={props.incomeCategories} />}
-          />
+
+          <Route path="/homepage/charges" render={() =>
+              <Charges charges={props.charges} categories={props.chargeCategories} />} />
+          <Route path="/homepage/incomes" render={() =>
+              <Incomes incomes={props.incomes} categories={props.incomeCategories} />} />
+
         </div>
       </div>
     </HashRouter>

@@ -1,6 +1,5 @@
 import React from 'react';
 import HomeTable from './HomeTable';
-
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Table from '@material-ui/core/Table';
@@ -15,6 +14,8 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import HomeSelect from './HomeSelect';
+import useSortTableData from "./sortTable";
+// import HomeModal from "./HomeModal";
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -52,43 +53,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-//---sort table-------
-const useSortTableData = (items, config = null) => {
-
-  const [sortConfig, setSortConfig] = React.useState(config);
-
-  const sortedItems = React.useMemo(() => {
-    let sortableItems = [...items];
-    if (sortConfig !== null) {
-      sortableItems.sort((a, b) => {
-        if (a[sortConfig.key] < b[sortConfig.key]) {
-          return sortConfig.direction === 'ascending' ? -1 : 1;
-        }
-        if (a[sortConfig.key] > b[sortConfig.key]) {
-          return sortConfig.direction === 'ascending' ? 1 : -1;
-        }
-        return 0;
-      });
-    }
-    return sortableItems;
-  }, [items, sortConfig]);
-
-  const requestSort = (key) => {
-    let direction = 'ascending';
-    if (
-        sortConfig &&
-        sortConfig.key === key &&
-        sortConfig.direction === 'ascending'
-    ) {
-      direction = 'descending';
-    }
-    setSortConfig({ key, direction });
-  };
-
-  return { items: sortedItems, requestSort, sortConfig };
-};
-//----end
-
 const Charges = (props) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -99,7 +63,6 @@ const Charges = (props) => {
     setOpen(false);
   };
 
-  //----sortСharges
   const { items, requestSort, sortConfig } = useSortTableData(props.charges);
   const getClassNamesFor = (name) => {
     if (!sortConfig) {
@@ -107,7 +70,6 @@ const Charges = (props) => {
     }
     return sortConfig.key === name ? sortConfig.direction : undefined;
   };
-  //---end
 
   return (
     <div>
@@ -140,7 +102,7 @@ const Charges = (props) => {
         }}>
         <Fade in={open}>
           <div className={classes.paper}>
-            <h2 id="transition-modal-title">Transition modal</h2>
+            <h2 id="transition-modal-title">Modal</h2>
             <p id="transition-modal-description">react-transition-group animates me.</p>
           </div>
         </Fade>
@@ -187,7 +149,7 @@ const Charges = (props) => {
                   icon={props.categories[el.category].icon}
                   name={props.categories[el.category].name}
                   description={el.description}
-                  date={el.date.toString()}
+                  date={el.date}
                   money={el.money}
                   key={i}
                 />

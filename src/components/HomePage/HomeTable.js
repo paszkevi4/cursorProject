@@ -1,7 +1,5 @@
 import React from "react";
 // import ReactDOM from 'react-dom'
-
-
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
@@ -9,6 +7,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
+// import HomeModal from "./HomeModal";
 
 const useStyles = makeStyles({
 	categoryBlock:{
@@ -60,8 +59,7 @@ const HomeTable = ({ icon, name, description, date, money }) => {
 					<div className={classes.categoryBlock}>
 						<div className={classes.categoryName}>{name}</div>
 							<div className={classes.categoryIcon}>{icon}</div>
-
-						{/*<div className={classes.categoryName}>{category}</div>*/}
+						{/*<div className={classes.categoryName}>`{category: {name + icon}}`</div>*/}
 					</div>
 				</TableCell>
 				<TableCell>{description}</TableCell>

@@ -74,7 +74,7 @@ const Incomes = ({ props }) => {
                 <Category
                   name={el.name}
                   description={el.description}
-                  date={el.date.toString()}
+                  date={el.date}
                   icon={el.icon}
                   key={el.name}
                   deleteCategory={() => {
@@ -83,7 +83,6 @@ const Incomes = ({ props }) => {
                   updateCategory={(category) => {
                     props.updateIncomeCategory(i, category);
                   }}
-                  index={i}
                   icons={props.icons}
                 />
               )),

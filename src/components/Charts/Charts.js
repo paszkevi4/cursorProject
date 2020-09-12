@@ -29,6 +29,7 @@ const Charts = (props) => {
     let categoriesDoughnut = [];
     let incomeDates = [];
 
+    console.log(props.incomes)
 
     props.incomeCategories.map( item => categoriesBar.push(item.name) );
     props.chargeCategories.map( item =>  categoriesDoughnut.push(item.name) );

@@ -10,7 +10,7 @@ let mapStateToProps = (state) => {
 };
 
 let mapDispatchToProps = (dispatch) => {
-  return null;
+  return {};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

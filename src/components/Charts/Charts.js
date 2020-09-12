@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Line} from 'react-chartjs-2';
+import {Bar, Doughnut, Line} from 'react-chartjs-2';
 
 import './Charts.css';
 
@@ -11,12 +11,23 @@ import './Charts.css';
 // props.incomeCategories = [{name, description, date, icon}, {-||-} ... {-||-}]
 // props.chargeCategories = [{name, description, date, icon}, {-||-} ... {-||-}]
 
-const divStyle = {
+const divLineStyle = {
     width: '99%',
     height: '400px'
 };
 
-const startData = (canvas) => {
+const divBarStyle = {
+    width: '100%',
+    height: '400px'
+}
+
+const divDoughnutStyle = {
+    width: '100%',
+    height: '400px'
+}
+
+
+const startDataLine = (canvas) => {
     const ctx = canvas.getContext('2d');
     const gradient = ctx.createLinearGradient(0,0,0,400);
     gradient.addColorStop(0, 'rgb(205,221,249)');
@@ -49,41 +60,129 @@ const startData = (canvas) => {
     }
 }
 
+const startDataBar = {
+    labels: ['My mom', 'Sale book', 'Donations', 'Work'],
+    datasets: [
+        {
+            backgroundColor: 'rgba(75,192,192,1)',
+            hoverBackgroundColor:'rgba(75,192,192,0.6)',
+            borderColor: 'rgba(0,0,0,1)',
+            borderWidth: 0,
+            barPercentage: 0.4,
+            data: [500,450,410,400]
+        }
+    ]
+}
+
+const startDataDoughnut = {
+    labels: ['Pets', 'Food', 'Restoraunts', 'Clothes'],
+    datasets: [
+        {
+            backgroundColor: [
+                'rgb(197,218,3)',
+                'rgb(6,120,207)',
+                'rgb(253,40,36)',
+                'rgb(254,132,2)'
+            ],
+            hoverBackgroundColor: [
+                'rgba(197,218,3,0.6)',
+                'rgba(6,120,207,0.6)',
+                'rgba(253,40,36,0.6)',
+                'rgba(254,132,2,0.6)'
+            ],
+            borderWidth: 0,
+            data: [100,100, 100, 100]
+        }
+    ]
+}
+
 class Charts extends React.Component {
     render() {
         return (
-            <div className="line-chart" style={divStyle}>
-                <Line
-                    data={startData}
-                    options = {{
-                        title: {
-                            display: true,
-                            text: 'Summary',
-                            fontSize: 20
-                        },
-                        legend: {
-                            display: false
-                        },
-                        scales: {
-                            yAxes: [{
-                                display: false,
-                                ticks: {
-                                    suggestedMin: 5,
-                                    suggestedMax: 15
-                                },
-                                gridLines: {
+            <div className="charts">
+                <div className="line-chart" style={divLineStyle}>
+                    <Line
+                        data={startDataLine}
+                        options = {{
+                            title: {
+                                display: true,
+                                text: 'Summary',
+                                fontSize: 20
+                            },
+                            legend: {
+                                display: false
+                            },
+                            scales: {
+                                yAxes: [{
                                     display: false,
-                                }
-                            }],
-                            xAxes: [{
-                                gridLines: {
-                                    display: false
-                                }
-                            }]
-                        },
-                        maintainAspectRatio: false
-                    }}
-                />
+                                    ticks: {
+                                        suggestedMin: 5,
+                                        suggestedMax: 15
+                                    },
+                                    gridLines: {
+                                        display: false,
+                                    }
+                                }],
+                                xAxes: [{
+                                    gridLines: {
+                                        display: false
+                                    }
+                                }]
+                            },
+                            maintainAspectRatio: false
+                        }}
+                    />
+                </div>
+                <div className="bar-chart" style={divBarStyle}>
+                    <Bar
+                        data={startDataBar}
+                        options={{
+                            title: {
+                                display: true,
+                                text: 'Income categories',
+                                fontSize: 20
+                            },
+                            legend: {
+                                display: false
+                            },
+                            scales: {
+                                yAxes: [{
+
+                                    ticks: {
+                                        suggestedMin: 0,
+                                        suggestedMax: 500
+                                    },
+                                    gridLines: {
+                                        display: false,
+                                    }
+                                }],
+                                xAxes: [{
+                                    gridLines: {
+                                        display: false
+                                    }
+                                }]
+                            },
+                            maintainAspectRatio: false
+                        }}
+                    />
+                </div>
+                <div className="doughnut-chart" style={divDoughnutStyle}>
+                    <Doughnut
+                        data={startDataDoughnut}
+                        options={{
+                            title: {
+                                display: true,
+                                text: 'Charges categories',
+                                fontSize: 20
+                            },
+                            legend:{
+                                display:true,
+                                position:'right'
+                            },
+                            maintainAspectRatio: false
+                        }}
+                    />
+                </div>
             </div>
         )
     }

@@ -28,7 +28,7 @@ type deleteIncomeACType = {
 type actionType = createIncomeACType | updateIncomeACType | deleteIncomeACType;
 
 let initialState: Array<incomeType> = [
-  { category: 0, description: 'From mom', date: new Date(2020, 7, 29), money: 500 },
+  { category: 0, description: 'From mom', date: new Date(2020, 7, 29), money: 500.57 },
   { category: 1, description: 'For selling a book', date: new Date(2020, 7, 28), money: 700 },
   { category: 2, description: '', date: new Date(2020, 7, 25), money: 320 },
   {

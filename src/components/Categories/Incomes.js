@@ -55,7 +55,7 @@ const Incomes = ({ props }) => {
       <AddCategory
         open={open}
         handleClose={handleClose}
-        createCategory={props.createIncomeCategory}
+        updateCategory={props.createIncomeCategory}
         icons={props.icons}
       />
       <TableContainer component={Paper}>

@@ -55,7 +55,7 @@ const Charges = ({ props }) => {
       <AddCategory
         open={open}
         handleClose={handleClose}
-        createCategory={props.createChargeCategory}
+        updateCategory={props.createChargeCategory}
         icons={props.icons}
       />
       <TableContainer component={Paper}>

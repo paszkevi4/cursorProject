@@ -32,7 +32,9 @@ const Charts = (props) => {
 
     props.incomeCategories.map( item => categoriesBar.push(item.name) );
     props.chargeCategories.map( item =>  categoriesDoughnut.push(item.name) );
-    props.incomes.map( item =>  incomeDates.push(item.date) );
+    props.incomes.map( item =>  incomeDates.push((item.date).getDay()) );
+
+    console.log(incomeDates)
 
     const startDataLine = (canvas) => {
         const ctx = canvas.getContext('2d');

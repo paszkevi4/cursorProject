@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/cursorProject/static/css/main.221f29f5.chunk.css",
-    "main.js": "/cursorProject/static/js/main.fa008c74.chunk.js",
-    "main.js.map": "/cursorProject/static/js/main.fa008c74.chunk.js.map",
+    "main.js": "/cursorProject/static/js/main.db835226.chunk.js",
+    "main.js.map": "/cursorProject/static/js/main.db835226.chunk.js.map",
     "runtime-main.js": "/cursorProject/static/js/runtime-main.a53070bf.js",
     "runtime-main.js.map": "/cursorProject/static/js/runtime-main.a53070bf.js.map",
     "static/js/2.ee4e938b.chunk.js": "/cursorProject/static/js/2.ee4e938b.chunk.js",
     "static/js/2.ee4e938b.chunk.js.map": "/cursorProject/static/js/2.ee4e938b.chunk.js.map",
     "index.html": "/cursorProject/index.html",
-    "precache-manifest.1fb4d20e44666efb59b431ca54d83438.js": "/cursorProject/precache-manifest.1fb4d20e44666efb59b431ca54d83438.js",
+    "precache-manifest.c47923677c735f7bbaf674215cb8589e.js": "/cursorProject/precache-manifest.c47923677c735f7bbaf674215cb8589e.js",
     "service-worker.js": "/cursorProject/service-worker.js",
     "static/css/main.221f29f5.chunk.css.map": "/cursorProject/static/css/main.221f29f5.chunk.css.map",
     "static/js/2.ee4e938b.chunk.js.LICENSE.txt": "/cursorProject/static/js/2.ee4e938b.chunk.js.LICENSE.txt",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.a53070bf.js",
     "static/js/2.ee4e938b.chunk.js",
     "static/css/main.221f29f5.chunk.css",
-    "static/js/main.fa008c74.chunk.js"
+    "static/js/main.db835226.chunk.js"
   ]
 }

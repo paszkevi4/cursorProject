@@ -1,0 +1,8 @@
+.main {
+  width: 400px;
+  margin: 0 auto;
+}
+
+.main > div {
+  margin: 15px 0;
+}

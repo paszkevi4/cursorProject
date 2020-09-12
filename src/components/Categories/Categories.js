@@ -43,21 +43,21 @@ const useStyles = makeStyles({
   toggleButtonActive: {
     borderBottom: '1px solid cornflowerblue',
   },
-  headerBlock: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: '100px',
-  },
-  balanceTitle: {
-    textAlign: 'right',
-    fontSize: '1.2em',
-    marginBottom: '10px',
-  },
-  balanceAmount: {
-    fontSize: '1.7em',
-    fontWeight: 'bold',
-  },
+  // headerBlock: {
+  //   display: 'flex',
+  //   justifyContent: 'space-between',
+  //   alignItems: 'center',
+  //   marginBottom: '100px',
+  // },
+  // balanceTitle: {
+  //   textAlign: 'right',
+  //   fontSize: '1.2em',
+  //   marginBottom: '10px',
+  // },
+  // balanceAmount: {
+  //   fontSize: '1.7em',
+  //   fontWeight: 'bold',
+  // },
 });
 
 const Categories = (props) => {
@@ -65,7 +65,7 @@ const Categories = (props) => {
   return (
     <HashRouter>
       <div className={classes.Categories}>
-        <div className={classes.headerBlock}>
+        {/* <div className={classes.headerBlock}>
           <div>
             <h2>Categories</h2>
           </div>
@@ -73,7 +73,7 @@ const Categories = (props) => {
             <div className={classes.balanceTitle}>Balance</div>
             <div className={classes.balanceAmount}>$2,652.07</div>
           </div>
-        </div>
+        </div> */}
         <Header title="Categories" />
         <div className={classes.sectionToggle}>
           <Button color="primary">

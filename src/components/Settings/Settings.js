@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { db } from '../../redux/firebase/firebase';
+
+import Avatar from './components/AvatarUpload';
 import TextField from '@material-ui/core/TextField';
 import PhoneInput from 'react-phone-input-2';
 
@@ -12,6 +15,22 @@ const Settings = ({ userName, phoneNumber, showWarning, moneyLimit, percentLimit
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
 
+  const [temp, setTemp] = useState(null);
+
+  window.temp = temp;
+
+  useEffect(() => {
+    db.collection('user-info').onSnapshot((ss) => {
+      // bla
+      setTemp(
+        ss.docs[0].data(),
+        // ss.docs.map((doc) => {
+        //   doc.data();
+        // }),
+      );
+    });
+  }, []);
+
   return (
     <div className={style.main}>
       <TextField
@@ -24,6 +43,9 @@ const Settings = ({ userName, phoneNumber, showWarning, moneyLimit, percentLimit
           setName(e.target.value);
         }}
       />
+
+      <Avatar />
+
       <PhoneInput
         inputStyle={{ width: '100%' }}
         id="phone"

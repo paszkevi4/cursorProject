@@ -6,3 +6,9 @@
 .main > div {
   margin: 15px 0;
 }
+
+.temp {
+  width: 250px;
+  height: 250px;
+  background: yellowgreen;
+}

@@ -1,5 +1,29 @@
-/* body {
-	background: #7F7FD5;
-	background: -webkit-linear-gradient(to bottom, #91EAE4, #86A8E7, #7F7FD5);
-	background: linear-gradient(to bottom, #91EAE4, #86A8E7, #7F7FD5);
-	} */
+ /*body {*/
+	/*background: #7F7FD5;*/
+	/*background: -webkit-linear-gradient(to bottom, #91EAE4, #86A8E7, #7F7FD5);*/
+	/*background: linear-gradient(to bottom, #91EAE4, #86A8E7, #7F7FD5);*/
+	/*}*/
+
+ .table-direct>button {
+	 border: none;
+	 font-family: inherit;
+	 font-weight: 700;
+	 font-size: inherit;
+	 padding: 0.5em;
+	 margin-bottom: 1px;
+	 text-decoration: none;
+	 background-color: lightcyan;
+	 }
+
+.table-direct>button.ascending::after {
+	border:inherit;
+	 content: '👇';
+	 display: inline-block;
+	 margin-left: 1em;
+	 }
+
+.table-direct button.descending::after {
+	 content: '☝️';
+	 display: inline-block;
+	 margin-left: 1em;
+	 }

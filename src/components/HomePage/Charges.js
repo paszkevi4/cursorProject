@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'lightcyan',
   },
   addButton: {
-    float: 'right',
+    display: 'flex',
   },
   modal: {
     display: 'flex',
@@ -63,7 +63,7 @@ const Charges = (props) => {
     setOpen(false);
   };
 
-  const { items, requestSort, sortConfig } = useSortTableData(props.charges);
+  const { items,  requestSort, sortConfig } = useSortTableData(props.charges, props.categories);
   const getClassNamesFor = (name) => {
     if (!sortConfig) {
       return;
@@ -112,28 +112,28 @@ const Charges = (props) => {
         <Table className={classes.table} aria-label="Table of Incomes">
           <TableHead className={classes.tableHead}>
             <TableRow>
-              <TableCell>
+              <TableCell className={"table-direct"}>
                 <button
                   type="button"
                   onClick={() => requestSort('category')}
                   className={getClassNamesFor('category')}> Category
                 </button>
               </TableCell>
-              <TableCell>
+              <TableCell className={"table-direct"}>
                 <button
                     type="button"
                     onClick={() => requestSort('description')}
                     className={getClassNamesFor('description')}> Description
                 </button>
               </TableCell>
-              <TableCell>
+              <TableCell className={"table-direct"}>
                 <button
                     type="button"
                     onClick={() => requestSort('date')}
-                    className={getClassNamesFor('date')}>  Date
+                    className={getClassNamesFor('date')}> Date
                 </button>
                </TableCell>
-              <TableCell>
+              <TableCell className={"table-direct"}>
                 <button
                     type="button"
                     onClick={() => requestSort('money')}
@@ -149,7 +149,7 @@ const Charges = (props) => {
                   icon={props.categories[el.category].icon}
                   name={props.categories[el.category].name}
                   description={el.description}
-                  date={el.date}
+                  date={el.date.toLocaleDateString()}
                   money={el.money}
                   key={i}
                 />

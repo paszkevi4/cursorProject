@@ -30,19 +30,19 @@ const HomeTable = ({ icon, name, description, date, money }) => {
 		console.log(e.target.closest('th'))
 	};
 
-	const propsDate = new Date(date);
-
-	const fullDate = {
-		year: propsDate.getFullYear(),
-		month:
-				propsDate.getMonth() + 1 < 10
-						? `0${propsDate.getMonth() + 1}`
-						: propsDate.getMonth() + 1,
-		day:
-				propsDate.getDay() + 1 < 10
-						? `0${propsDate.getDay() + 1}`
-						: propsDate.getDay() + 1,
-	};
+	// const propsDate = new Date(date));
+	//
+	// const fullDate = {
+	// 	year: propsDate.getFullYear(),
+	// 	month:
+	// 			propsDate.getMonth() + 1 < 10
+	// 					? `0${propsDate.getMonth() + 1}`
+	// 					: propsDate.getMonth() + 1,
+	// 	day:
+	// 			propsDate.getDay() + 1 < 10
+	// 					? `0${propsDate.getDay() + 1}`
+	// 					: propsDate.getDay() + 1,
+	// };
 
 	const handleClose = (e) => {
 		console.log(e.currentTarget);
@@ -63,7 +63,9 @@ const HomeTable = ({ icon, name, description, date, money }) => {
 					</div>
 				</TableCell>
 				<TableCell>{description}</TableCell>
-				<TableCell>{`${fullDate.year}-${fullDate.month}-${fullDate.day}`}</TableCell>
+				{/*<TableCell>{`${fullDate.year}-${fullDate.month}-${fullDate.day}`}</TableCell>*/}
+
+				<TableCell>{date}</TableCell>
 				<TableCell>{money}</TableCell>
 				<TableCell>
 					<Button

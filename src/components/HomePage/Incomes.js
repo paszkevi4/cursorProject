@@ -1,7 +1,7 @@
 import React from 'react';
 import HomeTable from './HomeTable';
 import HomeSelect from './HomeSelect';
-
+import useSortTableData from "./sortTable";
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Table from '@material-ui/core/Table';
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'lightcyan',
   },
   addButton: {
-    float: 'right',
+    display: 'flex',
   },
   modal: {
     display: 'flex',
@@ -60,6 +60,14 @@ const Incomes = ({ incomes, categories }) => {
   };
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const { items,  requestSort, sortConfig } = useSortTableData(incomes , categories);
+  const getClassNamesFor = (name) => {
+    if (!sortConfig) {
+      return;
+    }
+    return sortConfig.key === name ? sortConfig.direction : undefined;
   };
 
   return (
@@ -103,21 +111,46 @@ const Incomes = ({ incomes, categories }) => {
         <Table className={classes.table} aria-label="Table of Incomes">
           <TableHead className={classes.tableHead}>
             <TableRow>
-              <TableCell>Category</TableCell>
-              <TableCell>Description</TableCell>
-              <TableCell>Date</TableCell>
-              <TableCell>Money</TableCell>
+              <TableCell className={"table-direct"}>
+                <button
+                    type="button"
+                    onClick={() => requestSort('category')}
+                    className={getClassNamesFor('category')}
+                > Category
+                </button>
+              </TableCell>
+              <TableCell className={"table-direct"}>
+                <button
+                    type="button"
+                    onClick={() => requestSort('description')}
+                    className={getClassNamesFor('description')}> Description
+                </button>
+              </TableCell>
+              <TableCell className={"table-direct"}>
+                <button
+                    type="button"
+                    onClick={() => requestSort('date')}
+                    className={getClassNamesFor('date')}>Date
+                </button>
+              </TableCell>
+              <TableCell className={"table-direct"}>
+                <button
+                    type="button"
+                    onClick={() => requestSort('money')}
+                    className={getClassNamesFor('money')}> Money
+                </button>
+              </TableCell>
               <TableCell>Action</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {[
-              ...categories.map((el, i) => (
+              ...items.map((el, i) => (
                 <HomeTable
-                  name={el.name}
-                  icon={el.icon}
+                  name={categories[el.category].name}
+                  icon={categories[el.category].icon}
                   description={el.description}
-                  date={el.date.toString()}
+                  date={el.date.toLocaleDateString()}
                   money={el.money}
                   key={i}
                 />

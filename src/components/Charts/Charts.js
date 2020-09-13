@@ -24,15 +24,51 @@ const useStyles = makeStyles({
     },
   });
 
-const Charts = (props) => {
+const Charts = (props) => { 
+   
+    const getWeekDay = day => {
+        const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+        return days[day];
+    }
+
     let categoriesBar = [];
     let categoriesDoughnut = [];
     let incomeDates = [];
+    let incomeDays = [];
 
+
+    let trueDataCharges = [];
+    let trueDataIncomes = [];
+    let trueMoneyChargesDoughnut = [];
+    let trueMoneyIncomesBar = [];
+
+    let period = 31
+
+    props.charges.map(item => {
+        if(Math.ceil(Math.abs(item.date.getTime() - new Date().getTime()) / (1000 * 3600 * 24)) < period) {
+            trueDataCharges.push(item)
+        }
+        return trueDataCharges;
+    });
+
+    props.incomes.map(item => {
+        if(Math.ceil(Math.abs(item.date.getTime() - new Date().getTime()) / (1000 * 3600 * 24)) < period) {
+            trueDataIncomes.push(item)
+        }
+        return trueDataIncomes;
+    });
 
     props.incomeCategories.map( item => categoriesBar.push(item.name) );
-    props.chargeCategories.map( item =>  categoriesDoughnut.push(item.name) );
-    props.incomes.map( item =>  incomeDates.push(item.date) );
+    props.chargeCategories.map( item =>  categoriesDoughnut.push(item.name) ); /// maybe only for 30
+    trueDataIncomes.map( item =>  incomeDates.push((item.date).toLocaleDateString()) );
+    incomeDates.map( item => incomeDays.push(getWeekDay(item)) );
+
+    trueDataCharges.map( item => trueMoneyChargesDoughnut.push(item.money) );
+    trueDataIncomes.map( item => trueMoneyIncomesBar.push(item.money) );
+
+    console.log(trueMoneyChargesDoughnut)
+    console.log(categoriesDoughnut)
 
     const startDataLine = (canvas) => {
         const ctx = canvas.getContext('2d');
@@ -47,20 +83,22 @@ const Charts = (props) => {
                     lineTension: 0.5,
                     backgroundColor: gradient,
                     borderColor: 'rgb(93,143,238)',
+                    hoverBorderColor: 'rgba(93,143,238,0.6)',
                     borderWidth: 4,
-                    pointBackgroundColor: 'rgba(0,0,0,0)',
-                    pointBorderColor: 'rgba(0,0,0,0)',
-                    data: [12, 11, 13, 9, 11]
+                    pointBackgroundColor: 'rgb(93,143,238)',
+                    pointBorderColor: 'rgb(93,143,238)',
+                    data: trueMoneyIncomesBar
                 },
                 {
                     lineTension: 0.5,
-                    backgroundColor: 'rgb(222,232,251)',
-                    borderColor: 'rgb(222,232,251)',
+                    backgroundColor: 'rgb(254,132,2)',
+                    borderColor: 'rgb(254,132,2)',
+                    hoverBorderColor: 'rgba(254,132,2,0.6)',
                     borderWidth: 4,
                     borderDash: [15, 5],
-                    pointBackgroundColor: 'rgba(0,0,0,0)',
-                    pointBorderColor: 'rgba(0,0,0,0)',
-                    data: [12, 14, 11, 9, 13],
+                    pointBackgroundColor: 'rgb(254,132,2)',
+                    pointBorderColor: 'rgb(254,132,2)',
+                    data: trueMoneyChargesDoughnut,
                     fill: false
                 }
             ]
@@ -76,7 +114,7 @@ const Charts = (props) => {
                 borderColor: 'rgba(0,0,0,1)',
                 borderWidth: 0,
                 barPercentage: 0.4,
-                data: [500,450,410,400]
+                data: trueMoneyIncomesBar
             }
         ]
     };
@@ -98,7 +136,7 @@ const Charts = (props) => {
                     'rgba(254,132,2,0.6)'
                 ],
                 borderWidth: 0,
-                data: [100,100, 100, 100, 100]
+                data: trueMoneyChargesDoughnut
             }
         ]
     };
@@ -123,6 +161,7 @@ const Charts = (props) => {
                             title: {
                                 display: true,
                                 text: 'Summary',
+                                position: 'top',
                                 fontSize: 20
                             },
                             legend: {
@@ -203,16 +242,5 @@ const Charts = (props) => {
         </>
     )
 }
-
-// const Charts = (props) => {
-//   return (
-//     <>
-//         <div>CHARTS</div>
-//         <div className="summary-line">
-//
-//         </div>
-//     </>
-//   );
-// };
 
 export default Charts;

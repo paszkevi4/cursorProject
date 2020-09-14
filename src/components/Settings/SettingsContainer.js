@@ -1,6 +1,6 @@
 import Settings from './Settings';
 import { connect } from 'react-redux';
-import { updateUserNameAC } from '../../redux/settingsReducer';
+import { updateUserAC } from '../../redux/settingsReducer';
 
 let mapStateToProps = (state) => {
   return {
@@ -10,8 +10,8 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
   return {
-    updateUserName: (newUserName) => {
-      dispatch(updateUserNameAC(newUserName));
+    updateUser: (newUser) => {
+      dispatch(updateUserAC(newUser));
     },
   };
 };

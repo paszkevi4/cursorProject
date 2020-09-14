@@ -8,26 +8,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import Header from '../Common/Header/HedaerContainer';
 
-// in props you have two arrays of objects:
-
-// props.incomes = [{category, description, date, money}, {-||-} ... {-||-}]
-// props.charges = [{category, description, date, money}, {-||-} ... {-||-}]
-//
-//
-//
-// for charge CRUD use the following:
-//
-// props.createIncome({newIncome})
-// props.updateIncome(index, {updatedIncome})
-// props.deleteIncome(index)
-//
-//
-// for income CRUD use the following:
-//
-// props.createCharge({newCharge})
-// props.updateCharge(index, {updatedCharge})
-// props.deleteCharge(index)
-
 const useStyles = makeStyles({
   home: {
     padding: '20px',

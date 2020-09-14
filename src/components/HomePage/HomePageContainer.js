@@ -6,6 +6,7 @@ import { createIncomeAC, updateIncomeAC, deleteIncomeAC } from '../../redux/inco
 let mapStateToProps = (state) => {
   return {
     icons: state.icons,
+    avatar: state.settings.avatar,
     incomeCategories: state.incomeCategories,
     chargeCategories: state.chargeCategories,
     incomes: state.incomes,

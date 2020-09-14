@@ -1,3 +1,4 @@
+const UPDATE_USER = 'UPDATE_USER';
 const UPDATE_USER_NAME = 'UPDATE_USER_NAME';
 const UPDATE_PHONE_NUMBER = 'UPDATE_PHONE_NUMBER';
 const TOGGLE_WARNING = 'TOGGLE_WARNING';
@@ -10,6 +11,11 @@ type stateType = {
   showWarning: boolean;
   moneyLimit: number;
   percentLimit?: number;
+};
+
+type updateUserACType = {
+  type: typeof UPDATE_USER;
+  newUser: stateType;
 };
 
 type updateUserNameACType = {
@@ -33,6 +39,7 @@ type setLimitACType = {
 };
 
 type actionType =
+  | updateUserACType
   | updateUserNameACType
   | updatePhoneNumberACType
   | toggleWarningACType
@@ -49,6 +56,8 @@ const initialState: stateType = {
 
 const settingsReducer = (state = initialState, action: actionType): stateType => {
   switch (action.type) {
+    case UPDATE_USER:
+      return { ...action.newUser };
     case UPDATE_USER_NAME:
       return { ...state, userName: action.newUserName };
     case UPDATE_PHONE_NUMBER:
@@ -61,6 +70,11 @@ const settingsReducer = (state = initialState, action: actionType): stateType =>
       return state;
   }
 };
+
+export const updateUserAC = (newUser: stateType): updateUserACType => ({
+  type: UPDATE_USER,
+  newUser,
+});
 
 export const updateUserNameAC = (newUserName: string): updateUserNameACType => ({
   type: UPDATE_USER_NAME,

@@ -70,7 +70,7 @@ const Category = ({ name, description, date, icon, deleteCategory, updateCategor
     <TableRow>
       <TableCell component="th" scope="row">
         <div className={classes.categoryNameBlock}>
-          <div className={classes.categoryIcon}>{icons[icon]}</div>
+          <div className={classes.categoryIcon}>{icon}</div>
           <div className={classes.categoryName}>{name}</div>
         </div>
       </TableCell>

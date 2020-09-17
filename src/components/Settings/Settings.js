@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { db, storage } from '../../redux/firebase/firebase';
+import { db } from '../../redux/firebase/firebase';
+import { handleFireBaseUploadInfo, handleFireBaseUploadAvatar } from '../../redux/firebase/profile';
 
+// components
 import Avatar from './components/AvatarUpload';
 import Limits from './components/Limits';
 import TextField from '@material-ui/core/TextField';
@@ -13,16 +15,14 @@ import 'react-phone-input-2/lib/material.css';
 import style from './Settings.module.css';
 
 const Settings = (props) => {
-  const [avatar, setAvatar] = useState(props.avatar);
   const [avatarNew, setAvatarNew] = useState(null);
+  const [avatar, setAvatar] = useState(props.avatar);
   const [name, setName] = useState(props.userName);
   const [phone, setPhone] = useState(props.phoneNumber);
   const [showWarning, setWarning] = useState(props.showWarning);
   const [currentMoneyLimit, setCurrentMoneyLimit] = useState(props.moneyLimit);
   const [currentPercentLimit, setCurrentPercentLimit] = useState(props.percentLimit);
   const [showSaved, setShowSaved] = useState(false);
-
-  window.avatar = avatarNew;
 
   useEffect(() => {
     setAvatar(props.avatar);
@@ -39,57 +39,27 @@ const Settings = (props) => {
     });
   }, []);
 
-  const handleFireBaseUploadInfo = () => {
-    setShowSaved(true);
-    setTimeout(() => setShowSaved(false), 2000);
-    db.collection('user-info')
-      .doc('INFO')
-      .set({
-        avatar: avatar,
-        userName: name,
-        phoneNumber: phone,
-        showWarning: showWarning,
-        moneyLimit: currentMoneyLimit,
-        percentLimit: currentPercentLimit,
-      })
-      .then(() => {
-        console.log('Document successfully written without avatar!');
-      })
-      .catch((error) => {
-        console.error('Error: ', error);
-      });
-  };
-
-  const handleFireBaseUploadAvatar = (e) => {
-    setShowSaved(true);
-    setTimeout(() => setShowSaved(false), 2000);
-    const uploadTask = storage.ref(`images/avatar.jpg`).put(avatarNew);
-    console.log('start of upload');
-    uploadTask.on('state_changed', () => {
-      storage
-        .ref('images')
-        .child(`avatar.jpg`)
-        .getDownloadURL()
-        .then((url) => {
-          db.collection('user-info')
-            .doc('INFO')
-            .set({
-              avatar: url,
-              userName: name,
-              phoneNumber: phone,
-              showWarning: showWarning,
-              moneyLimit: currentMoneyLimit,
-              percentLimit: currentPercentLimit,
-            })
-            .then(() => {
-              console.log('Document successfully written with avatar!');
-            })
-            .catch((error) => {
-              console.error('Error: ', error);
-            });
-          setAvatarNew(null);
-        });
-    });
+  const uploadNewData = () => {
+    avatarNew
+      ? handleFireBaseUploadAvatar(
+          setAvatarNew,
+          avatarNew,
+          name,
+          phone,
+          showWarning,
+          currentMoneyLimit,
+          currentPercentLimit,
+          setShowSaved,
+        )
+      : handleFireBaseUploadInfo(
+          avatar,
+          name,
+          phone,
+          showWarning,
+          currentMoneyLimit,
+          currentPercentLimit,
+          setShowSaved,
+        );
   };
 
   return (
@@ -106,7 +76,6 @@ const Settings = (props) => {
             setName(e.target.value);
           }}
         />
-
         <PhoneInput
           inputStyle={{ width: '100%' }}
           id="phone"
@@ -141,11 +110,7 @@ const Settings = (props) => {
           step={5}
           disabled={!showWarning}
         />
-
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={avatarNew ? handleFireBaseUploadAvatar : handleFireBaseUploadInfo}>
+        <Button variant="contained" color="primary" onClick={uploadNewData}>
           SAVE
         </Button>
         {showSaved && (
@@ -159,62 +124,3 @@ const Settings = (props) => {
 };
 
 export default Settings;
-
-// // Add a new document in collection "cities"
-// const littleUpdate = () => {
-//   db.collection('user-info')
-//     .doc('NEW')
-//     .set({
-//       userName: 'Avocado',
-//       moneyLimit: 2500,
-//       avatar: imageAsFile,
-//     })
-//     .then(function () {
-//       console.log('Document successfully written!');
-//     })
-//     .catch(function (error) {
-//       console.error('Error writing document: ', error);
-//     });
-// };
-
-// const updateUpload = () => {
-//   const uploadTask = storage.ref(`images/${imageAsFile.name}`).put(imageAsFile);
-
-//   uploadTask.on(
-//     'state_changed',
-//     (snapshot) => {},
-//     (error) => {
-//       console.log(error);
-//     },
-//     () => {
-//       storage
-//         .ref('images')
-//         .child(imageAsFile.name)
-//         .getDownloadURL()
-//         .then((url) => {
-//           db.collection('user-info')
-//             .add({
-//               userName: 'Ivan',
-//               moneyLimit: 2300,
-//               avatar: url,
-//             })
-//             .then(function () {
-//               console.log('Document successfully written!');
-//             });
-//           // db.collection('user-info')
-//           //   .doc('NEW')
-//           //   .set({
-//           //     userName: 'Ivan',
-//           //     moneyLimit: 2500,
-//           //   })
-//           //   .then(function () {
-//           //     console.log('Document successfully written!');
-//           //   })
-//           //   .catch(function (error) {
-//           //     console.error('Error writing document: ', error);
-//           //   });
-//           setImage(null);
-//         });
-//     },
-//   );
-// };

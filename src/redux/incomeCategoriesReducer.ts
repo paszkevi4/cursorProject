@@ -1,5 +1,6 @@
 import { icons } from './iconsReducer';
 
+const FETCH_CATEGORIES = 'FETCH_INCOME_CATEGORIES';
 const CREATE_CATEGORY = 'CREATE_INCOME_CATEGORY';
 const UPDATE_CATEGORY = 'UPDATE_INCOME_CATEGORY';
 const DELETE_CATEGORY = 'DELETE_INCOME_CATEGORY';
@@ -9,6 +10,11 @@ type incomeCategoryType = {
   description: string;
   date: Date | string;
   icon: typeof icons[0];
+};
+
+type fetchCategoriesACType = {
+  type: typeof FETCH_CATEGORIES;
+  category: incomeCategoryType;
 };
 
 type createIncomeCategoryACType = {
@@ -28,6 +34,7 @@ type deleteIncomeCategoryACType = {
 };
 
 type actionType =
+  | fetchCategoriesACType
   | createIncomeCategoryACType
   | updateIncomeCategoryACType
   | deleteIncomeCategoryACType;
@@ -59,6 +66,9 @@ const incomeCategoriesReducer = (
   action: actionType,
 ): Array<incomeCategoryType> => {
   switch (action.type) {
+    case FETCH_CATEGORIES:
+      //@ts-ignore
+      return [...state, { ...action.category, icon: icons[action.category.icon] }];
     case CREATE_CATEGORY:
       return [...state, action.category];
     case UPDATE_CATEGORY:
@@ -71,6 +81,11 @@ const incomeCategoriesReducer = (
       return state;
   }
 };
+
+export const fetchIncomeCategoriesAC = (category: incomeCategoryType): fetchCategoriesACType => ({
+  type: FETCH_CATEGORIES,
+  category,
+});
 
 export const createIncomeCategoryAC = (
   category: incomeCategoryType,

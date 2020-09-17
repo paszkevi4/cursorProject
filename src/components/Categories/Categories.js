@@ -47,10 +47,14 @@ const Categories = (props) => {
   useEffect(() => {
     db.collection('charge-categories').onSnapshot((ss) => {
       ss.docs.map((el) => {
-        props.createChargeCategory(el.data());
+        props.fetchChargeCategories(el.data());
       });
-      //props.createChargeCategory(ss.docs[1].data());
     });
+    // db.collection('income-categories').onSnapshot((ss) => {
+    //   ss.docs.map((el) => {
+    //     props.fetchIncomeCategories(el.data());
+    //   });
+    // });
   }, []);
 
   const classes = useStyles();

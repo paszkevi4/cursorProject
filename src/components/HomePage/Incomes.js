@@ -1,6 +1,7 @@
 import React from 'react';
 import HomeTable from './HomeTable';
-import HomeSelect from './HomeSelect';
+import AddCharges from "./AddCharges";
+//import HomeSelect from './HomeSelect';
 import useSortTableData from "./sortTable";
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -12,9 +13,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import AddIcon from '@material-ui/icons/Add';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -52,17 +50,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Incomes = ({ incomes, categories }) => {
+const Incomes = ( props ) => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => {
+  const handleClickOpen = () => {
     setOpen(true);
   };
+  const [open, setOpen] = React.useState(false);
+  // const handleOpen = () => {
+  //   setOpen(true);
+  // };
   const handleClose = () => {
     setOpen(false);
   };
 
-  const { items,  requestSort, sortConfig } = useSortTableData(incomes , categories);
+  const { items,  requestSort, sortConfig } = useSortTableData(props.incomes , props.categories);
   const getClassNamesFor = (name) => {
     if (!sortConfig) {
       return;
@@ -75,38 +76,25 @@ const Incomes = ({ incomes, categories }) => {
       <div className={classes.homeMenu}>
         <div className={classes.homeSelect}>
           <h3 className={classes.homeMenuTitle}>My Incomes</h3>
-          <HomeSelect />
+       {/*  <HomeSelect />*/}
         </div>
         <Button
           className={classes.addButton}
           type="button"
-          onClick={handleOpen}
+          onClick={handleClickOpen}
           variant="contained"
           color="primary"
           startIcon={<AddIcon />}>
           Add more
         </Button>
       </div>
-
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        className={classes.modal}
-        open={open}
-        onClose={handleClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}>
-        <Fade in={open}>
-          <div className={classes.paper}>
-            <h2 id="transition-modal-title">Transition modal</h2>
-            <p id="transition-modal-description">react-transition-group animates me.</p>
-          </div>
-        </Fade>
-      </Modal>
-
+      <AddCharges
+          open={open}
+          handleClose={handleClose}
+          updateCharge={props.createIncome}
+          charges={props.incomes}
+          chargeCategories={props.categories}
+      />
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="Table of Incomes">
           <TableHead className={classes.tableHead}>
@@ -147,12 +135,21 @@ const Incomes = ({ incomes, categories }) => {
             {[
               ...items.map((el, i) => (
                 <HomeTable
-                  name={categories[el.category].name}
-                  icon={categories[el.category].icon}
+                  category={el.category}
+                  name={props.categories[el.category].name}
+                  icon={props.categories[el.category].icon}
                   description={el.description}
                   date={el.date.toLocaleDateString()}
                   money={el.money}
-                  key={i}
+                  key={el.name}
+                  deleteMoney={() => {
+                    props.deleteMoney(i);
+                  }}
+                  updateCharge={(income) => {
+                    props.updateIncome(i, income);
+                  }}
+                  charges={props.incomes}
+                  chargeCategories={props.categories}
                 />
               )),
             ]}

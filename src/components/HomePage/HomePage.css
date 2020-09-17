@@ -27,3 +27,7 @@
 	 display: inline-block;
 	 margin-left: 1em;
 	 }
+
+ .MuiTableCell-root {
+	 min-width: 200px;
+	 }

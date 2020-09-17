@@ -79,8 +79,6 @@ const AddCategory = ({
   };
 
   const handleChange = (event) => {
-    console.log(event.target);
-    debugger;
     if (event.target.id === 'nameInput') {
       setName(event.target.value);
     } else if (event.target.id === 'descriptionInput') {
@@ -138,7 +136,7 @@ const AddCategory = ({
               fullWidth>
               {[
                 ...icons.map((el, i) => (
-                  <MenuItem key={i} value={el} id="selectIcon" className={classes.iconSelect}>
+                  <MenuItem key={i} value={el} className={classes.iconSelect}>
                     {el}
                   </MenuItem>
                 )),

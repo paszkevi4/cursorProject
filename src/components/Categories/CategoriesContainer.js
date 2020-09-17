@@ -1,11 +1,13 @@
 import Categories from './Categories';
 import { connect } from 'react-redux';
 import {
+  fetchIncomeCategoriesAC,
   createIncomeCategoryAC,
   updateIncomeCategoryAC,
   deleteIncomeCategoryAC,
 } from '../../redux/incomeCategoriesReducer';
 import {
+  fetchChargeCategoriesAC,
   createChargeCategoryAC,
   updateChargeCategoryAC,
   deleteChargeCategoryAC,
@@ -21,6 +23,9 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
   return {
+    fetchChargeCategories: (category) => {
+      dispatch(fetchChargeCategoriesAC(category));
+    },
     createIncomeCategory: (category) => {
       dispatch(createIncomeCategoryAC(category));
     },
@@ -29,6 +34,9 @@ let mapDispatchToProps = (dispatch) => {
     },
     deleteIncomeCategory: (index) => {
       dispatch(deleteIncomeCategoryAC(index));
+    },
+    fetchIncomeCategories: (category) => {
+      dispatch(fetchIncomeCategoriesAC(category));
     },
     createChargeCategory: (category) => {
       dispatch(createChargeCategoryAC(category));

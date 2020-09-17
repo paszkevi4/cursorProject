@@ -1,6 +1,7 @@
 import { db } from './firebase/firebase';
 import { icons } from './iconsReducer';
 
+const FETCH_CATEGORIES = 'FETCH_CHARGE_CATEGORIES';
 const SET_CATEGORY = 'SET_CHARGE_CATEGORY';
 const UPDATE_CATEGORY = 'UPDATE_CHARGE_CATEGORY';
 const DELETE_CATEGORY = 'DELETE_CHARGE_CATEGORY';
@@ -10,6 +11,11 @@ type chargeCategoryType = {
   description: string;
   date: Date | string;
   icon: typeof icons[0];
+};
+
+type fetchCategoriesACType = {
+  type: typeof FETCH_CATEGORIES;
+  category: chargeCategoryType;
 };
 
 type createChargeCategoryACType = {
@@ -29,6 +35,7 @@ type deleteChargeCategoryACType = {
 };
 
 type actionType =
+  | fetchCategoriesACType
   | createChargeCategoryACType
   | updateChargeCategoryACType
   | deleteChargeCategoryACType;
@@ -61,9 +68,12 @@ const chargeCategoriesReducer = (
   action: actionType,
 ): Array<chargeCategoryType> => {
   switch (action.type) {
-    case SET_CATEGORY:
+    case FETCH_CATEGORIES:
       //@ts-ignore
       return [...state, { ...action.category, icon: icons[action.category.icon] }];
+    case SET_CATEGORY:
+      //@ts-ignore
+      return [...state, action.category];
     case UPDATE_CATEGORY:
       state.splice(action.index, 1, action.category);
       return [...state];
@@ -74,6 +84,11 @@ const chargeCategoriesReducer = (
       return state;
   }
 };
+
+export const fetchChargeCategoriesAC = (category: chargeCategoryType): fetchCategoriesACType => ({
+  type: FETCH_CATEGORIES,
+  category,
+});
 
 export const createChargeCategoryAC = (
   category: chargeCategoryType,

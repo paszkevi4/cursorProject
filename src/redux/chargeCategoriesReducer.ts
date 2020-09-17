@@ -1,3 +1,4 @@
+import { db } from './firebase/firebase';
 import { icons } from './iconsReducer';
 
 const SET_CATEGORY = 'SET_CHARGE_CATEGORY';
@@ -61,7 +62,8 @@ const chargeCategoriesReducer = (
 ): Array<chargeCategoryType> => {
   switch (action.type) {
     case SET_CATEGORY:
-      return [...state, action.category];
+      //@ts-ignore
+      return [...state, { ...action.category, icon: icons[action.category.icon] }];
     case UPDATE_CATEGORY:
       state.splice(action.index, 1, action.category);
       return [...state];

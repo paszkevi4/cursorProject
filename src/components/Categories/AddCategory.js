@@ -59,25 +59,26 @@ const AddCategory = ({
   const [icon, setIcon] = useState(currentCategory.currentIcon);
 
   const resetInputs = () => {
-    setName(name);
-    setDescription(description);
+    setName('');
+    setDescription('');
     setDate(values.currentDate);
-    setIcon(icon);
+    setIcon('');
   };
 
   const handleCloseDialog = (e) => {
     if (e.target.innerText === "ADD") {
-      if (name && icon) {
+      console.log(icon)
+      if (name && icon !== 'object' && icon) {
         updateCategory({
           name: name,
           description: description,
           date: Date(date),
-          icon: icons[icon],
+          icon: icon,
         });
         handleClose();
         resetInputs();
       }
-    } else {
+    } else if(e.target.innerText === "CANCEL") {
       handleClose();
       resetInputs();
     }

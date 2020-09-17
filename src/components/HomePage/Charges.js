@@ -1,5 +1,9 @@
 import React from 'react';
 import HomeTable from './HomeTable';
+import useSortTableData from "./sortTable";
+// import HomeModal from "./HomeModal";
+import AddCharges from "./AddCharges";
+
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Table from '@material-ui/core/Table';
@@ -10,12 +14,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import AddIcon from '@material-ui/icons/Add';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
-import HomeSelect from './HomeSelect';
-import useSortTableData from "./sortTable";
-// import HomeModal from "./HomeModal";
+// import HomeSelect from './HomeSelect';
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -31,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    minWidth: 300,
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
@@ -62,7 +62,22 @@ const Charges = (props) => {
   const handleClose = () => {
     setOpen(false);
   };
-
+//---------------------
+  // const selectVal = {
+  //   "TODAY": Date.now,
+  //   "THIS_WEEK": 6,
+  //   "THIS_MONTH": 30,
+  //   "THIS_YEAR": 256
+  // }
+const  handlePeriodChange = (selectVal) => {
+  // handlePeriodChange(selectVal){
+    this.props.handlePeriodChange(selectVal);
+    if (selectVal === Date.now) {
+      console.log(selectVal.filter(this.props.date));
+      return selectVal.filter()
+    }
+  }
+//------------------------
   const { items,  requestSort, sortConfig } = useSortTableData(props.charges, props.categories);
   const getClassNamesFor = (name) => {
     if (!sortConfig) {
@@ -76,7 +91,16 @@ const Charges = (props) => {
       <div className={classes.homeMenu}>
         <div className={classes.homeSelect}>
           <h3 className={classes.homeMenuTitle}>My Charges</h3>
-          <HomeSelect />
+          {/*<HomeSelect updateCategory={props.createChargeCategory}/>*/}
+
+          <select onChange={(val) => handlePeriodChange(val.target.value)}
+                  className="btn btn-sm btn-outline-secondary dropdown-toggle">
+            <option value="TODAY">Today</option>
+            <option value="THIS_WEEK">This Week</option>
+            <option value="THIS_MONTH">This Month</option>
+            <option value="THIS_YEAR">This Year</option>
+            <option selected value="FULL_PERIOD">Full period</option>
+          </select>
         </div>
         <Button
           className={classes.addButton}
@@ -88,26 +112,13 @@ const Charges = (props) => {
           Add more
         </Button>
       </div>
-
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        className={classes.modal}
-        open={open}
-        onClose={handleClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}>
-        <Fade in={open}>
-          <div className={classes.paper}>
-            <h2 id="transition-modal-title">Modal</h2>
-            <p id="transition-modal-description">react-transition-group animates me.</p>
-          </div>
-        </Fade>
-      </Modal>
-
+      <AddCharges
+          open={open}
+          handleClose={handleClose}
+          updateCharge={props.createCharge}
+          charges={props.charges}
+          chargeCategories={props.categories}
+      />
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="Table of Incomes">
           <TableHead className={classes.tableHead}>
@@ -146,12 +157,21 @@ const Charges = (props) => {
           <TableBody>
             {[...items.map((el, i) => (
                 <HomeTable
+                  category={el.category}
                   icon={props.categories[el.category].icon}
                   name={props.categories[el.category].name}
                   description={el.description}
                   date={el.date.toLocaleDateString()}
                   money={el.money}
-                  key={i}
+                  key={el.name}
+                  deleteMoney={() => {
+                    props.deleteMoney(i);
+                  }}
+                  updateCharge={(charge) => {
+                    props.updateCharge(i, charge);
+                  }}
+                  charges={props.charges}
+                  chargeCategories={props.categories}
                 />
               )),
             ]}
@@ -160,5 +180,6 @@ const Charges = (props) => {
       </TableContainer>
     </div>
   );
-};
+}
+
 export default Charges;

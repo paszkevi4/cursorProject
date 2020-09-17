@@ -88,11 +88,21 @@ const HomePage = (props) => {
 
           <Route
             path="/homepage/charges"
-            render={() => <Charges charges={props.charges} categories={props.chargeCategories} />}
+            render={() => <Charges charges={props.charges}
+                                   categories={props.chargeCategories}
+                                   deleteMoney={props.deleteCharge}
+                                   updateCharge={props.updateCharge}
+                                   createCharge={props.createCharge}
+                                   />}
           />
           <Route
             path="/homepage/incomes"
-            render={() => <Incomes incomes={props.incomes} categories={props.incomeCategories} />}
+            render={() => <Incomes incomes={props.incomes}
+                                   categories={props.incomeCategories}
+                                   deleteMoney={props.deleteIncome}
+                                   updateIncome={props.updateIncome}
+                                   createIncome={props.createIncome}
+                                  />}
           />
         </div>
       </div>

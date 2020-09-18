@@ -33,11 +33,12 @@ const Settings = (props) => {
     setCurrentPercentLimit(props.percentLimit);
   }, [props]);
 
-  useEffect(() => {
-    db.collection('user-info').onSnapshot((ss) => {
-      props.updateUser(ss.docs[0].data());
-    });
-  }, []);
+  // useEffect(() => {
+  //   // db.collection('user-info').onSnapshot((ss) => {
+  //   //   props.updateUser(ss.docs[0].data());
+  //   // });
+  //   props.settingsDidMountThunk();
+  // }, []);
 
   const uploadNewData = () => {
     avatarNew

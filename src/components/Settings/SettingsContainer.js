@@ -1,6 +1,6 @@
 import Settings from './Settings';
 import { connect } from 'react-redux';
-import { updateUserAC } from '../../redux/settingsReducer';
+import { updateUserAC, setSettingsThunk } from '../../redux/settingsReducer';
 
 let mapStateToProps = (state) => {
   return {
@@ -8,12 +8,12 @@ let mapStateToProps = (state) => {
   };
 };
 
-let mapDispatchToProps = (dispatch) => {
-  return {
-    updateUser: (newUser) => {
-      dispatch(updateUserAC(newUser));
-    },
-  };
-};
+// let mapDispatchToProps = (dispatch) => {
+//   return {
+//     updateUser: (newUser) => {
+//       dispatch(updateUserAC(newUser));
+//     },
+//   };
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Settings);
+export default connect(mapStateToProps, null)(Settings);

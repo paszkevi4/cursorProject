@@ -93,6 +93,7 @@ const HomePage = (props) => {
                                    deleteMoney={props.deleteCharge}
                                    updateCharge={props.updateCharge}
                                    createCharge={props.createCharge}
+                                   avatar={props.avatar}
                                    />}
           />
           <Route
@@ -102,6 +103,7 @@ const HomePage = (props) => {
                                    deleteMoney={props.deleteIncome}
                                    updateIncome={props.updateIncome}
                                    createIncome={props.createIncome}
+                                   avatar={props.avatar}
                                   />}
           />
         </div>

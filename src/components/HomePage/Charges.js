@@ -120,7 +120,7 @@ const  handlePeriodChange = (selectVal) => {
           chargeCategories={props.categories}
       />
       <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="Table of Incomes">
+        <Table className={classes.table} aria-label="Table of Charges">
           <TableHead className={classes.tableHead}>
             <TableRow>
               <TableCell className={"table-direct"}>
@@ -151,6 +151,7 @@ const  handlePeriodChange = (selectVal) => {
                     className={getClassNamesFor('money')}> Money
                 </button>
               </TableCell>
+              <TableCell>Avatar</TableCell>
               <TableCell>Action</TableCell>
             </TableRow>
           </TableHead>
@@ -164,6 +165,7 @@ const  handlePeriodChange = (selectVal) => {
                   date={el.date.toLocaleDateString()}
                   money={el.money}
                   key={el.name}
+                  avatar={props.avatar}
                   deleteMoney={() => {
                     props.deleteMoney(i);
                   }}

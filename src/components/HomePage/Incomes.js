@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
   tableHead: {
     backgroundColor: 'lightcyan',
+    fontWeight: '700',
   },
   addButton: {
     display: 'flex',
@@ -128,7 +129,8 @@ const Incomes = ( props ) => {
                     className={getClassNamesFor('money')}> Money
                 </button>
               </TableCell>
-              <TableCell>Action</TableCell>
+              <TableCell className={"table-direct"}>Avatar</TableCell>
+              <TableCell className={"table-direct"}>Action</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -142,6 +144,7 @@ const Incomes = ( props ) => {
                   date={el.date.toLocaleDateString()}
                   money={el.money}
                   key={el.name}
+                  avatar={props.avatar}
                   deleteMoney={() => {
                     props.deleteMoney(i);
                   }}

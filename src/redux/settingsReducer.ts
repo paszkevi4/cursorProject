@@ -46,7 +46,7 @@ type actionType =
   | setLimitACType;
 
 const initialState: stateType = {
-  avatar: null,
+  avatar: "https://www.flaticon.com/svg/static/icons/svg/527/527489.svg",
   userName: 'Ivan',
   phoneNumber: '+380991234567',
   showWarning: true,

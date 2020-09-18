@@ -20,7 +20,7 @@ const useStyles = makeStyles({
 });
 
 const HomeTable = ({ icon, name, description, date, money, deleteMoney, updateCharge,  charges,
-										 chargeCategories}) => {
+										 chargeCategories, avatar}) => {
 
 	const classes = useStyles();
 
@@ -102,6 +102,9 @@ const HomeTable = ({ icon, name, description, date, money, deleteMoney, updateCh
 
 				<TableCell>{date}</TableCell>
 				<TableCell>{money}</TableCell>
+				<TableCell>
+					<img src={`${avatar}`} alt="avatar"  className={"avatar"} />
+				</TableCell>
 				<TableCell>
 					<Button
 							aria-controls="home-menu"

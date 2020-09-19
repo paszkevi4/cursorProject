@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavLink, Route, HashRouter, Redirect } from 'react-router-dom';
 
 import Charges from './Charges';
@@ -8,24 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import Header from '../Common/Header/HedaerContainer';
 
-//
-// У такому форматi redux очiкуе отримувати категорii. Дата може буди як датою, так i стрiнгою:
-// { name: 'Pets', description: 'For smth else', date: '26/08/20', icon: props.icons[0] },
-//
-//
-// for charge CRUD use the following:
-//
-// props.createChargeCategory({newCategory})
-// props.updateChargeCategory(index, {updatedCategory});
-// props.deleteChargeCategory(index);
-//
-//
-//
-// for income CRUD use the following:
-//
-// props.createIncomeCategory({newCategory})
-// props.updateIncomeCategory(index, {updatedCategory})
-// props.deleteIncomeCategory(index)
+import { db } from '../../redux/firebase/firebase';
 
 const useStyles = makeStyles({
   Categories: {
@@ -61,6 +44,19 @@ const useStyles = makeStyles({
 });
 
 const Categories = (props) => {
+  useEffect(() => {
+    db.collection('charge-categories').onSnapshot((ss) => {
+      ss.docs.map((el) => {
+        props.fetchChargeCategories(el.data());
+      });
+    });
+    // db.collection('income-categories').onSnapshot((ss) => {
+    //   ss.docs.map((el) => {
+    //     props.fetchIncomeCategories(el.data());
+    //   });
+    // });
+  }, []);
+
   const classes = useStyles();
   return (
     <HashRouter>

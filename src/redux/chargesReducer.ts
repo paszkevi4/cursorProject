@@ -28,6 +28,16 @@ type deleteChargeACType = {
 type actionType = createChargeACType | updateChargeACType | deleteChargeACType;
 
 let initialState: Array<chargeType> = [
+  { category: 0, description: 'Diner with John', date: new Date(2020, 8, 17), money: 300 },
+  { category: 1, description: 'For clothes', date: new Date(2020, 8, 16), money: 500 },
+  { category: 2, description: '', date: new Date(2020, 8, 14), money: 470 },
+  {
+    category: 3,
+    description: 'Its a looooooooooooooooooooooooooooooong description',
+    date: new Date(2020, 8, 13),
+    money: 390,
+  },
+  { category: 4, description: '', date: new Date(2020, 8, 12), money: 150 },
   { category: 0, description: 'Diner with John', date: new Date(2020, 8, 2), money: 300 },
   { category: 1, description: 'For clothes', date: new Date(2020, 7, 28), money: 500 },
   { category: 2, description: '', date: new Date(2020, 7, 26), money: 470 },

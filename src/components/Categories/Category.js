@@ -66,7 +66,6 @@ const Category = ({ name, description, date, icon, deleteCategory, updateCategor
 
     setAnchorEl(null);
   };
-
   return (
     <TableRow>
       <TableCell component="th" scope="row">

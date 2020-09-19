@@ -35,7 +35,7 @@ const Header = (props) => {
     } else {
       setToWarn(false);
     }
-  }, [total]);
+  }, [total, incomes, props]);
 
   return (
     <div className={style.header}>

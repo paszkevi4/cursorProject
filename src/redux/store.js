@@ -1,4 +1,5 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
 
 import incomeCategoriesReducer from './incomeCategoriesReducer';
 import chargeCategoriesReducer from './chargeCategoriesReducer';
@@ -17,6 +18,6 @@ let reducers = combineReducers({
   chargeCategories: chargeCategoriesReducer,
 });
 
-let store = createStore(reducers);
+let store = createStore(reducers, applyMiddleware(thunkMiddleware));
 
 export default store;

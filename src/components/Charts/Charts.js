@@ -67,8 +67,10 @@ const Charts = (props) => {
     trueDataCharges.map( item => trueMoneyChargesDoughnut.push(item.money) );
     trueDataIncomes.map( item => trueMoneyIncomesBar.push(item.money) );
 
-    console.log(trueMoneyChargesDoughnut)
+    console.log(categoriesBar)
+    console.log(trueMoneyIncomesBar)
     console.log(categoriesDoughnut)
+    console.log(trueMoneyChargesDoughnut)
 
     const startDataLine = (canvas) => {
         const ctx = canvas.getContext('2d');

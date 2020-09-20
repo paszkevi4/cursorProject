@@ -31,3 +31,31 @@
     margin-right: 4%;
     margin-top: 1rem;
 }
+
+.btn-active{
+    background-color:rgb(63,81,181)!important;
+    color: #eee!important;
+}
+
+.checkboxes-wrapper{
+    min-width: 100%;
+    text-align: center;
+}
+
+.checkboxes-wrapper label{
+    font-size: 1.2rem;
+    margin-left: 5px;
+    margin-right: 10px;
+}
+
+@media(max-width: 1078px) {
+    .line-chart,
+    .bar-chart,
+    .doughnut-chart
+    {
+        max-width: 90%;
+        min-width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

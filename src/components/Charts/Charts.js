@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {Bar, Doughnut, Line} from 'react-chartjs-2';
 
@@ -6,13 +6,6 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
 import './Charts.css';
-
-// in props you have four arrays of objects:
-
-// props.incomes = [{category, description, date, icon}, {-||-} ... {-||-}]
-// props.charges = [{category, description, date, icon}, {-||-} ... {-||-}]
-// props.incomeCategories = [{name, description, date, icon}, {-||-} ... {-||-}]
-// props.chargeCategories = [{name, description, date, icon}, {-||-} ... {-||-}]
 
 const useStyles = makeStyles({
     root: {
@@ -24,53 +17,154 @@ const useStyles = makeStyles({
     },
   });
 
-const Charts = (props) => { 
-   
+const Charts = ({incomes, charges, incomeCategories, chargeCategories}) => { 
+    const [activePeriod, setActivePeriod] = useState(8);
+    const [isShowIncomes, setIsShowIncomes] = useState(true);
+    const [isShowCharges, setIsShowCharges] = useState(true);
+
     const getWeekDay = day => {
         const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-        return days[day];
+        return days[(new Date(day)).getDay()];
+    };
+
+    const getWeek = () => {
+        setActivePeriod(8);
     }
 
-    let categoriesBar = [];
-    let categoriesDoughnut = [];
-    let incomeDates = [];
-    let incomeDays = [];
+    const getMonth = () => {
+        setActivePeriod(31)
+    };
 
+    const allDates = [];
+    const allDatesForDay = [];
+    const allDays = [];
+    const categoriesBar = [];
+    const categoriesDoughnut = [];
+    const trueDataCharges = [];
+    const trueDataIncomes = [];
+    const trueMoneyChargesDoughnut = [];
+    const trueMoneyIncomesBar = [];
+    const trueMoneyIncomes = [];
+    const moneyIn = [];
+    const moneyOut = [];
+    const trueMoneyCharges = [];
 
-    let trueDataCharges = [];
-    let trueDataIncomes = [];
-    let trueMoneyChargesDoughnut = [];
-    let trueMoneyIncomesBar = [];
+    const allMoney = [];
 
-    let period = 31
+    for(let i = 0; i < activePeriod - 1; i++) {
+        allDates.push((new Date(Date.now() - (i * 1000 * 3600 * 24)).toLocaleDateString()).slice(0, 5));
+        allDatesForDay.push(Date.now() - (i * 1000 * 3600 * 24));
+    }
 
-    props.charges.map(item => {
-        if(Math.ceil(Math.abs(item.date.getTime() - new Date().getTime()) / (1000 * 3600 * 24)) < period) {
+    allDates.reverse();
+    allDatesForDay.reverse();
+
+    allDatesForDay.map(el => {
+        allDays.push(getWeekDay(el));
+        return allDays;
+    });
+
+    const fullIncomes = incomeCategories.slice();
+    const fullCharges = chargeCategories.slice();
+
+    fullIncomes.forEach((el, i) => {
+        el.id = i;
+        el.sum = 0;
+    });
+    
+    incomes.forEach(el => {
+        if(Math.ceil(Math.abs(el.date.getTime() - new Date().getTime()) / (1000 * 3600 * 24)) < activePeriod) {
+            fullIncomes[el.category].sum += el.money;
+        }
+    });
+
+    fullCharges.forEach((el, i) => {
+        el.id = i;
+        el.sum = 0;
+    });
+    
+    charges.forEach(el => {
+        if(Math.ceil(Math.abs(el.date.getTime() - new Date().getTime()) / (1000 * 3600 * 24)) < activePeriod) {
+            fullCharges[el.category].sum += el.money;
+        }
+    });
+
+    incomes.map(el => {
+        if(Math.ceil(Math.abs(el.date.getTime() - new Date().getTime()) / (1000 * 3600 * 24)) < activePeriod) {
+            trueMoneyIncomes.push(el.money)
+        }
+        return trueMoneyIncomes;
+    });
+
+    charges.map(el => {
+        if(Math.ceil(Math.abs(el.date.getTime() - new Date().getTime()) / (1000 * 3600 * 24)) < activePeriod) {
+            trueMoneyCharges.push(el.money)
+        }
+        return trueMoneyCharges;
+    });
+
+    charges.map(item => {
+        if(Math.ceil(Math.abs(item.date.getTime() - new Date().getTime()) / (1000 * 3600 * 24)) < activePeriod) {
             trueDataCharges.push(item)
         }
         return trueDataCharges;
     });
 
-    props.incomes.map(item => {
-        if(Math.ceil(Math.abs(item.date.getTime() - new Date().getTime()) / (1000 * 3600 * 24)) < period) {
-            trueDataIncomes.push(item)
+    incomes.map(item => {
+        if(Math.ceil(Math.abs(item.date.getTime() - new Date().getTime()) / (1000 * 3600 * 24)) < activePeriod) {
+            trueDataIncomes.push(item);
         }
         return trueDataIncomes;
     });
 
-    props.incomeCategories.map( item => categoriesBar.push(item.name) );
-    props.chargeCategories.map( item =>  categoriesDoughnut.push(item.name) ); /// maybe only for 30
-    trueDataIncomes.map( item =>  incomeDates.push((item.date).toLocaleDateString()) );
-    incomeDates.map( item => incomeDays.push(getWeekDay(item)) );
+    allDates.forEach(d => {
+        let elIn = trueDataIncomes.find(el => el.date.toLocaleDateString().slice(0, 5) === d);
+        let elOut = trueDataCharges.find(el => el.date.toLocaleDateString().slice(0, 5) === d);
+        if(elIn) {
+            moneyIn.push(elIn.money)
+        } else {
+            moneyIn.push(0)
+        }
+        if(elOut) {
+            moneyOut.push(elOut.money)
+        } else {
+            moneyOut.push(0)
+        }
+    });
 
-    trueDataCharges.map( item => trueMoneyChargesDoughnut.push(item.money) );
-    trueDataIncomes.map( item => trueMoneyIncomesBar.push(item.money) );
+    fullIncomes.map( el => {
+        if(el.sum !== 0) {
+            categoriesBar.push(el.name) 
+        }
+        return categoriesBar
+    });
 
-    console.log(categoriesBar)
-    console.log(trueMoneyIncomesBar)
-    console.log(categoriesDoughnut)
-    console.log(trueMoneyChargesDoughnut)
+    fullCharges.map( el =>  {
+        if(el.sum !== 0) {
+            categoriesDoughnut.push(el.name) 
+        }
+        return categoriesDoughnut
+    });
+
+    fullCharges.map( el => trueMoneyChargesDoughnut.push(el.sum) );
+    fullIncomes.map( el => trueMoneyIncomesBar.push(el.sum) );
+
+    const showIncomes = () => setIsShowIncomes(!isShowIncomes);
+    const showCharges= () => setIsShowCharges(!isShowCharges);
+
+    incomes.map(el => {
+        allMoney.push(+el.money);
+        return allMoney
+    });
+
+    charges.map(el => {
+        allMoney.push(+el.money);
+        return allMoney
+    })
+
+    const maxSum = Math.max(...allMoney);
+    const minSum = Math.min(...allMoney);
 
     const startDataLine = (canvas) => {
         const ctx = canvas.getContext('2d');
@@ -79,28 +173,30 @@ const Charts = (props) => {
         gradient.addColorStop(1, 'rgb(255,255,255)');
     
         return {
-            labels: incomeDates,
+            labels: activePeriod === 8 ? allDays : allDates,
             datasets: [
                 {
+                    label: 1,
                     lineTension: 0.5,
                     backgroundColor: gradient,
                     borderColor: 'rgb(93,143,238)',
-                    hoverBorderColor: 'rgba(93,143,238,0.6)',
+                    hoverBorderColor: 'rgba(0,0,0,0)',
                     borderWidth: 4,
-                    pointBackgroundColor: 'rgb(93,143,238)',
-                    pointBorderColor: 'rgb(93,143,238)',
-                    data: trueMoneyIncomesBar
+                    pointBackgroundColor: 'rgba(0,0,0,0)',
+                    pointBorderColor: 'rgba(0,0,0,0)',
+                    data: isShowIncomes ? moneyIn : null
                 },
                 {
+                    label: 2,
                     lineTension: 0.5,
                     backgroundColor: 'rgb(254,132,2)',
                     borderColor: 'rgb(254,132,2)',
-                    hoverBorderColor: 'rgba(254,132,2,0.6)',
+                    hoverBorderColor: 'rgba(0,0,0,0)',
                     borderWidth: 4,
                     borderDash: [15, 5],
-                    pointBackgroundColor: 'rgb(254,132,2)',
-                    pointBorderColor: 'rgb(254,132,2)',
-                    data: trueMoneyChargesDoughnut,
+                    pointBackgroundColor: 'rgba(0,0,0,0)',
+                    pointBorderColor: 'rgba(0,0,0,0)',
+                    data: isShowCharges ? moneyOut : null,
                     fill: false
                 }
             ]
@@ -148,10 +244,20 @@ const Charts = (props) => {
     return (
         <>
             <div className="btn-wrapper">
-                <Button variant="outlined" classes={{ root: classes.root,label: classes.label }}>
+                <Button 
+                    variant="outlined" 
+                    className={activePeriod === 31 ? 'btn-active' : null}
+                    classes={{ root: classes.root,label: classes.label }} 
+                    onClick={getMonth}
+                >
                     Month
                 </Button>
-                <Button variant="contained" color="primary" classes={{ root: classes.root, label: classes.label }}>
+                <Button 
+                    variant="outlined"
+                    className={activePeriod === 8 ? 'btn-active' : null}
+                    classes={{ root: classes.root, label: classes.label }}
+                    onClick={getWeek}
+                >
                     Week
                 </Button>
             </div>
@@ -173,8 +279,8 @@ const Charts = (props) => {
                                 yAxes: [{
                                     display: false,
                                     ticks: {
-                                        suggestedMin: 5,
-                                        suggestedMax: 15
+                                        suggestedMin: minSum,
+                                        suggestedMax: maxSum
                                     },
                                     gridLines: {
                                         display: false,
@@ -189,6 +295,22 @@ const Charts = (props) => {
                             maintainAspectRatio: false
                         }}
                     />
+                </div>
+                <div className="checkboxes-wrapper">
+                    <input 
+                        type="checkbox" 
+                        id="show-in" 
+                        onChange={showIncomes}
+                        defaultChecked
+                    />
+                    <label htmlFor="show-in">Incomes</label>
+                    <input 
+                        type="checkbox" 
+                        id="show-out" 
+                        onChange={showCharges}
+                        defaultChecked 
+                    />
+                    <label htmlFor="show-out">Charges</label>
                 </div>
                 <div className="bar-chart">
                     <Bar

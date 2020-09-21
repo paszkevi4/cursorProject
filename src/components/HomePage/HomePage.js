@@ -24,28 +24,6 @@ const useStyles = makeStyles({
   toggleButtonActive: {
     borderBottom: '1px solid cornflowerblue',
   },
-  // headerBlock: {
-  //   display: 'flex',
-  //   justifyContent: 'space-between',
-  //   alignItems: 'top',
-  //   // marginBottom: '100px',
-  // },
-  // headerBalance: {
-  //   display: 'flex',
-  //   flexDirection: 'column',
-  //   // justifyContent: 'space-between',
-  //   alignItems: 'center',
-  //   marginBottom: '100px',
-  // },
-  // balanceTitle: {
-  //   textAlign: 'right',
-  //   fontSize: '1.2em',
-  //   marginBottom: '10px',
-  // },
-  // balanceAmount: {
-  //   fontSize: '1.7em',
-  //   fontWeight: 'bold',
-  // },
 });
 
 const HomePage = (props) => {
@@ -53,15 +31,6 @@ const HomePage = (props) => {
   return (
     <HashRouter>
       <div className={classes.home}>
-        {/* <div className={classes.headerBlock}>
-          <div>
-            <h2>HOMEPAGE</h2>
-          </div>
-          <div className={classes.headerBalance}>
-            <h2 className={classes.balanceTitle}>Balance</h2>
-            <h1 className={classes.balanceAmount}>$2,652.07</h1>
-          </div>
-        </div> */}
         <Header title="Homepage" />
         <div className={classes.sectionToggle}>
           <Button color="primary">
@@ -88,23 +57,29 @@ const HomePage = (props) => {
 
           <Route
             path="/homepage/charges"
-            render={() => <Charges charges={props.charges}
-                                   categories={props.chargeCategories}
-                                   deleteMoney={props.deleteCharge}
-                                   updateCharge={props.updateCharge}
-                                   createCharge={props.createCharge}
-                                   avatar={props.avatar}
-                                   />}
+            render={() => (
+              <Charges
+                charges={props.charges}
+                categories={props.chargeCategories}
+                deleteMoney={props.deleteCharge}
+                updateCharge={props.updateCharge}
+                createCharge={props.createCharge}
+                avatar={props.avatar}
+              />
+            )}
           />
           <Route
             path="/homepage/incomes"
-            render={() => <Incomes incomes={props.incomes}
-                                   categories={props.incomeCategories}
-                                   deleteMoney={props.deleteIncome}
-                                   updateIncome={props.updateIncome}
-                                   createIncome={props.createIncome}
-                                   avatar={props.avatar}
-                                  />}
+            render={() => (
+              <Incomes
+                incomes={props.incomes}
+                categories={props.incomeCategories}
+                deleteMoney={props.deleteIncome}
+                updateIncome={props.updateIncome}
+                createIncome={props.createIncome}
+                avatar={props.avatar}
+              />
+            )}
           />
         </div>
       </div>

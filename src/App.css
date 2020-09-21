@@ -3,3 +3,9 @@
   display: grid;
   grid-template-columns: 300px 1fr;
 }
+
+@media screen and (max-width: 992px) {
+  .app {
+    grid-template-columns: 100px 1fr;
+  }
+}

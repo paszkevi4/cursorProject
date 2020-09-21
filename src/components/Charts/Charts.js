@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { Bar, Doughnut, Line } from 'react-chartjs-2';
 
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -258,66 +259,74 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
 
   return (
     <>
-      <div className="btn-wrapper">
-        <Button
-          variant="outlined"
-          className={activePeriod === 31 ? 'btn-active' : null}
-          classes={{ root: classes.root, label: classes.label }}
-          onClick={getMonth}>
-          Month
-        </Button>
-        <Button
-          variant="outlined"
-          className={activePeriod === 8 ? 'btn-active' : null}
-          classes={{ root: classes.root, label: classes.label }}
-          onClick={getWeek}>
-          Week
-        </Button>
-      </div>
       <div className="charts">
-        <div className="line-chart">
-          <Line
-            data={startDataLine}
-            options={{
-              title: {
-                display: true,
-                text: 'Summary',
-                position: 'top',
-                fontSize: 20,
-              },
-              legend: {
-                display: false,
-              },
-              scales: {
-                yAxes: [
-                  {
-                    display: false,
-                    ticks: {
-                      suggestedMin: minSum,
-                      suggestedMax: maxSum,
-                    },
-                    gridLines: {
+        <div className="line-chart__container">
+          <div className="line-chart">
+            <Line
+              data={startDataLine}
+              options={{
+                title: {
+                  display: true,
+                  text: 'Summary',
+                  position: 'top',
+                  fontSize: 20,
+                },
+                legend: {
+                  display: false,
+                },
+                scales: {
+                  yAxes: [
+                    {
                       display: false,
+                      ticks: {
+                        suggestedMin: minSum,
+                        suggestedMax: maxSum,
+                      },
+                      gridLines: {
+                        display: false,
+                      },
                     },
-                  },
-                ],
-                xAxes: [
-                  {
-                    gridLines: {
-                      display: false,
+                  ],
+                  xAxes: [
+                    {
+                      gridLines: {
+                        display: false,
+                      },
                     },
-                  },
-                ],
-              },
-              maintainAspectRatio: false,
-            }}
-          />
-        </div>
-        <div className="checkboxes-wrapper">
-          <input type="checkbox" id="show-in" onChange={showIncomes} defaultChecked />
-          <label htmlFor="show-in">Incomes</label>
-          <input type="checkbox" id="show-out" onChange={showCharges} defaultChecked />
-          <label htmlFor="show-out">Charges</label>
+                  ],
+                },
+                maintainAspectRatio: false,
+              }}
+            />
+          </div>
+          <div className="chart-buttons">
+            <div className="chart-buttons__btn">
+              <Button
+                variant="outlined"
+                className={activePeriod === 31 ? 'btn-active' : null}
+                classes={{ root: classes.root, label: classes.label }}
+                onClick={getMonth}>
+                Month
+              </Button>
+              <Button
+                variant="outlined"
+                className={activePeriod === 8 ? 'btn-active' : null}
+                classes={{ root: classes.root, label: classes.label }}
+                onClick={getWeek}>
+                Week
+              </Button>
+            </div>
+            <div className="chart-buttons__checkbox">
+              <span>
+                <input type="checkbox" id="show-in" onChange={showIncomes} defaultChecked />
+                <label htmlFor="show-in">Incomes</label>
+              </span>
+              <span>
+                <input type="checkbox" id="show-out" onChange={showCharges} defaultChecked />
+                <label htmlFor="show-out">Charges</label>
+              </span>
+            </div>
+          </div>
         </div>
         <div className="bar-chart">
           <Bar

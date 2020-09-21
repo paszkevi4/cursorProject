@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 // Styles
 import './Navbar.css';
 import { List } from '@material-ui/core';
+import logo from '../../assets/img/logo_white.png';
 
 //
 // Icons
@@ -16,6 +17,10 @@ import SettingsIcon from '@material-ui/icons/Settings';
 const Navbar = () => {
   return (
     <nav>
+      <div className="logo">
+        <img src={logo} alt="logo" />
+        <h2>Money Tracker</h2>
+      </div>
       <List>
         <NavLink to="/homepage" activeClassName="active">
           <div className="link-container">

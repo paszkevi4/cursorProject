@@ -8,7 +8,6 @@ nav {
   display: flex;
   flex-direction: column;
   margin: 2vh;
-  padding-top: 50px;
   box-sizing: border-box;
   border-radius: 25px;
   overflow: hidden;
@@ -17,6 +16,21 @@ nav {
 
 nav * {
   color: #fff;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  margin: 50px 0;
+}
+
+.logo img {
+  height: 30px;
+  object-fit: contain;
+}
+
+.logo h2 {
+  margin: 4px;
 }
 
 nav a {

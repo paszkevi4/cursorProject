@@ -4,6 +4,37 @@
   grid-template-columns: 300px 1fr;
 }
 
+.charts {
+  display: grid;
+  grid-template-rows: 300px 300px;
+  grid-template-columns: 300px 100vh;
+}
+
+.line-chart {
+  padding: 30px;
+  background: linear-gradient(0deg, #ecc22e, #f6ea67);
+  /* background: #71a4af */
+  border-radius: 25px;
+  box-shadow: 10px 10px 20px -7px rgba(0, 0, 0);
+}
+
+.bar-chart {
+  grid-row: 2/-1;
+  grid-column: 1/2;
+  padding: 40px;
+  margin: 3%;
+  background: linear-gradient(20deg, #2f054e, #e01094);
+  border-radius: 25px;
+  box-shadow: 10px 10px 20px -7px rgba(0, 0, 0);
+}
+
+.doughnut-chart {
+  padding: 40px 100px;
+  background: linear-gradient(20deg, #0e2453, #3578b1);
+  border-radius: 25px;
+  box-shadow: 10px 10px 20px -7px rgba(0, 0, 0);
+}
+
 @media screen and (max-width: 992px) {
   .app {
     grid-template-columns: 100px 1fr;

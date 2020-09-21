@@ -8,7 +8,7 @@ const DELETE_CATEGORY = 'DELETE_INCOME_CATEGORY';
 type incomeCategoryType = {
   name: string;
   description: string;
-  date: Date | string;
+  date: Date | number;
   icon: typeof icons[0];
 };
 
@@ -43,22 +43,16 @@ let initialState: Array<incomeCategoryType> = [
   {
     name: 'My mom',
     description: 'Money from my mom',
-    date: new Date(2020, 7, 25),
+    date: Date.parse('2020-7-25'),
     icon: icons[15],
   },
   {
     name: 'Sale book',
     description: 'Sold a book',
-    date: new Date(2020, 7, 24),
+    date: Date.parse('2020-7-24'),
     icon: icons[13],
   },
-  { name: 'Work', description: '', date: new Date(2020, 7, 23), icon: icons[19] },
-  {
-    name: 'Donations',
-    description: 'Its a looooooooooooooooooooooooooooooong description',
-    date: new Date(2020, 7, 22),
-    icon: icons[15],
-  },
+  { name: 'Work', description: '', date: Date.parse('2020-7-23'), icon: icons[19] },
 ];
 
 const incomeCategoriesReducer = (

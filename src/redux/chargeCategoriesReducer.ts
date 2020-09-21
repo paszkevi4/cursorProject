@@ -9,7 +9,7 @@ const DELETE_CATEGORY = 'DELETE_CHARGE_CATEGORY';
 type chargeCategoryType = {
   name: string;
   description: string;
-  date: Date | string;
+  date: Date | number;
   icon: typeof icons[0];
 };
 
@@ -44,23 +44,23 @@ let initialState: Array<chargeCategoryType> = [
   {
     name: 'Food',
     description: 'For food',
-    date: new Date(2020, 7, 26),
+    date: Date.parse('2020-7-26'),
     icon: icons[12],
   },
   {
     name: 'Clothes',
     description: 'For clothes',
-    date: new Date(2020, 7, 25),
+    date: Date.parse('2020-7-25'),
     icon: icons[7],
   },
-  { name: 'Restoraunts', description: '', date: new Date(2020, 7, 24), icon: icons[8] },
+  { name: 'Restoraunts', description: '', date: Date.parse('2020-7-24'), icon: icons[8] },
   {
     name: 'Utility bills',
     description: 'Its a looooooooooooooooooooooooooooooong description',
-    date: new Date(2020, 7, 23),
+    date: Date.parse('2020-7-23'),
     icon: icons[2],
   },
-  { name: 'Pets', description: 'For smth else', date: new Date(2020, 7, 21), icon: icons[14] },
+  { name: 'Pets', description: 'For smth else', date: Date.parse('2020-7-21'), icon: icons[14] },
 ];
 
 const chargeCategoriesReducer = (

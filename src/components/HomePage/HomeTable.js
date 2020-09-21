@@ -30,6 +30,7 @@ const HomeTable = ({
   charges,
   chargeCategories,
   avatar,
+  category
 }) => {
   // let propsDate = new Date(date)
   // console.log(propsDate.getDay());
@@ -59,6 +60,7 @@ const HomeTable = ({
     currentIcon: icon,
     currentMoney: money,
     currentDate: null,
+    currentCategory: category,
   });
 
   const handleClose = () => {
@@ -77,10 +79,11 @@ const HomeTable = ({
       setOpen(true);
       setCurrentTable({
         currentName: name,
+        currentCategory: category ,
         currentDescription: description,
         currentIcon: icon,
-        currentMoney: money, ///null
-        currentDate: `${fullDate.year}-${fullDate.month}-${fullDate.day}`, ///null
+        currentMoney: money,
+        currentDate: `${fullDate.year}-${fullDate.month}-${fullDate.day}`,
       });
       console.log(
         name,

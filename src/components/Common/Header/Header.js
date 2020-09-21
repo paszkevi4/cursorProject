@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import style from './Header.module.css';
-import Alert from '@material-ui/lab/Alert';
 
 const Header = (props) => {
   const [incomes, setIncomes] = useState(0);
@@ -38,16 +37,12 @@ const Header = (props) => {
   }, [total, incomes, props]);
 
   return (
-    <div className={style.header}>
+    <div className={`${style.header} ${toWarn ? style.header__warning : ''}`}>
       <div className={style.header_category}>
         <h2>{props.title}</h2>
       </div>
-      {toWarn && (
-        <Alert variant="outlined" severity="warning">
-          Be aware of low budget
-        </Alert>
-      )}
-      <div className={toWarn ? style.header_balance__red : style.header_balance}>
+      {toWarn && <p> BE aware of low budget</p>}
+      <div className={style.header_balance}>
         <h2 className={style.header_balance__title}>Balance</h2>
         <h1 className={style.header_balance__amount}>
           {total.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}

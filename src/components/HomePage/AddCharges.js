@@ -57,29 +57,26 @@ const AddCharges = ({
   };
   // const values = { currentDate: today.toLocaleDateString()};
 
-  // const [name1, setName] = useState(`${currentTable.currentName}`);
-  const [category, setCategory] = useState(`${currentTable.currentCategory}`);
-  const [description, setDescription] = useState(
-    currentTable.currentDescription
-  );
+  const [name, setName] = useState(`${currentTable.currentName}`);
+  const [category, setCategory] = useState(currentTable.currentCategory);
+  const [description, setDescription] = useState(currentTable.currentDescription);
   const [date, setDate] = useState(
     currentTable.currentDate ? currentTable.currentDate : values.currentDate
   );
-
   const [money, setMoney] = useState(currentTable.currentMoney);
 
   const resetInputs = () => {
+		setName("");
     setCategory("");
     setDescription("");
     setDate(values.currentDate);
-    setMoney();
+    setMoney("");
   };
 
   const handleCloseDialog = (e) => {
     if (e.target.innerText === "ADD") {
       if (category >= 0 && money) {
         updateCharge({
-          // category: charges[category].category,
           name: chargeCategories[category].name,
           icon: chargeCategories[category].icon,
           category: category,
@@ -98,7 +95,9 @@ const AddCharges = ({
 
   const handleChange = (event) => {
     if (typeof event.target.value === "number") {
-      setCategory(event.target.value);
+			setCategory(event.target.value);
+		}else if (event.target.id === "selectName") {
+				setName(event.target.value);
     } else if (event.target.id === "descriptionInput") {
       setDescription(event.target.value);
     } else if (event.target.id === "datePicker") {
@@ -124,6 +123,7 @@ const AddCharges = ({
               select
               margin="dense"
               label="Category name (required)"
+							selected={name}
               value={category}
               onChange={handleChange}
               fullWidth

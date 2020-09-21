@@ -36,7 +36,7 @@ const AddCharges = ({
 											 createCharge,
 											 currentTable = {
 											 	currentCategory: "",
-												 // currentName: "",
+												 currentName: "",
 												 currentDescription: "",
 												 currentDate: "",
 												 currentMoney: "",
@@ -49,15 +49,15 @@ const AddCharges = ({
 	const classes = useStyles();
 	const today = new Date();
 
-	const values = {
-		currentDate: today.toLocaleDateString()
+	// const values = {
+	// 	currentDate: today.toLocaleDateString()
 		// currentDate: `${today.getFullYear()}-${
 		// 		today.getMonth() + 1 < 10
 		// 				? `0${today.getMonth() + 1}`
 		// 				: today.getMonth() + 1
 		// }-${today.getDate()}`,
-	};
-	// const values = { currentDate: today.toLocaleDateString()};
+	// };
+	const values = { currentDate: today.toLocaleDateString()};
 
 	// const [name1, setName] = useState(`${currentTable.currentName}`);
 	const [category, setCategory] = useState(`${currentTable.currentCategory}`);
@@ -73,6 +73,7 @@ const AddCharges = ({
 	const resetInputs = () => {
 		setCategory(category);
 		setDescription(description);
+		// setDate(date);
 		setDate(values.currentDate);
 		setMoney(money);
 	};
@@ -80,8 +81,12 @@ const AddCharges = ({
 	const handleCloseDialog = (e) => {
 		if (e.target.innerText === "ADD") {
 			if(category>=0 && money){
+				debugger;
 				updateCharge({
-					category: charges[category].category,
+					// category: charges[category].category,
+					name: chargeCategories[category].name,
+					icon: chargeCategories[category].icon,
+					category: category,
 					description: description,
 					date: new Date(date),
 					money: +money,

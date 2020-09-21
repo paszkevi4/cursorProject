@@ -28,6 +28,7 @@ const HomeTable = ({ icon, name, description, date, money, deleteMoney, updateCh
 
 	const [open, setOpen] = useState(false);
 
+	// let today = new Date(date).toLocaleDateString();
 	// const propsDate = date;
 
 	// const fullDate = {

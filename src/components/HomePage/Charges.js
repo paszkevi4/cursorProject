@@ -164,7 +164,7 @@ const  handlePeriodChange = (selectVal) => {
                   description={el.description}
                   date={el.date.toLocaleDateString()}
                   money={el.money}
-                  key={el.name}
+                  key={i}
                   avatar={props.avatar}
                   deleteMoney={() => {
                     props.deleteMoney(i);

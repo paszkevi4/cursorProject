@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { db } from '../../redux/firebase/firebase';
 import { handleFireBaseUploadInfo, handleFireBaseUploadAvatar } from '../../redux/firebase/profile';
 
 // components

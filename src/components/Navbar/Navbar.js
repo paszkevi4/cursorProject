@@ -1,77 +1,53 @@
-import React from "react";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 
-import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import { NavLink } from "react-router-dom";
+//
+// Styles
+import './Navbar.css';
+import { List } from '@material-ui/core';
+import logo from '../../assets/img/logo_white.png';
 
-import HomeIcon from "@material-ui/icons/Home";
-import ShowChartIcon from "@material-ui/icons/ShowChart";
-import CategoryIcon from "@material-ui/icons/Category";
-import SettingsIcon from "@material-ui/icons/Settings";
-
-const drawerWidth = 240;
-
-const useStyles = makeStyles((theme) => ({
-  toolbar: theme.mixins.toolbar,
-
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  link: {
-    textDecoration: "none",
-    color: "white",
-  },
-  icon: {
-    color: "white",
-  },
-}));
+//
+// Icons
+import HomeIcon from '@material-ui/icons/Home';
+import ShowChartIcon from '@material-ui/icons/ShowChart';
+import CategoryIcon from '@material-ui/icons/Category';
+import SettingsIcon from '@material-ui/icons/Settings';
 
 const Navbar = () => {
-  const classes = useStyles();
   return (
-    <div>
-      <div className={classes.toolbar} />
+    <nav>
+      <div className="logo">
+        <img src={logo} alt="logo" />
+        <h2>Money Tracker</h2>
+      </div>
       <List>
-        {/* {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))} */}
-        <NavLink to="/homepage" className={classes.link}>
-          <ListItem button>
-            <ListItemIcon>
-              <HomeIcon className={classes.icon} />
-            </ListItemIcon>
-            <ListItemText>Home</ListItemText>
-          </ListItem>
+        <NavLink to="/homepage" activeClassName="active">
+          <div className="link-container">
+            <HomeIcon />
+            <p>Home</p>
+          </div>
         </NavLink>
-        <NavLink to="/charts" className={classes.link}>
-          <ListItem button>
-            <ListItemIcon>
-              <ShowChartIcon className={classes.icon} />
-            </ListItemIcon>
-            <ListItemText>Charts</ListItemText>
-          </ListItem>
+        <NavLink to="/charts" activeClassName="active">
+          <div className="link-container">
+            <ShowChartIcon />
+            <p>Charts</p>
+          </div>
         </NavLink>
-        <NavLink to="/categories" className={classes.link}>
-          <ListItem button>
-            <ListItemIcon>
-              <CategoryIcon className={classes.icon} />
-            </ListItemIcon>
-            <ListItemText>Categories</ListItemText>
-          </ListItem>
+        <NavLink to="/categories" activeClassName="active">
+          <div className="link-container">
+            <CategoryIcon />
+            <p>Categories</p>
+          </div>
         </NavLink>
-        <NavLink to="/settings" className={classes.link}>
-          <ListItem button>
-            <ListItemIcon>
-              <SettingsIcon className={classes.icon} />
-            </ListItemIcon>
-            <ListItemText>Settings</ListItemText>
-          </ListItem>
+        <NavLink to="/settings" activeClassName="active">
+          <div className="link-container">
+            <SettingsIcon />
+            <p>Settings</p>
+          </div>
         </NavLink>
       </List>
-    </div>
+    </nav>
   );
 };
 

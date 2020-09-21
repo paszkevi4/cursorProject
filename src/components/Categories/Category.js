@@ -27,7 +27,7 @@ const Category = ({ name, description, date, icon, deleteCategory, updateCategor
 
   const [open, setOpen] = useState(false);
 
-  const propsDate = new Date(date);
+  const propsDate = new Date(date.seconds * 1000);
 
   const fullDate = {
     year: propsDate.getFullYear(),

@@ -38,6 +38,10 @@ nav a {
   margin-top: 20px;
   text-decoration: none;
 }
+nav p{
+  display: flex;
+  align-items: center;
+}
 
 .link-container {
   display: flex;

@@ -36,26 +36,28 @@ const Settings = (props) => {
   }, [props]);
 
   const uploadNewData = () => {
-    avatarNew
-      ? handleFireBaseUploadAvatar(
-          setAvatarNew,
-          avatarNew,
-          name,
-          phone,
-          showWarning,
-          currentMoneyLimit,
-          currentPercentLimit,
-          setShowSaved,
-        )
-      : handleFireBaseUploadInfo(
-          avatar,
-          name,
-          phone,
-          showWarning,
-          currentMoneyLimit,
-          currentPercentLimit,
-          setShowSaved,
-        );
+    if (avatarNew) {
+      handleFireBaseUploadAvatar(
+        setAvatarNew,
+        avatarNew,
+        name,
+        phone,
+        showWarning,
+        currentMoneyLimit,
+        currentPercentLimit,
+        setShowSaved,
+      );
+    } else {
+      handleFireBaseUploadInfo(
+        avatar,
+        name,
+        phone,
+        showWarning,
+        currentMoneyLimit,
+        currentPercentLimit,
+        setShowSaved,
+      );
+    }
   };
 
   return (

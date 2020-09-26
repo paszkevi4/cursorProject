@@ -78,10 +78,10 @@ const Incomes = ({ props }) => {
                   icon={el.icon}
                   key={`${el.name}${i}`}
                   deleteCategory={() => {
-                    props.deleteIncomeCategory(i);
+                    props.deleteIncomeCategory(el.docId);
                   }}
                   updateCategory={(category) => {
-                    props.updateIncomeCategory(i, category);
+                    props.updateIncomeCategory(el.docId, category);
                   }}
                   icons={props.icons}
                 />

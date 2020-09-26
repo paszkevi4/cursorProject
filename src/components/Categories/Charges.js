@@ -78,10 +78,10 @@ const Charges = ({ props }) => {
                   icon={el.icon}
                   key={`${el.name}${i}`}
                   deleteCategory={() => {
-                    props.deleteChargeCategory(i);
+                    props.deleteChargeCategory(el.docId);
                   }}
                   updateCategory={(category) => {
-                    props.updateChargeCategory(i, category);
+                    props.updateChargeCategory(el.docId, category);
                   }}
                   icons={props.icons}
                 />

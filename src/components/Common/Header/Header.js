@@ -1,31 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import style from './Header.module.css';
 
+import { totalCounter, totalIncomes } from '../Functions';
+
 const Header = (props) => {
   const [incomes, setIncomes] = useState(0);
-  const [charges, setCharges] = useState(0);
   const [total, setTotal] = useState(0);
   const [toWarn, setToWarn] = useState(false);
 
   useEffect(() => {
-    setIncomes(
-      props.incomes.reduce((prev, curr) => {
-        return prev + curr.money;
-      }, 0),
-    );
+    setIncomes(totalIncomes(props.incomes));
   }, [props.incomes]);
 
   useEffect(() => {
-    setCharges(
-      props.charges.reduce((prev, curr) => {
-        return prev + curr.money;
-      }, 0),
-    );
-  }, [props.charges]);
-
-  useEffect(() => {
-    setTotal(incomes - charges);
-  }, [incomes, charges]);
+    setTotal(totalCounter(props.incomes, props.charges));
+  }, [props]);
 
   useEffect(() => {
     // prettier-ignore

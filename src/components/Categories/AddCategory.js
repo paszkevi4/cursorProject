@@ -26,7 +26,6 @@ const useStyles = makeStyles({
 const AddCategory = ({
   open,
   handleClose,
-  createCategory,
   currentCategory = {
     currentName: '',
     currentDescription: '',
@@ -66,8 +65,10 @@ const AddCategory = ({
         updateCategory({
           name: name,
           description: description,
-          date: Date(date),
-          icon: icon,
+          // date: Date(date),
+          date: new Date(2020, 8, 25),
+          // icon: icon,
+          icon: 11,
         });
         handleClose();
         resetInputs();

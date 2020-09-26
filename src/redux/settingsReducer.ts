@@ -20,32 +20,32 @@ type updateUserACType = {
   newUser: stateType;
 };
 
-type updateUserNameACType = {
-  type: typeof UPDATE_USER_NAME;
-  newUserName: string;
-};
+// type updateUserNameACType = {
+//   type: typeof UPDATE_USER_NAME;
+//   newUserName: string;
+// };
 
-type updatePhoneNumberACType = {
-  type: typeof UPDATE_PHONE_NUMBER;
-  newPhoneNumber: any;
-};
+// type updatePhoneNumberACType = {
+//   type: typeof UPDATE_PHONE_NUMBER;
+//   newPhoneNumber: any;
+// };
 
-type toggleWarningACType = {
-  type: typeof TOGGLE_WARNING;
-  showWarning: boolean;
-};
+// type toggleWarningACType = {
+//   type: typeof TOGGLE_WARNING;
+//   showWarning: boolean;
+// };
 
-type setLimitACType = {
-  type: typeof SET_MONEY_LIMIT;
-  newLimit: number;
-};
+// type setLimitACType = {
+//   type: typeof SET_MONEY_LIMIT;
+//   newLimit: number;
+// };
 
-type actionType =
-  | updateUserACType
-  | updateUserNameACType
-  | updatePhoneNumberACType
-  | toggleWarningACType
-  | setLimitACType;
+// type actionType =
+//   | updateUserACType
+//   | updateUserNameACType
+//   | updatePhoneNumberACType
+//   | toggleWarningACType
+//   | setLimitACType;
 
 const initialState: stateType = {
   avatar: 'https://www.flaticon.com/svg/static/icons/svg/527/527489.svg',
@@ -56,7 +56,7 @@ const initialState: stateType = {
   percentLimit: 40,
 };
 
-const settingsReducer = (state = initialState, action: actionType): stateType => {
+const settingsReducer = (state = initialState, action: updateUserACType): stateType => {
   switch (action.type) {
     case UPDATE_USER:
       return { ...action.newUser };

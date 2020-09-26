@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { handleFireBaseUploadInfo, handleFireBaseUploadAvatar } from '../../redux/firebase/profile';
+import {
+  handleFireBaseUploadInfo,
+  handleFireBaseUploadAvatar,
+} from '../../redux/firebase/profileFB';
 
 // components
 import Avatar from './components/AvatarUpload';
@@ -31,13 +34,6 @@ const Settings = (props) => {
     setCurrentMoneyLimit(props.moneyLimit);
     setCurrentPercentLimit(props.percentLimit);
   }, [props]);
-
-  // useEffect(() => {
-  //   // db.collection('user-info').onSnapshot((ss) => {
-  //   //   props.updateUser(ss.docs[0].data());
-  //   // });
-  //   props.settingsDidMountThunk();
-  // }, []);
 
   const uploadNewData = () => {
     avatarNew

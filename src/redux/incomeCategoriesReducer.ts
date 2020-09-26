@@ -1,3 +1,4 @@
+import { db } from './firebase/firebase';
 import { icons } from './iconsReducer';
 
 const FETCH_CATEGORIES = 'FETCH_INCOME_CATEGORIES';
@@ -6,6 +7,7 @@ const UPDATE_CATEGORY = 'UPDATE_INCOME_CATEGORY';
 const DELETE_CATEGORY = 'DELETE_INCOME_CATEGORY';
 
 type incomeCategoryType = {
+  docId: string;
   name: string;
   description: string;
   date: Date | number;
@@ -14,7 +16,7 @@ type incomeCategoryType = {
 
 type fetchCategoriesACType = {
   type: typeof FETCH_CATEGORIES;
-  category: incomeCategoryType;
+  categories: Array<incomeCategoryType>;
 };
 
 type createIncomeCategoryACType = {
@@ -39,21 +41,7 @@ type actionType =
   | updateIncomeCategoryACType
   | deleteIncomeCategoryACType;
 
-let initialState: Array<incomeCategoryType> = [
-  {
-    name: 'My mom',
-    description: 'Money from my mom',
-    date: Date.parse('2020-7-25'),
-    icon: icons[15],
-  },
-  {
-    name: 'Sale book',
-    description: 'Sold a book',
-    date: Date.parse('2020-7-24'),
-    icon: icons[13],
-  },
-  { name: 'Work', description: '', date: Date.parse('2020-7-23'), icon: icons[19] },
-];
+let initialState: Array<incomeCategoryType> = [];
 
 const incomeCategoriesReducer = (
   state = initialState,
@@ -61,8 +49,7 @@ const incomeCategoriesReducer = (
 ): Array<incomeCategoryType> => {
   switch (action.type) {
     case FETCH_CATEGORIES:
-      //@ts-ignore
-      return [...state, { ...action.category, icon: icons[action.category.icon] }];
+      return [...action.categories];
     case CREATE_CATEGORY:
       return [...state, action.category];
     case UPDATE_CATEGORY:
@@ -76,9 +63,11 @@ const incomeCategoriesReducer = (
   }
 };
 
-export const fetchIncomeCategoriesAC = (category: incomeCategoryType): fetchCategoriesACType => ({
+export const fetchIncomeCategoriesAC = (
+  categories: Array<incomeCategoryType>,
+): fetchCategoriesACType => ({
   type: FETCH_CATEGORIES,
-  category,
+  categories,
 });
 
 export const createIncomeCategoryAC = (
@@ -101,5 +90,20 @@ export const deleteIncomeCategoryAC = (index: number): deleteIncomeCategoryACTyp
   type: DELETE_CATEGORY,
   index,
 });
+
+export const setIncomeCategoriesThunk = () => {
+  return (dispatch: any) => {
+    db.collection('income-categories').onSnapshot((ss: any) => {
+      dispatch(
+        fetchIncomeCategoriesAC(
+          ss.docs.map((el: any) => {
+            const category = el.data();
+            return { ...category, icon: icons[category.icon], docId: el.id };
+          }),
+        ),
+      );
+    });
+  };
+};
 
 export default incomeCategoriesReducer;

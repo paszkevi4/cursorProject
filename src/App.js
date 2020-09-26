@@ -1,11 +1,15 @@
 import React, { useEffect } from 'react';
 import { HashRouter, Route, Redirect } from 'react-router-dom';
+
 import './App.css';
 
 //
 // Redux
 import { connect, Provider } from 'react-redux';
 import { setSettingsThunk } from '../src/redux/settingsReducer';
+import { setChargeCategoriesThunk } from '../src/redux/chargeCategoriesReducer';
+import { setIncomeCategoriesThunk } from '../src/redux/incomeCategoriesReducer';
+
 import store from './redux/store';
 
 //
@@ -19,6 +23,8 @@ import Settings from './components/Settings/SettingsContainer';
 const App = (props) => {
   useEffect(() => {
     props.setSettingsThunk();
+    props.setChargeCategoriesThunk();
+    props.setIncomeCategoriesThunk();
   }, []);
 
   return (
@@ -37,7 +43,11 @@ const App = (props) => {
   );
 };
 
-const AppContainer = connect(null, { setSettingsThunk })(App);
+const AppContainer = connect(null, {
+  setSettingsThunk,
+  setChargeCategoriesThunk,
+  setIncomeCategoriesThunk,
+})(App);
 
 const MainAppContainer = (props) => {
   return (

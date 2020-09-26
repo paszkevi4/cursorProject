@@ -7,6 +7,7 @@ const UPDATE_CATEGORY = 'UPDATE_CHARGE_CATEGORY';
 const DELETE_CATEGORY = 'DELETE_CHARGE_CATEGORY';
 
 type chargeCategoryType = {
+  docId: string;
   name: string;
   description: string;
   date: Date | number;
@@ -15,7 +16,7 @@ type chargeCategoryType = {
 
 type fetchCategoriesACType = {
   type: typeof FETCH_CATEGORIES;
-  category: chargeCategoryType;
+  categories: Array<chargeCategoryType>;
 };
 
 type createChargeCategoryACType = {
@@ -42,25 +43,12 @@ type actionType =
 
 let initialState: Array<chargeCategoryType> = [
   {
-    name: 'Food',
-    description: 'For food',
-    date: Date.parse('2020-7-26'),
-    icon: icons[12],
+    docId: '0',
+    name: 'Pets',
+    description: 'For smth else',
+    date: Date.parse('2020-7-21'),
+    icon: icons[14],
   },
-  {
-    name: 'Clothes',
-    description: 'For clothes',
-    date: Date.parse('2020-7-25'),
-    icon: icons[7],
-  },
-  { name: 'Restoraunts', description: '', date: Date.parse('2020-7-24'), icon: icons[8] },
-  {
-    name: 'Utility bills',
-    description: 'Its a looooooooooooooooooooooooooooooong description',
-    date: Date.parse('2020-7-23'),
-    icon: icons[2],
-  },
-  { name: 'Pets', description: 'For smth else', date: Date.parse('2020-7-21'), icon: icons[14] },
 ];
 
 const chargeCategoriesReducer = (
@@ -69,10 +57,8 @@ const chargeCategoriesReducer = (
 ): Array<chargeCategoryType> => {
   switch (action.type) {
     case FETCH_CATEGORIES:
-      //@ts-ignore
-      return [...state, { ...action.category, icon: icons[action.category.icon] }];
+      return [...action.categories];
     case SET_CATEGORY:
-      //@ts-ignore
       return [...state, action.category];
     case UPDATE_CATEGORY:
       state.splice(action.index, 1, action.category);
@@ -85,9 +71,11 @@ const chargeCategoriesReducer = (
   }
 };
 
-export const fetchChargeCategoriesAC = (category: chargeCategoryType): fetchCategoriesACType => ({
+// ACs
+
+const fetchChargeCategoriesAC = (categories: Array<chargeCategoryType>): fetchCategoriesACType => ({
   type: FETCH_CATEGORIES,
-  category,
+  categories,
 });
 
 export const createChargeCategoryAC = (
@@ -110,5 +98,20 @@ export const deleteChargeCategoryAC = (index: number): deleteChargeCategoryACTyp
   type: DELETE_CATEGORY,
   index,
 });
+
+export const setChargeCategoriesThunk = () => {
+  return (dispatch: any) => {
+    db.collection('charge-categories').onSnapshot((ss: any) => {
+      dispatch(
+        fetchChargeCategoriesAC(
+          ss.docs.map((el: any) => {
+            const category = el.data();
+            return { ...category, icon: icons[category.icon], docId: el.id };
+          }),
+        ),
+      );
+    });
+  };
+};
 
 export default chargeCategoriesReducer;

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { NavLink, Route, HashRouter, Redirect } from 'react-router-dom';
 
 import Charges from './Charges';
@@ -7,8 +7,6 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Header from '../Common/Header/HedaerContainer';
-
-import { db } from '../../redux/firebase/firebase';
 
 const useStyles = makeStyles({
   Categories: {
@@ -26,37 +24,9 @@ const useStyles = makeStyles({
   toggleButtonActive: {
     borderBottom: '1px solid cornflowerblue',
   },
-  // headerBlock: {
-  //   display: 'flex',
-  //   justifyContent: 'space-between',
-  //   alignItems: 'center',
-  //   marginBottom: '100px',
-  // },
-  // balanceTitle: {
-  //   textAlign: 'right',
-  //   fontSize: '1.2em',
-  //   marginBottom: '10px',
-  // },
-  // balanceAmount: {
-  //   fontSize: '1.7em',
-  //   fontWeight: 'bold',
-  // },
 });
 
 const Categories = (props) => {
-  useEffect(() => {
-    db.collection('charge-categories').onSnapshot((ss) => {
-      ss.docs.map((el) => {
-        props.fetchChargeCategories(el.data());
-      });
-    });
-    // db.collection('income-categories').onSnapshot((ss) => {
-    //   ss.docs.map((el) => {
-    //     props.fetchIncomeCategories(el.data());
-    //   });
-    // });
-  }, []);
-
   const classes = useStyles();
   return (
     <HashRouter>

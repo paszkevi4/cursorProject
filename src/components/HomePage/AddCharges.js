@@ -75,21 +75,40 @@ const AddCharges = ({
 
   const handleCloseDialog = (e) => {
     if (e.target.innerText === "ADD") {
-      if (category >= 0 && money) {
-        updateCharge({
-          name: chargeCategories[category].name,
-          icon: chargeCategories[category].icon,
-          category: category,
-          description: description,
-          date: new Date(date),
-          money: +money,
-        });
-        handleClose();
-        resetInputs();
-      }
+      // const gap = total - +money  ;
+      if (category >= 0 && money ) {
+        // if (gap <= 0) {
+        //   const isSure = window.confirm("Are you sure?");
+        //   if (isSure) {
+            updateCharge({
+              name: chargeCategories[category].name,
+              icon: chargeCategories[category].icon,
+              category: category,
+              description: description,
+              date: new Date(date),
+              money: +money,
+            });
+            handleClose();
+            resetInputs();
+          // }
+          // return null;
+        // } else {
+        //   updateCharge({
+        //     name: chargeCategories[category].name,
+        //     icon: chargeCategories[category].icon,
+        //     category: category,
+        //     description: description,
+        //     date: new Date(date),
+        //     money: +money,
+        //   });
+        //   handleClose();
+        //   resetInputs();
+        // }
+      // }
     } else if (e.target.innerText === "CANCEL") {
       handleClose();
       resetInputs();
+    }
     }
   };
 

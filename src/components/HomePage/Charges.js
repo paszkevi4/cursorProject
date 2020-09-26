@@ -3,6 +3,7 @@ import HomeTable from "./HomeTable";
 import useSortTableData from "./sortTable";
 // import HomeModal from "./HomeModal";
 import AddCharges from "./AddCharges";
+// import HomeSelect from './HomeSelect';
 
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -14,7 +15,8 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import AddIcon from "@material-ui/icons/Add";
-// import HomeSelect from './HomeSelect';
+// import FilterDate from "./FilterDate";
+// import Select from "@material-ui/core/Select";
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -62,25 +64,28 @@ const Charges = (props) => {
   const handleClose = () => {
     setOpen(false);
   };
-  //---------------------
-  // const selectVal = {
-  //   "TODAY": Date.now,
-  //   "THIS_WEEK": 6,
-  //   "THIS_MONTH": 30,
-  //   "THIS_YEAR": 256
-  // }
+  const [filtered, setFiltered] = React.useState(props.charges);//items
   const handlePeriodChange = (selectVal) => {
-    // handlePeriodChange(selectVal){
-    this.props.handlePeriodChange(selectVal);
-    if (selectVal === Date.now) {
-      console.log(selectVal.filter(this.props.date));
-      return selectVal.filter();
+    if (+selectVal === 7 || +selectVal === 30) {
+      let milliseconds = +selectVal * 24 * 60 * 60 * 1000;
+      let currentDate = new Date();
+      let time = currentDate.setTime(currentDate.getTime() - milliseconds);
+      return setFiltered(
+          [...props.charges.filter((arr) => {  // filtered:  ...items
+            console.log(arr.date.getTime() > time);
+            return(arr.date.getTime() > time);
+          })]
+      )
+    }else if(selectVal === "FULL_PERIOD"){
+      // console.log([...props.charges]);
+      // return([...props.charges]);
+      return setFiltered([...props.charges])  //items
     }
-  };
-  //------------------------
-  const { items, requestSort, sortConfig } = useSortTableData(
-    props.charges,
-    props.categories
+  }
+
+  const {items, requestSort, sortConfig} = useSortTableData(
+      filtered,  //props.charges
+      props.categories
   );
   const getClassNamesFor = (name) => {
     if (!sortConfig) {
@@ -88,26 +93,79 @@ const Charges = (props) => {
     }
     return sortConfig.key === name ? sortConfig.direction : undefined;
   };
+  // const { itemsFilter, setFilterConfig }  = React.useState([...items]);
+  // const [dateFilter, setFilterDate] = React.useState([...items]);
 
+
+//     // handlePeriodChange(selectVal){
+//     // this.handlePeriodChange(selectVal);
+//     const setFiltered = filters( filtered);
+//     function filters(anArray){
+//       let newArr = []
+//       for(let i =0; i< anArray.length; i++){
+//         if(anArray[i]){
+//           newArr.push(anArray[i].date.getTime());
+//         }
+//       }
+//       return (newArr);
+//     }
+//     if (+selectVal === 7) {
+//       // console.log(setFiltered.filter((fil) => {
+//       //   return (parseInt(fil) / 2) > 10
+//       // }));
+//      let mili = +selectVal*24*60*60*1000;
+//       let currentDate = new Date();
+//       let time = currentDate.setTime(currentDate.getTime()- mili);
+//       console.log(new Date(time));
+//       // setFiltered.filter((fil) => {
+//       //   return((fil) >=(time));
+//       // });
+//       console.log(setFiltered.filter((fil) => {
+//         return((fil) >=(time))}));
+//       // console.log(
+//       //    (new Date(setFiltered.filter((fil) => ((fil) >=( time)) )).toLocaleDateString()));
+//       // console.log(new Date(fil).toLocaleDateString());
+//     }else if (+selectVal === 30) {
+//       // console.log(setFiltered.filter((fil) => {
+//       //   return (parseInt(fil) / 2) > 10
+//       // }));
+//       let mili = +selectVal*24*60*60*1000;
+//       let currentDate = new Date();
+//       let time = currentDate.setTime(currentDate.getTime() - mili);
+//       // console.log(new Date(time).toLocaleDateString());
+//       console.log(new Date(time));
+//       console.log(setFiltered.filter((fil) => {
+//         return((fil) >=(time))}));
+//     }else{
+//       console.log(setFiltered);
+//       return (setFiltered);
+//     }
+//   };
+  // const day = new Date();
+  // const me = new Date(day);
+  // me;
+  // me.toLocaleDateString()
   return (
     <div>
       <div className={classes.homeMenu}>
         <div className={classes.homeSelect}>
           <h3 className={classes.homeMenuTitle}>My Charges</h3>
           {/*<HomeSelect updateCategory={props.createChargeCategory}/>*/}
-
           <select
-            onChange={(val) => handlePeriodChange(val.target.value)}
+            id="datePeriod" name="datePeriod"
+            onChange={event => handlePeriodChange(event.target.value)}
             className="btn btn-sm btn-outline-secondary dropdown-toggle"
-          >
-            <option value="TODAY">Today</option>
-            <option value="THIS_WEEK">This Week</option>
-            <option value="THIS_MONTH">This Month</option>
-            <option value="THIS_YEAR">This Year</option>
-            <option selected value="FULL_PERIOD">
-              Full period
-            </option>
+            // selected={"FULL_PERIOD"}
+            defaultValue={"FULL_PERIOD"}
+              // value={filter ? filter.value : "FULL_PERIOD"}
+            // value={props.charges}
+              >
+            <option value="7">This Week</option>
+            <option value="30">This Month</option>
+            <option value="FULL_PERIOD">Full period</option>
           </select>
+          {/*<HomeSelect filtered={items}/>*/}
+          {/*<FilterDate filtered={items} />*/}
         </div>
         <Button
           className={classes.addButton}
@@ -177,7 +235,7 @@ const Charges = (props) => {
           </TableHead>
           <TableBody>
             {[
-              ...items.map((el, i) => (
+              ...items.map((el, i) => (  //items
                 <HomeTable
                   category={el.category}
                   icon={props.categories[el.category].icon}

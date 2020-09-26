@@ -150,8 +150,7 @@ const HomeTable = ({
         >
           <MenuItem onClick={handleActionClose}>Edit</MenuItem>
           <MenuItem onClick={handleActionClose}>Delete</MenuItem>
-          {/*<MenuItem onClick={handleClose}>Edit</MenuItem>*/}
-          {/*<MenuItem onClick={handleClose}>Delete</MenuItem>*/}
+         
           {open && (
             <AddCharges
               open={open}

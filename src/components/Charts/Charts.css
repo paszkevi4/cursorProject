@@ -1,3 +1,7 @@
+.header_wrapper{
+    padding: 20px;
+}
+
 .charts {
   margin: 2vh;
   display: grid;
@@ -11,8 +15,6 @@
   grid-column: 1/-1;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-
-  /* background: linear-gradient(0deg, #ecc22e, #f6ea67); */
   box-shadow: 10px 6px 23px -6px rgba(0, 0, 0);
   border-radius: 25px;
 }
@@ -22,6 +24,7 @@
   background: linear-gradient(0deg, #ecc22e, #f6ea67);
   box-shadow: 10px 5px 10px -10px rgba(0, 0, 0, 0.5);
   border-radius: 25px;
+  padding: 3px;
 }
 
 .chart-buttons {
@@ -116,6 +119,10 @@
   margin-left: 5px;
   margin-right: 10px;
 } */
+
+.non-active{
+    text-decoration: line-through;
+}
 
 @media (max-width: 1078px) {
   .line-chart,

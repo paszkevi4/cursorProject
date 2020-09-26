@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 
 import { Bar, Doughnut, Line } from 'react-chartjs-2';
 
-import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+
+import Header from '../Common/Header/HedaerContainer';
 
 import './Charts.css';
 
@@ -60,6 +61,7 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
 
   allDates.reverse();
   allDatesForDay.reverse();
+
 
   allDatesForDay.map((el) => {
     allDays.push(getWeekDay(el));
@@ -166,8 +168,17 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
     return categoriesDoughnut;
   });
 
-  fullCharges.map((el) => trueMoneyChargesDoughnut.push(el.sum));
-  fullIncomes.map((el) => trueMoneyIncomesBar.push(el.sum));
+  fullCharges.map((el) => {
+    if(el.sum > 0) {
+        trueMoneyChargesDoughnut.push(el.sum)
+    }
+  });
+
+  fullIncomes.map((el) => {
+    if(el.sum > 0) {
+        trueMoneyIncomesBar.push(el.sum)
+    }
+  });
 
   const showIncomes = () => setIsShowIncomes(!isShowIncomes);
   const showCharges = () => setIsShowCharges(!isShowCharges);
@@ -240,13 +251,6 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
     labels: categoriesDoughnut,
     datasets: [
       {
-        // backgroundColor: ['rgb(197,218,3)', 'rgb(6,120,207)', 'rgb(253,40,36)', 'rgb(254,132,2)'],
-        // hoverBackgroundColor: [
-        //   'rgba(197,218,3,0.6)',
-        //   'rgba(6,120,207,0.6)',
-        //   'rgba(253,40,36,0.6)',
-        //   'rgba(254,132,2,0.6)',
-        // ],'#ecc22e'
         backgroundColor: ['#f6ea67', '#ef878d', '#38ef7d', '#94ecde', '#ffc7bb'],
         hoverBackgroundColor: ['#ecc22e', '#fa9dbe', '#35bb61', '#06c0da', '#ef8270'],
         borderWidth: 0,
@@ -259,6 +263,9 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
 
   return (
     <>
+    <div className="header_wrapper">
+        <Header title="Charts" />
+    </div>
       <div className="charts">
         <div className="line-chart__container">
           <div className="line-chart">
@@ -319,11 +326,11 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
             <div className="chart-buttons__checkbox">
               <span>
                 <input type="checkbox" id="show-in" onChange={showIncomes} defaultChecked />
-                <label htmlFor="show-in">Incomes</label>
+                <label className={!isShowIncomes ? 'non-active' : ''} htmlFor="show-in">Incomes</label>
               </span>
               <span>
                 <input type="checkbox" id="show-out" onChange={showCharges} defaultChecked />
-                <label htmlFor="show-out">Charges</label>
+                <label className={!isShowCharges ? 'non-active' : ''} htmlFor="show-out">Charges</label>
               </span>
             </div>
           </div>

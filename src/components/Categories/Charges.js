@@ -53,7 +53,7 @@ const Charges = ({ props }) => {
         updateCategory={createChargeCategory}
         icons={props.icons}
       />
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} className={classes.tableWrapper}>
         <Table className={classes.table}>
           <TableHead className={classes.tableHead}>
             <TableRow>

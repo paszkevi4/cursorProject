@@ -47,8 +47,12 @@ export const TableStyles = {
   table: {
     minWidth: 300,
   },
+  tableWrapper:{
+    boxShadow: '10px 10px 20px -7px rgba(0, 0, 0)',
+    borderRadius: '25px'
+  },
   tableHead: {
-    backgroundColor: "lightcyan",
+    background: "linear-gradient(20deg,#00ffff,#ccffff)",
   },
   addButtonWrapper: {
     display: "flex",

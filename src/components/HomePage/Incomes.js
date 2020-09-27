@@ -66,7 +66,7 @@ const Incomes = (props) => {
         charges={props.incomes}
         chargeCategories={props.categories}
       />
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} className={classes.tableWrapper}>
         <Table className={classes.table} aria-label="Table of Incomes">
           <TableHead className={classes.tableHead}>
             <TableRow>

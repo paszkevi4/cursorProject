@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import AddCategory from './AddCategory';
-import Category from './Category';
+import AddCategory from "./AddCategory";
+import Category from "./Category";
 
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 import {
   Button,
   Table,
@@ -13,28 +13,18 @@ import {
   TableHead,
   TableRow,
   Paper,
-} from '@material-ui/core/';
-import AddIcon from '@material-ui/icons/Add';
+} from "@material-ui/core/";
+import AddIcon from "@material-ui/icons/Add";
 
 import {
   createIncomeCategory,
   updateIncomeCategory,
   deleteIncomeCategory,
-} from '../../redux/firebase/incomeCategoriesFB';
+} from "../../redux/firebase/incomeCategoriesFB";
+import {TableStyles} from '../Styles'
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 300,
-  },
-  tableHead: {
-    backgroundColor: 'lightcyan',
-  },
-  addButtonWrapper: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    paddingBottom: '20px',
-  },
-});
+
+const useStyles = makeStyles(TableStyles);
 
 const Incomes = ({ props }) => {
   const [open, setOpen] = useState(false);
@@ -54,7 +44,8 @@ const Incomes = ({ props }) => {
           variant="contained"
           color="primary"
           startIcon={<AddIcon />}
-          onClick={handleClickOpen}>
+          onClick={handleClickOpen}
+        >
           Add more
         </Button>
       </div>

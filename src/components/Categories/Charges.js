@@ -21,20 +21,9 @@ import {
   updateChargeCategory,
   deleteChargeCategory,
 } from '../../redux/firebase/chargeCategoriesFB';
+import { TableStyles } from '../Styles';
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 300,
-  },
-  tableHead: {
-    backgroundColor: 'lightcyan',
-  },
-  addButtonWrapper: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    paddingBottom: '20px',
-  },
-});
+const useStyles = makeStyles(TableStyles);
 
 const Charges = ({ props }) => {
   const [open, setOpen] = useState(false);

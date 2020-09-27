@@ -13,43 +13,9 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import AddIcon from "@material-ui/icons/Add";
+import { TableStyles } from "../Styles";
 
-const useStyles = makeStyles((theme) => ({
-  table: {
-    minWidth: 650,
-  },
-  tableHead: {
-    backgroundColor: "lightcyan",
-    fontWeight: "700",
-  },
-  addButton: {
-    display: "flex",
-  },
-  modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  paper: {
-    backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
-  homeSelect: {
-    display: "flex",
-    alignItems: "center",
-  },
-  homeMenu: {
-    display: "flex",
-    justifyContent: "space-between",
-    margin: "20px 0",
-    height: "40px",
-  },
-  homeMenuTitle: {
-    marginRight: "20px",
-  },
-}));
+const useStyles = makeStyles(TableStyles);
 
 const Incomes = (props) => {
   const classes = useStyles();

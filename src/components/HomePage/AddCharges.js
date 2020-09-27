@@ -9,8 +9,9 @@ import {
   DialogTitle,
   TextField,
 } from "@material-ui/core";
+import { ModalStyles } from "../Styles";
 
-const useStyles = makeStyles({
+/*const useStyles = makeStyles({
   dialogWindow: {
     minWidth: "350px",
   },
@@ -27,8 +28,9 @@ const useStyles = makeStyles({
     minWidth: "400px",
     padding: "50px",
   },
-});
+});*/
 
+const useStyles = makeStyles(ModalStyles);
 
 const AddCharges = ({
   open,
@@ -136,7 +138,7 @@ const AddCharges = ({
         aria-describedby="add-charge-description"
       >
         <DialogTitle id="add-charge-title">{"ADD NEW ITEM"}</DialogTitle>
-        <DialogContent className={classes.dialogWindow}>
+        <DialogContent className={classes.window}>
           <div>
             <TextField
               id="selectName"

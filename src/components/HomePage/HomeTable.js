@@ -8,8 +8,9 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import AddCharges from "./AddCharges";
+import { CategoryStyles } from "../Styles";
 
-const useStyles = makeStyles({
+/*const useStyles = makeStyles({
   categoryBlock: {
     // display: 'flex',
     alignItems: "center",
@@ -17,7 +18,9 @@ const useStyles = makeStyles({
   categoryName: {
     display: "flex",
   },
-});
+});*/
+
+const useStyles = makeStyles(CategoryStyles)
 
 const HomeTable = ({
   icon,
@@ -117,9 +120,9 @@ const HomeTable = ({
   return (
     <TableRow>
       <TableCell component="th" scope="row">
-        <div className={classes.categoryBlock}>
-          <div className={classes.categoryName}>{name}</div>
+        <div className={classes.categoryNameBlock}>
           <div className={classes.categoryIcon}>{icon}</div>
+          <div className={classes.categoryName}>{name}</div>
         </div>
       </TableCell>
       <TableCell>{description}</TableCell>

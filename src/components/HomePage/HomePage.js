@@ -23,9 +23,9 @@ import { totalCounter } from '../Common/Functions';
 //
 
 const useStyles = makeStyles({
-  home: {
-    padding: '20px',
-  },
+  // home: {
+  //   padding: '20px',
+  // },
   sectionToggle: {
     display: 'flex',
     marginBottom: '20px',

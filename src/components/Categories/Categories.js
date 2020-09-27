@@ -9,9 +9,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Header from '../Common/Header/HedaerContainer';
 
 const useStyles = makeStyles({
-  Categories: {
-    padding: '20px',
-  },
+  // Categories: {
+  //   padding: '20px',
+  // },
   sectionToggle: {
     display: 'flex',
     marginBottom: '20px',

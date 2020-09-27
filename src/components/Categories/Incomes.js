@@ -16,6 +16,12 @@ import {
 } from '@material-ui/core/';
 import AddIcon from '@material-ui/icons/Add';
 
+import {
+  createIncomeCategory,
+  updateIncomeCategory,
+  deleteIncomeCategory,
+} from '../../redux/firebase/incomeCategoriesFB';
+
 const useStyles = makeStyles({
   table: {
     minWidth: 300,
@@ -55,7 +61,7 @@ const Incomes = ({ props }) => {
       <AddCategory
         open={open}
         handleClose={handleClose}
-        updateCategory={props.createIncomeCategory}
+        updateCategory={createIncomeCategory}
         icons={props.icons}
       />
       <TableContainer component={Paper}>
@@ -78,10 +84,10 @@ const Incomes = ({ props }) => {
                   icon={el.icon}
                   key={`${el.name}${i}`}
                   deleteCategory={() => {
-                    props.deleteIncomeCategory(el.docId);
+                    deleteIncomeCategory(el.docId);
                   }}
                   updateCategory={(category) => {
-                    props.updateIncomeCategory(el.docId, category);
+                    updateIncomeCategory(el.docId, category);
                   }}
                   icons={props.icons}
                 />

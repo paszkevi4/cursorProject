@@ -16,6 +16,12 @@ import {
 } from '@material-ui/core/';
 import AddIcon from '@material-ui/icons/Add';
 
+import {
+  createChargeCategory,
+  updateChargeCategory,
+  deleteChargeCategory,
+} from '../../redux/firebase/chargeCategoriesFB';
+
 const useStyles = makeStyles({
   table: {
     minWidth: 300,
@@ -55,7 +61,7 @@ const Charges = ({ props }) => {
       <AddCategory
         open={open}
         handleClose={handleClose}
-        updateCategory={props.createChargeCategory}
+        updateCategory={createChargeCategory}
         icons={props.icons}
       />
       <TableContainer component={Paper}>
@@ -78,10 +84,10 @@ const Charges = ({ props }) => {
                   icon={el.icon}
                   key={`${el.name}${i}`}
                   deleteCategory={() => {
-                    props.deleteChargeCategory(el.docId);
+                    deleteChargeCategory(el.docId);
                   }}
                   updateCategory={(category) => {
-                    props.updateChargeCategory(el.docId, category);
+                    updateChargeCategory(el.docId, category);
                   }}
                   icons={props.icons}
                 />

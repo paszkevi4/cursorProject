@@ -78,26 +78,26 @@ const fetchChargeCategoriesAC = (categories: Array<chargeCategoryType>): fetchCa
   categories,
 });
 
-export const createChargeCategoryAC = (
-  category: chargeCategoryType,
-): createChargeCategoryACType => ({
-  type: SET_CATEGORY,
-  category,
-});
+// export const createChargeCategoryAC = (
+//   category: chargeCategoryType,
+// ): createChargeCategoryACType => ({
+//   type: SET_CATEGORY,
+//   category,
+// });
 
-export const updateChargeCategoryAC = (
-  index: number,
-  category: chargeCategoryType,
-): updateChargeCategoryACType => ({
-  type: UPDATE_CATEGORY,
-  index,
-  category,
-});
+// export const updateChargeCategoryAC = (
+//   index: number,
+//   category: chargeCategoryType,
+// ): updateChargeCategoryACType => ({
+//   type: UPDATE_CATEGORY,
+//   index,
+//   category,
+// });
 
-export const deleteChargeCategoryAC = (index: number): deleteChargeCategoryACType => ({
-  type: DELETE_CATEGORY,
-  index,
-});
+// export const deleteChargeCategoryAC = (index: number): deleteChargeCategoryACType => ({
+//   type: DELETE_CATEGORY,
+//   index,
+// });
 
 export const setChargeCategoriesThunk = () => {
   return (dispatch: any) => {

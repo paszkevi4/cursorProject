@@ -33,7 +33,7 @@ const Category = ({ name, description, date, icon, deleteCategory, updateCategor
     year: propsDate.getFullYear(),
     month:
       propsDate.getMonth() + 1 < 10 ? `0${propsDate.getMonth() + 1}` : propsDate.getMonth() + 1,
-    day: propsDate.getDay() + 1 < 10 ? `0${propsDate.getDay() + 1}` : propsDate.getDay() + 1,
+    day: propsDate.getDate() < 10 ? `0${propsDate.getDate()}` : propsDate.getDate(),
   };
 
   const [currentCategory, setCurrentCategory] = useState({
@@ -51,6 +51,7 @@ const Category = ({ name, description, date, icon, deleteCategory, updateCategor
     setAnchorEl(e.currentTarget);
   };
 
+  console.log(`${fullDate.year}-${fullDate.month}-${fullDate.day}`);
   const handleActionClose = (e) => {
     if (e.target.innerText === 'Delete') {
       deleteCategory();
@@ -63,7 +64,6 @@ const Category = ({ name, description, date, icon, deleteCategory, updateCategor
         currentDate: `${fullDate.year}-${fullDate.month}-${fullDate.day}`,
       });
     }
-
     setAnchorEl(null);
   };
   return (

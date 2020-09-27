@@ -60,6 +60,8 @@ const AddCategory = ({
 
   const handleCloseDialog = (e) => {
     if (e.target.innerText === 'ADD') {
+      // console.log(date);
+      // console.log(new Date(date));
       if (name && icon !== 'object' && icon) {
         updateCategory({
           name: name,

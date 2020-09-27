@@ -70,26 +70,26 @@ export const fetchIncomeCategoriesAC = (
   categories,
 });
 
-export const createIncomeCategoryAC = (
-  category: incomeCategoryType,
-): createIncomeCategoryACType => ({
-  type: CREATE_CATEGORY,
-  category,
-});
+// export const createIncomeCategoryAC = (
+//   category: incomeCategoryType,
+// ): createIncomeCategoryACType => ({
+//   type: CREATE_CATEGORY,
+//   category,
+// });
 
-export const updateIncomeCategoryAC = (
-  index: number,
-  category: incomeCategoryType,
-): updateIncomeCategoryACType => ({
-  type: UPDATE_CATEGORY,
-  category,
-  index,
-});
+// export const updateIncomeCategoryAC = (
+//   index: number,
+//   category: incomeCategoryType,
+// ): updateIncomeCategoryACType => ({
+//   type: UPDATE_CATEGORY,
+//   category,
+//   index,
+// });
 
-export const deleteIncomeCategoryAC = (index: number): deleteIncomeCategoryACType => ({
-  type: DELETE_CATEGORY,
-  index,
-});
+// export const deleteIncomeCategoryAC = (index: number): deleteIncomeCategoryACType => ({
+//   type: DELETE_CATEGORY,
+//   index,
+// });
 
 export const setIncomeCategoriesThunk = () => {
   return (dispatch: any) => {

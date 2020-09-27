@@ -41,15 +41,7 @@ type actionType =
   | updateChargeCategoryACType
   | deleteChargeCategoryACType;
 
-let initialState: Array<chargeCategoryType> = [
-  {
-    docId: '0',
-    name: 'Pets',
-    description: 'For smth else',
-    date: Date.parse('2020-7-21'),
-    icon: icons[14],
-  },
-];
+let initialState: Array<chargeCategoryType> = [];
 
 const chargeCategoriesReducer = (
   state = initialState,
@@ -71,33 +63,10 @@ const chargeCategoriesReducer = (
   }
 };
 
-// ACs
-
 const fetchChargeCategoriesAC = (categories: Array<chargeCategoryType>): fetchCategoriesACType => ({
   type: FETCH_CATEGORIES,
   categories,
 });
-
-// export const createChargeCategoryAC = (
-//   category: chargeCategoryType,
-// ): createChargeCategoryACType => ({
-//   type: SET_CATEGORY,
-//   category,
-// });
-
-// export const updateChargeCategoryAC = (
-//   index: number,
-//   category: chargeCategoryType,
-// ): updateChargeCategoryACType => ({
-//   type: UPDATE_CATEGORY,
-//   index,
-//   category,
-// });
-
-// export const deleteChargeCategoryAC = (index: number): deleteChargeCategoryACType => ({
-//   type: DELETE_CATEGORY,
-//   index,
-// });
 
 export const setChargeCategoriesThunk = () => {
   return (dispatch: any) => {

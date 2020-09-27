@@ -1,16 +1,12 @@
 .main {
   width: 400px;
-  margin: 0 auto;
+  margin: 2vh auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .main > div {
-  margin: 15px 0;
-}
-
-.temp {
-  width: 250px;
-  height: 250px;
-  background: yellowgreen;
+  margin: 10px 0;
 }
 
 .avatar {
@@ -24,9 +20,26 @@
   width: 100%;
   object-fit: cover;
   border-radius: 50%;
+  box-shadow: 10px 10px 15px -7px rgba(0, 0, 0, 0.5);
 }
 
-.limit {
-  margin-right: 20px;
-  margin-bottom: 130px;
+.main_inner {
+  padding: 30px 45px;
+  border-radius: 15px;
+  box-shadow: 4px 4px 15px -0px rgba(0, 0, 0, 0.3);
+}
+
+.main_inner > div {
+  margin: 15px 0;
+}
+
+.settings_button {
+  align-self: flex-end;
+  width: 200px;
+  box-shadow: 4px 4px 15px -0px rgba(0, 0, 0, 0.3);
+}
+
+.settings_button button {
+  align-self: flex-end;
+  width: 100%;
 }

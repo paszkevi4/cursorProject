@@ -9,6 +9,8 @@ import { connect, Provider } from 'react-redux';
 import { setSettingsThunk } from '../src/redux/settingsReducer';
 import { setChargeCategoriesThunk } from '../src/redux/chargeCategoriesReducer';
 import { setIncomeCategoriesThunk } from '../src/redux/incomeCategoriesReducer';
+import { setChargesThunk } from '../src/redux/chargesReducer';
+import { fetchIncomesThunk } from '../src/redux/incomesReducer';
 
 import store from './redux/store';
 
@@ -25,6 +27,8 @@ const App = (props) => {
     props.setSettingsThunk();
     props.setChargeCategoriesThunk();
     props.setIncomeCategoriesThunk();
+    //props.setChargesThunk();
+    //props.fetchIncomesThunk();
   }, []);
 
   return (
@@ -45,8 +49,12 @@ const App = (props) => {
 
 const AppContainer = connect(null, {
   setSettingsThunk,
+
   setChargeCategoriesThunk,
   setIncomeCategoriesThunk,
+
+  setChargesThunk,
+  fetchIncomesThunk,
 })(App);
 
 const MainAppContainer = (props) => {

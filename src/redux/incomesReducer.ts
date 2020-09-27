@@ -1,3 +1,6 @@
+import { db } from './firebase/firebase';
+
+const FETCH_INCOMES = 'FETCH_INCOMES';
 const CREATE_INCOME = 'SET_INCOME';
 const UPDATE_INCOME = 'UPDATE_INCOME';
 const DELETE_INCOME = 'DELEE_INCOME';
@@ -7,6 +10,11 @@ type incomeType = {
   description: string;
   date: Date | string;
   money: number;
+};
+
+type fetchIncomesACType = {
+  type: typeof FETCH_INCOMES;
+  incomes: Array<incomeType>;
 };
 
 type createIncomeACType = {
@@ -25,7 +33,7 @@ type deleteIncomeACType = {
   index: number;
 };
 
-type actionType = createIncomeACType | updateIncomeACType | deleteIncomeACType;
+type actionType = fetchIncomesACType | createIncomeACType | updateIncomeACType | deleteIncomeACType;
 
 let initialState: Array<incomeType> = [
   { category: 0, description: 'From mom', date: new Date(2020, 8, 3), money: 500.57 },
@@ -52,6 +60,8 @@ let initialState: Array<incomeType> = [
 
 const incomesReducer = (state = initialState, action: actionType): Array<incomeType> => {
   switch (action.type) {
+    case FETCH_INCOMES:
+      return [...action.incomes];
     case CREATE_INCOME:
       return [...state, action.income];
     case UPDATE_INCOME:
@@ -64,6 +74,11 @@ const incomesReducer = (state = initialState, action: actionType): Array<incomeT
       return state;
   }
 };
+
+const fetchIncomesAC = (incomes: Array<incomeType>): fetchIncomesACType => ({
+  type: FETCH_INCOMES,
+  incomes,
+});
 
 export const createIncomeAC = (income: incomeType): createIncomeACType => ({
   type: CREATE_INCOME,
@@ -80,5 +95,19 @@ export const deleteIncomeAC = (index: number): deleteIncomeACType => ({
   type: DELETE_INCOME,
   index,
 });
+
+export const fetchIncomesThunk = () => {
+  return (dispatch: any) => {
+    db.collection('incomes').onSnapshot((ss: any) => {
+      dispatch(
+        fetchIncomesAC(
+          ss.docs.map((el: any) => {
+            return el.data();
+          }),
+        ),
+      );
+    });
+  };
+};
 
 export default incomesReducer;

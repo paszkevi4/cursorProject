@@ -64,53 +64,60 @@ const Settings = (props) => {
     <>
       <Avatar img={avatar} updateInState={setAvatarNew} />
       <div className={style.main}>
-        <TextField
-          fullWidth
-          variant="outlined"
-          label="Name"
-          id="name"
-          value={name}
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
-        />
-        <PhoneInput
-          inputStyle={{ width: '100%' }}
-          id="phone"
-          value={phone}
-          country="ua"
-          onChange={(e) => setPhone(e)}
-        />
-        <div>
-          <FormControlLabel
-            control={
-              <Switch
-                checked={showWarning}
-                onChange={() => {
-                  setWarning(!showWarning);
-                }}
-              />
-            }
-            label="Warn me when remains:"
+        <div className={style.main_inner}>
+          <TextField
+            fullWidth
+            variant="outlined"
+            label="Name"
+            id="name"
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+          />
+          <PhoneInput
+            inputStyle={{ width: '100%' }}
+            id="phone"
+            value={phone}
+            country="ua"
+            onChange={(e) => setPhone(e)}
           />
         </div>
-        <Limits
-          title="amount"
-          limit={currentMoneyLimit}
-          setLimit={setCurrentMoneyLimit}
-          step={100}
-          disabled={!showWarning}
-        />
-        <Limits
-          title="percent"
-          limit={currentPercentLimit}
-          setLimit={setCurrentPercentLimit}
-          step={5}
-          disabled={!showWarning}
-        />
-        <Button variant="contained" color="primary" onClick={uploadNewData}>
-          SAVE
-        </Button>
+        <div className={style.main_inner}>
+          <div>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={showWarning}
+                  onChange={() => {
+                    setWarning(!showWarning);
+                  }}
+                />
+              }
+              label="Warn me when remains:"
+            />
+          </div>
+          <Limits
+            title="amount"
+            limit={currentMoneyLimit}
+            setLimit={setCurrentMoneyLimit}
+            step={100}
+            disabled={!showWarning}
+          />
+          <Limits
+            title="percent"
+            limit={currentPercentLimit}
+            setLimit={setCurrentPercentLimit}
+            step={5}
+            disabled={!showWarning}
+          />
+        </div>
+        <div className={style.settings_button}>
+          <Button variant="contained" color="primary" onClick={uploadNewData}>
+            SAVE
+          </Button>
+        </div>
+
         {showSaved && (
           <Alert style={{ marginTop: '50px' }} variant="outlined" severity="success">
             Your profile has been updated

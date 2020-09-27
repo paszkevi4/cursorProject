@@ -1,42 +1,45 @@
- /*body {*/
-	/*background: #7F7FD5;*/
-	/*background: -webkit-linear-gradient(to bottom, #91EAE4, #86A8E7, #7F7FD5);*/
-	/*background: linear-gradient(to bottom, #91EAE4, #86A8E7, #7F7FD5);*/
-	/*}*/
+/*body {*/
+/*background: #7F7FD5;*/
+/*background: -webkit-linear-gradient(to bottom, #91EAE4, #86A8E7, #7F7FD5);*/
+/*background: linear-gradient(to bottom, #91EAE4, #86A8E7, #7F7FD5);*/
+/*}*/
 
- .table-direct>button {
-	 /*border: none;*/
-	 border: 2px solid green;
-	 border-radius: 3px;
-	 font-family: inherit;
-	 font-weight: 700;
-	 font-size: inherit;
-	 padding: 0.5em;
-	 margin-bottom: 1px;
-	 text-decoration: none;
-	 background-color: lightcyan;
-	 }
+.table-direct > button {
+  position: relative;
+  border: none;
+  border-radius: 3px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: inherit;
+  padding: 0.5em;
+  margin-bottom: 1px;
+  text-decoration: none;
+  background-color: inherit;
+  cursor: pointer;
+  outline: none;
+}
 
-.table-direct>button.ascending::after {
-	/*border:inherit;*/
-	 content: '👇';
-	 display: inline-block;
-	 margin-left: 0.5em;
-	 }
+.table-direct button.ascending::after,
+.table-direct button.descending::after {
+  position: absolute;
+  content: "👇";
+  display: inline-block;
+  top: 5px;
+  font-size: 1.7em;
+}
 
 .table-direct button.descending::after {
-	 content: '☝️';
-	 display: inline-block;
-	 margin-left: 0.5em;
-	 }
+  top: -3px;
+  content: "☝️";
+}
 
- .MuiTableCell-root {
-	 min-width: 130px;
-	 font-weight: 700;
-	 }
- .avatar {
-	 vertical-align: middle;
-	 width: 50px;
-	 height: 50px;
-	 border-radius: 50%;
-	 }
+.MuiTableCell-root {
+  min-width: 130px;
+  font-weight: 700;
+}
+.avatar {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}

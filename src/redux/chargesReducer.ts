@@ -1,3 +1,6 @@
+import { db } from './firebase/firebase';
+
+const FETCH_CHARGES = 'FETCH_CHARGES';
 const CREATE_CHARGE = 'CREATE_CHARGE';
 const UPDATE_CHARGE = 'UPDATE_CHARGE';
 const DELETE_CHARGE = 'DELETE_CHARGE';
@@ -7,6 +10,11 @@ type chargeType = {
   description: string;
   date: Date | string;
   money: number;
+};
+
+type fetchChargeACType = {
+  type: typeof FETCH_CHARGES;
+  charges: Array<chargeType>;
 };
 
 type createChargeACType = {
@@ -25,7 +33,7 @@ type deleteChargeACType = {
   index: number;
 };
 
-type actionType = createChargeACType | updateChargeACType | deleteChargeACType;
+type actionType = fetchChargeACType | createChargeACType | updateChargeACType | deleteChargeACType;
 
 let initialState: Array<chargeType> = [
   { category: 0, description: 'Diner with John', date: new Date(2020, 8, 17), money: 300 },
@@ -52,6 +60,8 @@ let initialState: Array<chargeType> = [
 
 const chargesReducer = (state = initialState, action: actionType): Array<chargeType> => {
   switch (action.type) {
+    case FETCH_CHARGES:
+      return [...action.charges];
     case CREATE_CHARGE:
       return [...state, action.charge];
     case UPDATE_CHARGE:
@@ -64,6 +74,11 @@ const chargesReducer = (state = initialState, action: actionType): Array<chargeT
       return state;
   }
 };
+
+export const fetchChargesAC = (charges: Array<chargeType>): fetchChargeACType => ({
+  type: FETCH_CHARGES,
+  charges,
+});
 
 export const createChargeAC = (charge: chargeType): createChargeACType => ({
   type: CREATE_CHARGE,
@@ -80,5 +95,21 @@ export const deleteChargeAC = (index: number): deleteChargeACType => ({
   type: DELETE_CHARGE,
   index,
 });
+
+// THUNK
+
+export const setChargesThunk = () => {
+  return (dispatch: any) => {
+    db.collection('charges').onSnapshot((ss: any) => {
+      dispatch(
+        fetchChargesAC(
+          ss.docs.map((el: any) => {
+            return el.data();
+          }),
+        ),
+      );
+    });
+  };
+};
 
 export default chargesReducer;

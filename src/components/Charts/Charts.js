@@ -6,16 +6,9 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
 import './Charts.css';
+import { ChartsStyles } from '../Styles';
 
-const useStyles = makeStyles({
-  root: {
-    marginLeft: '3%',
-    width: '150px',
-  },
-  label: {
-    textTransform: 'capitalize',
-  },
-});
+const useStyles = makeStyles(ChartsStyles);
 
 const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
   const [activePeriod, setActivePeriod] = useState(8);

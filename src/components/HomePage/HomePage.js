@@ -17,28 +17,12 @@ import Header from '../Common/Header/HedaerContainer';
 //
 //
 import { totalCounter } from '../Common/Functions';
+import { TabsAreaStyles } from '../Styles';
 //
 // totalCounter(props.incomes, props.charges)
 //
 //
-
-const useStyles = makeStyles({
-  // home: {
-  //   padding: '20px',
-  // },
-  sectionToggle: {
-    display: 'flex',
-    marginBottom: '20px',
-  },
-  toggleButton: {
-    textDecoration: 'none',
-    color: 'inherit',
-    letterSpacing: '1px',
-  },
-  toggleButtonActive: {
-    borderBottom: '1px solid cornflowerblue',
-  },
-});
+const useStyles = makeStyles(TabsAreaStyles)
 
 const HomePage = (props) => {
   const classes = useStyles();

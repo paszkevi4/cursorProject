@@ -47,7 +47,7 @@
 }
 
 .bar-chart {
-  grid-row: 2/-1;
+  grid-row: 2/3;
   grid-column: 1/2;
   padding: 40px;
   background: linear-gradient(20deg, #2f054e, #e01094);
@@ -56,7 +56,7 @@
 }
 
 .doughnut-chart {
-  grid-row: 2/-1;
+  grid-row: 2/3;
   grid-column: 2/-1;
   padding: 40px 100px;
   background: linear-gradient(20deg, #0e2453, #3578b1);
@@ -66,6 +66,35 @@
 
 .non-active {
   text-decoration: line-through;
+}
+
+.forecast__container{
+  grid-row: 3/-1;
+  grid-column: 1/-1;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 300px;
+  box-shadow: 10px 6px 23px -6px rgba(0, 0, 0);
+  border-radius: 25px;
+}
+
+.forecast-chart {
+  grid-column: 1/4;
+  padding: 40px;
+  background: linear-gradient(20deg,  #ecc22e, #f6ea67);
+  border-radius: 25px;
+  box-shadow: 10px 10px 20px -7px rgba(0, 0, 0);
+}
+
+.forecast_descr{
+  grid-column: 4/-1;
+  display: flex;
+  flex-direction: column;
+  padding: 5px 20px;
+}
+
+.forecast_descr span{
+  text-decoration: underline;
+  font-weight: bold;
 }
 
 @media (max-width: 1024px) {

@@ -5,8 +5,6 @@ import { Bar, Doughnut, Line } from 'react-chartjs-2';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
-import Header from '../Common/Header/HedaerContainer';
-
 import './Charts.css';
 
 const useStyles = makeStyles({
@@ -51,8 +49,11 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
   const moneyIn = [];
   const moneyOut = [];
   const trueMoneyCharges = [];
-
   const allMoney = [];
+  let lastWeekIn = 0;
+  let penultimateWeekIn = 0;
+  let lastWeekOut = 0;
+  let penultimateWeekOut = 0;
 
   for (let i = 0; i < activePeriod - 1; i++) {
     allDates.push(new Date(Date.now() - i * 1000 * 3600 * 24).toLocaleDateString().slice(0, 5));
@@ -171,12 +172,14 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
     if (el.sum > 0) {
       trueMoneyChargesDoughnut.push(el.sum);
     }
+    return trueMoneyChargesDoughnut
   });
 
   fullIncomes.map((el) => {
     if (el.sum > 0) {
       trueMoneyIncomesBar.push(el.sum);
     }
+    return trueMoneyIncomesBar
   });
 
   const showIncomes = () => setIsShowIncomes(!isShowIncomes);
@@ -195,6 +198,27 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
   const maxSum = Math.max(...allMoney);
   const minSum = Math.min(...allMoney);
 
+  incomes.map(el => {
+    if(Math.ceil(Math.abs(el.date.getTime() - new Date().getTime()) / (1000 * 3600 * 24)) < 8) {
+      lastWeekIn += el.money
+    }
+    if(Math.ceil(Math.abs(el.date.getTime() - new Date().getTime()) / (1000 * 3600 * 24)) >= 8 && Math.ceil(Math.abs(el.date.getTime() - new Date().getTime()) / (1000 * 3600 * 24)) < 15) {
+      penultimateWeekIn += el.money
+    }
+  });
+
+  charges.map(el => {
+    if(Math.ceil(Math.abs(el.date.getTime() - new Date().getTime()) / (1000 * 3600 * 24)) < 8) {
+      lastWeekOut += el.money
+    }
+    if(Math.ceil(Math.abs(el.date.getTime() - new Date().getTime()) / (1000 * 3600 * 24)) >= 8 && Math.ceil(Math.abs(el.date.getTime() - new Date().getTime()) / (1000 * 3600 * 24)) < 15) {
+      penultimateWeekOut += el.money
+    }
+  });
+
+  const futureWeekIn = ((lastWeekIn - penultimateWeekIn) / penultimateWeekIn) * lastWeekIn + lastWeekIn;
+  const futureWeekOut = ((lastWeekOut - penultimateWeekOut) / penultimateWeekOut) * lastWeekOut + lastWeekOut;
+
   const startDataLine = (canvas) => {
     const ctx = canvas.getContext('2d');
     const gradient = ctx.createLinearGradient(0, 0, 0, 400);
@@ -205,7 +229,7 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
       labels: activePeriod === 8 ? allDays : allDates,
       datasets: [
         {
-          label: 1,
+          label: 'Incomes',
           lineTension: 0.5,
           backgroundColor: gradient,
           borderColor: 'rgb(93,143,238)',
@@ -216,7 +240,7 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
           data: isShowIncomes ? moneyIn : null,
         },
         {
-          label: 2,
+          label: 'Charges',
           lineTension: 0.5,
           backgroundColor: 'rgb(254,132,2)',
           borderColor: 'rgb(254,132,2)',
@@ -258,13 +282,37 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
     ],
   };
 
+  const startForecast = {
+    labels: ['Penultimate week', 'Last week', 'Future week'],
+    datasets: [
+      {
+        label: 'Incomes',
+        fill: false,
+        borderColor: 'rgb(93,143,238)',
+        hoverBorderColor: 'rgba(0,0,0,0)',
+        borderWidth: 4,
+        pointBackgroundColor: 'rgba(0,0,0,0)',
+        pointBorderColor: 'rgba(0,0,0,0)',
+        data: [Math.round(penultimateWeekIn), Math.round(lastWeekIn), Math.round(futureWeekIn)]
+      },
+      {
+        label: 'Charges',
+        fill: false,
+        backgroundColor: 'rgb(254,132,2)',
+        borderColor: 'rgb(254,132,2)',
+        hoverBorderColor: 'rgba(0,0,0,0)',
+        borderWidth: 4,
+        pointBackgroundColor: 'rgba(0,0,0,0)',
+        pointBorderColor: 'rgba(0,0,0,0)',
+        data: [Math.round(penultimateWeekOut), Math.round(lastWeekOut), Math.round(futureWeekOut)]
+      }
+    ]
+  }
+
   const classes = useStyles();
 
   return (
     <>
-      {/* <div className="header_wrapper">
-        <Header title="Charts" />
-    </div> */}
       <div className="charts">
         <div className="line-chart__container">
           <div className="line-chart">
@@ -275,7 +323,7 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
                   display: true,
                   text: 'Summary',
                   position: 'top',
-                  fontSize: 20,
+                  fontSize: 20
                 },
                 legend: {
                   display: false,
@@ -433,6 +481,46 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
               maintainAspectRatio: false,
             }}
           />
+        </div>
+        <div className="forecast__container">
+          <div className="forecast-chart">
+            <Line
+              data={startForecast}
+              options={{
+                title:{
+                  display:true,
+                  text:'Forecast for incomes and charges',
+                  fontSize:20
+                },
+                legend:{
+                  display:true,
+                  position:'right'
+                },
+                scales: {
+                  yAxes: [
+                    {
+                      display: false,
+                      gridLines: {
+                        display: true,
+                      },
+                    },
+                  ],
+                  xAxes: [
+                    {
+                      gridLines: {
+                        display: false,
+                      },
+                    },
+                  ],
+                },
+                maintainAspectRatio: false,
+              }}
+            />
+          </div>
+          <div className="forecast_descr">
+              <h3>Your budget has changed in the last week</h3>
+              <p>If this continues, your incomes will <span>{lastWeekIn < penultimateWeekIn ? 'decrease' : 'increase'}</span> and your charges will <span>{lastWeekOut < penultimateWeekOut ? 'decrease' : 'increase'}</span>.</p>
+          </div>
         </div>
       </div>
     </>

@@ -38,7 +38,7 @@ nav a {
   margin-top: 20px;
   text-decoration: none;
 }
-nav p{
+nav p {
   display: flex;
   align-items: center;
 }
@@ -55,4 +55,34 @@ nav p{
 
 .active .link-container {
   background: rgb(45, 45, 45);
+}
+
+@media (max-width: 1024px) {
+  .logo img {
+    display: none;
+  }
+}
+
+@media (max-width: 770px) {
+  nav {
+    height: 99vh;
+  }
+  .logo img {
+    display: block;
+  }
+  .logo h2 {
+    display: none;
+  }
+  .link-container p {
+    display: none;
+  }
+  .link-container svg {
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 770px) {
+  nav {
+    height: 111vh;
+  }
 }

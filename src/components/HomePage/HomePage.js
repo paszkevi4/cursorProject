@@ -1,12 +1,26 @@
 import React from 'react';
 import { HashRouter, NavLink, Redirect, Route } from 'react-router-dom';
-import Charges from './Charges';
-import Incomes from './Incomes';
+
+//
+// Styles
 import './HomePage.css';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
+//
+// Components
+import Charges from './Charges';
+import Incomes from './Incomes';
 import Header from '../Common/Header/HedaerContainer';
+
+//
+//
+//
+import { totalCounter } from '../Common/Functions';
+//
+// totalCounter(props.incomes, props.charges)
+//
+//
 
 const useStyles = makeStyles({
   home: {

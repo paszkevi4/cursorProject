@@ -62,7 +62,6 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
   allDates.reverse();
   allDatesForDay.reverse();
 
-
   allDatesForDay.map((el) => {
     allDays.push(getWeekDay(el));
     return allDays;
@@ -169,14 +168,14 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
   });
 
   fullCharges.map((el) => {
-    if(el.sum > 0) {
-        trueMoneyChargesDoughnut.push(el.sum)
+    if (el.sum > 0) {
+      trueMoneyChargesDoughnut.push(el.sum);
     }
   });
 
   fullIncomes.map((el) => {
-    if(el.sum > 0) {
-        trueMoneyIncomesBar.push(el.sum)
+    if (el.sum > 0) {
+      trueMoneyIncomesBar.push(el.sum);
     }
   });
 
@@ -263,9 +262,9 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
 
   return (
     <>
-    <div className="header_wrapper">
+      {/* <div className="header_wrapper">
         <Header title="Charts" />
-    </div>
+    </div> */}
       <div className="charts">
         <div className="line-chart__container">
           <div className="line-chart">
@@ -326,15 +325,53 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
             <div className="chart-buttons__checkbox">
               <span>
                 <input type="checkbox" id="show-in" onChange={showIncomes} defaultChecked />
-                <label className={!isShowIncomes ? 'non-active' : ''} htmlFor="show-in">Incomes</label>
+                <label className={!isShowIncomes ? 'non-active' : ''} htmlFor="show-in">
+                  Incomes
+                </label>
               </span>
               <span>
                 <input type="checkbox" id="show-out" onChange={showCharges} defaultChecked />
-                <label className={!isShowCharges ? 'non-active' : ''} htmlFor="show-out">Charges</label>
+                <label className={!isShowCharges ? 'non-active' : ''} htmlFor="show-out">
+                  Charges
+                </label>
               </span>
             </div>
           </div>
         </div>
+
+        <div className="buttons_separated">
+          <div className="buttons_btn__separated">
+            <Button
+              variant="outlined"
+              className={activePeriod === 31 ? 'btn-active' : null}
+              classes={{ root: classes.root, label: classes.label }}
+              onClick={getMonth}>
+              Month
+            </Button>
+            <Button
+              variant="outlined"
+              className={activePeriod === 8 ? 'btn-active' : null}
+              classes={{ root: classes.root, label: classes.label }}
+              onClick={getWeek}>
+              Week
+            </Button>
+          </div>
+          <div className="buttons_checkbox__separated">
+            <span>
+              <input type="checkbox" id="show-in" onChange={showIncomes} defaultChecked />
+              <label className={!isShowIncomes ? 'non-active' : ''} htmlFor="show-in">
+                Incomes
+              </label>
+            </span>
+            <span>
+              <input type="checkbox" id="show-out" onChange={showCharges} defaultChecked />
+              <label className={!isShowCharges ? 'non-active' : ''} htmlFor="show-out">
+                Charges
+              </label>
+            </span>
+          </div>
+        </div>
+
         <div className="bar-chart">
           <Bar
             data={startDataBar}

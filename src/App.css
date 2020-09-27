@@ -4,7 +4,20 @@
   grid-template-columns: 300px 1fr;
 }
 
-@media screen and (max-width: 992px) {
+main {
+  width: 100%;
+  padding: 2vh;
+  padding-left: 0;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 1024px) {
+  .app {
+    grid-template-columns: 200px 1fr;
+  }
+}
+
+@media screen and (max-width: 768px) {
   .app {
     grid-template-columns: 100px 1fr;
   }

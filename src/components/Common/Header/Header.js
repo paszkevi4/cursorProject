@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import style from './Header.module.css';
-
 import { totalCounter, totalIncomes } from '../Functions';
+import style from './Header.module.css';
 
 const Header = (props) => {
   const [incomes, setIncomes] = useState(0);

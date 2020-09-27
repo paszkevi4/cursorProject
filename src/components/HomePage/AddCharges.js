@@ -8,8 +8,15 @@ import {
   DialogContent,
   DialogTitle,
   TextField,
+  Snackbar,
 } from "@material-ui/core";
+import MuiAlert from "@material-ui/lab/Alert";
+
 import { ModalStyles } from "../Styles";
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 /*const useStyles = makeStyles({
   dialogWindow: {
@@ -62,14 +69,17 @@ const AddCharges = ({
 
   const [name, setName] = useState(`${currentTable.currentName}`);
   const [category, setCategory] = useState(currentTable.currentCategory);
-  const [description, setDescription] = useState(currentTable.currentDescription);
+  const [description, setDescription] = useState(
+    currentTable.currentDescription
+  );
   const [date, setDate] = useState(
     currentTable.currentDate ? currentTable.currentDate : values.currentDate
   );
   const [money, setMoney] = useState(currentTable.currentMoney);
+  const [openAlert, setOpenAlert] = useState(false);
 
   const resetInputs = () => {
-		setName("");
+    setName("");
     setCategory("");
     setDescription("");
     setDate(values.currentDate);
@@ -79,22 +89,23 @@ const AddCharges = ({
   const handleCloseDialog = (e) => {
     if (e.target.innerText === "ADD") {
       // const gap = total - +money  ;
-      if (category >= 0 && money ) {
+      if (category >= 0 && money) {
         // if (gap <= 0) {
         //   const isSure = window.confirm("Are you sure?");
         //   if (isSure) {
-            updateCharge({
-              name: chargeCategories[category].name,
-              icon: chargeCategories[category].icon,
-              category: category,
-              description: description,
-              date: new Date(date),
-              money: +money,
-            });
-            handleClose();
-            resetInputs();
-          // }
-          // return null;
+        updateCharge({
+          name: chargeCategories[category].name,
+          icon: chargeCategories[category].icon,
+          category: category,
+          description: description,
+          date: new Date(date),
+          money: +money,
+        });
+        handleClose();
+        resetInputs();
+        handleClickAlert();
+        // }
+        // return null;
         // } else {
         //   updateCharge({
         //     name: chargeCategories[category].name,
@@ -107,19 +118,19 @@ const AddCharges = ({
         //   handleClose();
         //   resetInputs();
         // }
-      // }
-    } else if (e.target.innerText === "CANCEL") {
-      handleClose();
-      resetInputs();
-    }
+        // }
+      } else if (e.target.innerText === "CANCEL") {
+        handleClose();
+        resetInputs();
+      }
     }
   };
 
   const handleChange = (event) => {
     if (typeof event.target.value === "number") {
-			setCategory(event.target.value);
-		}else if (event.target.id === "selectName") {
-				setName(event.target.value);
+      setCategory(event.target.value);
+    } else if (event.target.id === "selectName") {
+      setName(event.target.value);
     } else if (event.target.id === "descriptionInput") {
       setDescription(event.target.value);
     } else if (event.target.id === "datePicker") {
@@ -127,6 +138,17 @@ const AddCharges = ({
     } else if (event.target.id === "moneyInput") {
       setMoney(event.target.value);
     }
+  };
+
+  const handleClickAlert = () => {
+    setOpenAlert(true);
+  };
+
+  const handleCloseAlert = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenAlert(false);
   };
 
   return (
@@ -145,7 +167,7 @@ const AddCharges = ({
               select
               margin="dense"
               label="Category name (required)"
-							selected={name}
+              selected={name}
               value={category}
               onChange={handleChange}
               fullWidth
@@ -205,6 +227,15 @@ const AddCharges = ({
           </Button>
         </DialogActions>
       </Dialog>
+      <Snackbar
+        open={openAlert}
+        autoHideDuration={4000}
+        onClose={handleCloseAlert}
+      >
+        <Alert onClose={handleCloseAlert} severity="success">
+          Added successfully
+        </Alert>
+      </Snackbar>
     </div>
   );
 };

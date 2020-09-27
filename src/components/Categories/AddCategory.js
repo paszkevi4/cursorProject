@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { ModalStyles } from "../Styles";
 
@@ -11,7 +11,14 @@ import {
   DialogContent,
   DialogTitle,
   TextField,
+  Snackbar
 } from "@material-ui/core";
+
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles(ModalStyles);
 
@@ -67,12 +74,20 @@ const AddCategory = ({
         });
         handleClose();
         resetInputs();
+        handleClickSuccess()
       }
     } else if (e.target.innerText === "CANCEL") {
       handleClose();
       resetInputs();
     }
   };
+  useEffect(() => {
+
+    return () => {
+      handleClickSuccess()
+
+    }
+  }, [])
 
   const handleChange = (event) => {
     if (event.target.id === "nameInput") {
@@ -84,6 +99,19 @@ const AddCategory = ({
     } else if (typeof event.target.value === "object") {
       setIcon(event.target.value);
     }
+  };
+  const [openSuccess, setOpenSuccess] = useState(false);
+
+  const handleClickSuccess = () => {
+    setOpenSuccess(true);
+  };
+
+  const handleCloseSuccess = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpenSuccess(false);
   };
 
   return (
@@ -161,6 +189,11 @@ const AddCategory = ({
           </Button>
         </DialogActions>
       </Dialog>
+      <Snackbar open={openSuccess} autoHideDuration={4000} onClose={handleCloseSuccess}>
+        <Alert onClose={handleCloseSuccess} severity="success">
+          Added successfully
+        </Alert>
+      </Snackbar>
     </div>
   );
 };

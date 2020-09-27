@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 
-import AddCategory from "./AddCategory";
-
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -11,6 +9,7 @@ import {
   TableCell,
   TableRow,
 } from "@material-ui/core/";
+import AddCategory from "./AddCategory";
 import { CategoryStyles } from "../Styles";
 
 const useStyles = makeStyles(CategoryStyles);

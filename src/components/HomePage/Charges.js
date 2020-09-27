@@ -15,10 +15,11 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import AddIcon from '@material-ui/icons/Add';
+import { TableStyles } from '../Styles';
 // import FilterDate from "./FilterDate";
 // import Select from "@material-ui/core/Select";
 
-const useStyles = makeStyles((theme) => ({
+/*const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 650,
   },
@@ -53,7 +54,9 @@ const useStyles = makeStyles((theme) => ({
   homeMenuTitle: {
     marginRight: '20px',
   },
-}));
+}));*/
+
+const useStyles = makeStyles(TableStyles)
 
 const Charges = (props) => {
   const classes = useStyles();
@@ -168,6 +171,7 @@ const Charges = (props) => {
           {/*<HomeSelect filtered={items}/>*/}
           {/*<FilterDate filtered={items} />*/}
         </div>
+
         <Button
           className={classes.addButton}
           type="button"
@@ -177,6 +181,7 @@ const Charges = (props) => {
           startIcon={<AddIcon />}>
           Add more
         </Button>
+
       </div>
       <AddCharges
         open={open}

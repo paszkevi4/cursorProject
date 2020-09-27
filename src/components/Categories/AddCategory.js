@@ -60,15 +60,12 @@ const AddCategory = ({
 
   const handleCloseDialog = (e) => {
     if (e.target.innerText === 'ADD') {
-      console.log(icon);
       if (name && icon !== 'object' && icon) {
         updateCategory({
           name: name,
           description: description,
-          // date: Date(date),
-          date: new Date(2020, 8, 25),
-          // icon: icon,
-          icon: 11,
+          date: new Date(date),
+          icon: icons.indexOf(icon),
         });
         handleClose();
         resetInputs();

@@ -134,6 +134,7 @@ const Charges = (props) => {
         charges={props.charges}
         chargeCategories={props.categories}
         total={props.total}
+        totalIncome={props.totalIncome}
         handlePeriodChange={handlePeriodChange}
       />
       <TableContainer component={Paper} className={classes.tableWrapper}>
@@ -202,6 +203,7 @@ const Charges = (props) => {
                   charges={props.charges}
                   chargeCategories={props.categories}
                   total={props.total}
+                  totalIncome={props.totalIncome}
                   handlePeriodChange={handlePeriodChange}
                 />
               )),

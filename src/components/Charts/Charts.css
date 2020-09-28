@@ -100,7 +100,7 @@
 @media (max-width: 1024px) {
   .charts {
     display: grid;
-    grid-template-rows: 25vh 45vh 25vh;
+    grid-template-rows: 25vh 35vh 35vh;
     grid-template-columns: 1fr 1fr;
     grid-gap: 2vh;
   }
@@ -143,6 +143,10 @@
     border-radius: 25px;
     box-shadow: 10px 10px 20px -7px rgba(0, 0, 0);
   }
+
+  .forecast__container{
+    grid-row: 4/-1;
+  }
 }
 
 @media (max-width: 425px) {
@@ -166,7 +170,19 @@
   }
 
   .doughnut-chart {
-    grid-row: 4/-1;
+    grid-row: 4/5;
     padding: 0 40px;
+  }
+
+  .forecast__container{
+    grid-row: 5/-1;
+  }
+
+  .forecast-chart {
+    grid-column: 1/-1;
+  }
+  
+  .forecast_descr{
+    display: none;
   }
 }

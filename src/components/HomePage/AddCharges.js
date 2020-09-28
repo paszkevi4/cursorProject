@@ -56,10 +56,11 @@ const AddCharges = ({
   charges,
   chargeCategories,
   total,
+  totalIncome,
   handlePeriodChange,
   ...props
 }) => {
-  debugger;
+  console.log(props, total);
   const classes = useStyles();
   const today = new Date();
 
@@ -89,8 +90,9 @@ const AddCharges = ({
   const handleCloseDialog = (e) => {
     if (e.target.innerText === 'ADD') {
       const gap = total - +money;
+      const gapPercent = ( (total - +money) / totalIncome ) * 100;
       if (category >= 0 && money) {
-        if (gap <= 200) {
+        if (props.showWarning && ((gap <= props.moneyLimit) || (gapPercent <  props.percentLimit )) ) {
           const isSure = window.confirm('Are you sure?');
           if (isSure) {
             updateCharge({
@@ -118,8 +120,9 @@ const AddCharges = ({
           });
           handleClose();
           resetInputs();
-          handlePeriodChange();
           handleClickAlert();
+          handlePeriodChange();
+
         }
       }
       handlePeriodChange();

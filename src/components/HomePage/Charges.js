@@ -1,9 +1,7 @@
 import React from 'react';
 import HomeTable from './HomeTable';
 import useSortTableData from './sortTable';
-// import HomeModal from "./HomeModal";
 import AddCharges from './AddCharges';
-// import HomeSelect from './HomeSelect';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -68,7 +66,7 @@ const Charges = (props) => {
     setOpen(false);
   };
   const [filtered, setFiltered] = React.useState(props.charges); //items
-  const handlePeriodChange = (selectVal) => {
+  const handlePeriodChange = (selectVal = 'FULL_PERIOD') => {
     if (+selectVal === 7 || +selectVal === 30) {
       let milliseconds = +selectVal * 24 * 60 * 60 * 1000;
       let currentDate = new Date();
@@ -81,8 +79,6 @@ const Charges = (props) => {
         }),
       ]);
     } else if (selectVal === 'FULL_PERIOD') {
-      // console.log([...props.charges]);
-      // return([...props.charges]);
       return setFiltered([...props.charges]); //items
     }
   };
@@ -97,63 +93,11 @@ const Charges = (props) => {
     }
     return sortConfig.key === name ? sortConfig.direction : undefined;
   };
-  // const { itemsFilter, setFilterConfig }  = React.useState([...items]);
-  // const [dateFilter, setFilterDate] = React.useState([...items]);
-
-  //     // handlePeriodChange(selectVal){
-  //     // this.handlePeriodChange(selectVal);
-  //     const setFiltered = filters( filtered);
-  //     function filters(anArray){
-  //       let newArr = []
-  //       for(let i =0; i< anArray.length; i++){
-  //         if(anArray[i]){
-  //           newArr.push(anArray[i].date.getTime());
-  //         }
-  //       }
-  //       return (newArr);
-  //     }
-  //     if (+selectVal === 7) {
-  //       // console.log(setFiltered.filter((fil) => {
-  //       //   return (parseInt(fil) / 2) > 10
-  //       // }));
-  //      let mili = +selectVal*24*60*60*1000;
-  //       let currentDate = new Date();
-  //       let time = currentDate.setTime(currentDate.getTime()- mili);
-  //       console.log(new Date(time));
-  //       // setFiltered.filter((fil) => {
-  //       //   return((fil) >=(time));
-  //       // });
-  //       console.log(setFiltered.filter((fil) => {
-  //         return((fil) >=(time))}));
-  //       // console.log(
-  //       //    (new Date(setFiltered.filter((fil) => ((fil) >=( time)) )).toLocaleDateString()));
-  //       // console.log(new Date(fil).toLocaleDateString());
-  //     }else if (+selectVal === 30) {
-  //       // console.log(setFiltered.filter((fil) => {
-  //       //   return (parseInt(fil) / 2) > 10
-  //       // }));
-  //       let mili = +selectVal*24*60*60*1000;
-  //       let currentDate = new Date();
-  //       let time = currentDate.setTime(currentDate.getTime() - mili);
-  //       // console.log(new Date(time).toLocaleDateString());
-  //       console.log(new Date(time));
-  //       console.log(setFiltered.filter((fil) => {
-  //         return((fil) >=(time))}));
-  //     }else{
-  //       console.log(setFiltered);
-  //       return (setFiltered);
-  //     }
-  //   };
-  // const day = new Date();
-  // const me = new Date(day);
-  // me;
-  // me.toLocaleDateString()
   return (
     <div>
       <div className={classes.homeMenu}>
         <div className={classes.homeSelect}>
           <h3 className={classes.homeMenuTitle}>My Charges</h3>
-          {/*<HomeSelect updateCategory={props.createChargeCategory}/>*/}
           <select
             id="datePeriod"
             name="datePeriod"
@@ -162,13 +106,11 @@ const Charges = (props) => {
             // selected={"FULL_PERIOD"}
             defaultValue={'FULL_PERIOD'}
             // value={filter ? filter.value : "FULL_PERIOD"}
-            // value={props.charges}
           >
             <option value="7">This Week</option>
             <option value="30">This Month</option>
             <option value="FULL_PERIOD">Full period</option>
           </select>
-          {/*<HomeSelect filtered={items}/>*/}
           {/*<FilterDate filtered={items} />*/}
         </div>
 
@@ -189,6 +131,8 @@ const Charges = (props) => {
         updateCharge={props.createCharge}
         charges={props.charges}
         chargeCategories={props.categories}
+        total={props.total}
+        handlePeriodChange={handlePeriodChange}
       />
       <TableContainer component={Paper} className={classes.tableWrapper}>
         <Table className={classes.table} aria-label="Table of Charges">
@@ -236,10 +180,7 @@ const Charges = (props) => {
           </TableHead>
           <TableBody>
             {[
-              ...items.map((
-                el,
-                i, //items
-              ) => (
+              ...items.map((el, i) => ( 
                 <HomeTable
                   category={el.category}
                   icon={props.categories[el.category]?.icon}
@@ -257,6 +198,8 @@ const Charges = (props) => {
                   }}
                   charges={props.charges}
                   chargeCategories={props.categories}
+                  total={props.total}
+                  handlePeriodChange={handlePeriodChange}
                 />
               )),
             ]}

@@ -54,6 +54,8 @@ const AddCharges = ({
   updateCharge,
   charges,
   chargeCategories,
+  total,
+  handlePeriodChange,
 }) => {
   const classes = useStyles();
   const today = new Date();
@@ -65,13 +67,11 @@ const AddCharges = ({
         : today.getMonth() + 1
     }-${today.getDate()}`,
   };
-  // const values = { currentDate: today.toLocaleDateString()};
+
 
   const [name, setName] = useState(`${currentTable.currentName}`);
   const [category, setCategory] = useState(currentTable.currentCategory);
-  const [description, setDescription] = useState(
-    currentTable.currentDescription
-  );
+  const [description, setDescription] = useState(currentTable.currentDescription);
   const [date, setDate] = useState(
     currentTable.currentDate ? currentTable.currentDate : values.currentDate
   );
@@ -88,42 +88,46 @@ const AddCharges = ({
 
   const handleCloseDialog = (e) => {
     if (e.target.innerText === "ADD") {
-      // const gap = total - +money  ;
-      if (category >= 0 && money) {
-        // if (gap <= 0) {
-        //   const isSure = window.confirm("Are you sure?");
-        //   if (isSure) {
-        updateCharge({
-          name: chargeCategories[category].name,
-          icon: chargeCategories[category].icon,
-          category: category,
-          description: description,
-          date: new Date(date),
-          money: +money,
-        });
-        handleClose();
-        resetInputs();
-        handleClickAlert();
-        // }
-        // return null;
-        // } else {
-        //   updateCharge({
-        //     name: chargeCategories[category].name,
-        //     icon: chargeCategories[category].icon,
-        //     category: category,
-        //     description: description,
-        //     date: new Date(date),
-        //     money: +money,
-        //   });
-        //   handleClose();
-        //   resetInputs();
-        // }
-        // }
-      } else if (e.target.innerText === "CANCEL") {
-        handleClose();
-        resetInputs();
+      const gap = total - +money  ;
+      if (category >= 0 && money ) {
+        if (gap <= 200) {
+          const isSure = window.confirm("Are you sure?");
+          if (isSure) {
+            updateCharge({
+              name: chargeCategories[category].name,
+              icon: chargeCategories[category].icon,
+              category: category,
+	      description: description,
+	      date: new Date(date),
+	      money: +money,
+	    });
+	    handleClose();
+	    resetInputs();
+      handleClickAlert();
+	    handlePeriodChange();
+        }
+        return null;
+        } else {
+          updateCharge({
+            name: chargeCategories[category].name,
+            icon: chargeCategories[category].icon,
+            category: category,
+            description: description,
+            date: new Date(date),
+            money: +money,
+          });
+          handleClose();
+          resetInputs();
+          handlePeriodChange();
+          handleClickAlert();
+        }
       }
-    }
+      handlePeriodChange();
+    } else if (e.target.innerText === "CANCEL") {
+          handleClose();
+          resetInputs();
+        }
+    // }
   };
 
   const handleChange = (event) => {

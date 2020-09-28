@@ -98,11 +98,12 @@ export const deleteIncomeAC = (index: number): deleteIncomeACType => ({
 
 export const fetchIncomesThunk = () => {
   return (dispatch: any) => {
-    db.collection('incomes').onSnapshot((ss: any) => {
+    db.collection('incomes1').onSnapshot((ss: any) => {
       dispatch(
         fetchIncomesAC(
           ss.docs.map((el: any) => {
-            return el.data();
+            const income = el.data();
+            return { ...income, docId: el.id };
           }),
         ),
       );

@@ -17,6 +17,8 @@ import { TableStyles } from '../Styles';
 // import FilterDate from "./FilterDate";
 // import Select from "@material-ui/core/Select";
 
+import { createCharge, updateCharge, deleteCharge } from '../../redux/firebase/chargesFB';
+
 /*const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 650,
@@ -54,9 +56,10 @@ import { TableStyles } from '../Styles';
   },
 }));*/
 
-const useStyles = makeStyles(TableStyles)
+const useStyles = makeStyles(TableStyles);
 
 const Charges = (props) => {
+  console.log(props);
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
@@ -123,12 +126,11 @@ const Charges = (props) => {
           startIcon={<AddIcon />}>
           Add more
         </Button>
-
       </div>
       <AddCharges
         open={open}
         handleClose={handleClose}
-        updateCharge={props.createCharge}
+        updateCharge={createCharge}
         charges={props.charges}
         chargeCategories={props.categories}
         total={props.total}
@@ -180,7 +182,8 @@ const Charges = (props) => {
           </TableHead>
           <TableBody>
             {[
-              ...items.map((el, i) => ( 
+              // ...items.map((el, i) => (
+              ...props.charges.map((el, i) => (
                 <HomeTable
                   category={el.category}
                   icon={props.categories[el.category]?.icon}
@@ -191,10 +194,10 @@ const Charges = (props) => {
                   key={i}
                   avatar={props.avatar}
                   deleteMoney={() => {
-                    props.deleteMoney(i);
+                    deleteCharge(el.docId);
                   }}
                   updateCharge={(charge) => {
-                    props.updateCharge(i, charge);
+                    updateCharge(el.docId, charge);
                   }}
                   charges={props.charges}
                   chargeCategories={props.categories}

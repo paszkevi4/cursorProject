@@ -33,9 +33,10 @@ const HomeTable = ({
   charges,
   chargeCategories,
   avatar,
-  category
+  category,
+  total,
+  handlePeriodChange,
 }) => {
-  // let propsDate = new Date(date)
   // console.log(propsDate.getDay());
   const classes = useStyles();
 
@@ -78,6 +79,7 @@ const HomeTable = ({
   const handleActionClose = (e) => {
     if (e.target.innerText === "Delete") {
       deleteMoney();
+      handlePeriodChange();
     } else if (e.target.innerText === "Edit") {
       setOpen(true);
       setCurrentTable({
@@ -98,25 +100,6 @@ const HomeTable = ({
     setAnchorEl(null);
   };
 
-  // const handleClick = (e) => {
-  // 	setAnchorEl(e.currentTarget);
-  // 	console.log(e.target.closest('th'))
-  // };
-
-  // const propsDate = new Date(date);
-  //
-  // const fullDate = {
-  // 	year: propsDate.getFullYear(),
-  // 	month:
-  // 			propsDate.getMonth() + 1 < 10
-  // 					? `0${propsDate.getMonth() + 1}`
-  // 					: propsDate.getMonth() + 1,
-  // 	day:
-  // 			propsDate.getDay() + 1 < 10
-  // 					? `0${propsDate.getDay() + 1}`
-  // 					: propsDate.getDay() + 1,
-  // };
-
   return (
     <TableRow>
       <TableCell component="th" scope="row">
@@ -127,7 +110,6 @@ const HomeTable = ({
       </TableCell>
       <TableCell>{description}</TableCell>
       {/*<TableCell>{`${fullDate.year}-${fullDate.month}-${fullDate.day}`}</TableCell>*/}
-
       <TableCell>{date.toLocaleDateString()}</TableCell>
       <TableCell>{money}</TableCell>
       <TableCell>
@@ -137,7 +119,6 @@ const HomeTable = ({
         <Button
           aria-controls="home-menu"
           aria-haspopup="true"
-          // onClick={handleClick}
           onClick={handleActionClick}
           size="small"
         >
@@ -148,12 +129,10 @@ const HomeTable = ({
           anchorEl={anchorEl}
           keepMounted
           open={Boolean(anchorEl)}
-          // onClose={handleClose}>
           onClose={handleActionClose}
         >
           <MenuItem onClick={handleActionClose}>Edit</MenuItem>
           <MenuItem onClick={handleActionClose}>Delete</MenuItem>
-         
           {open && (
             <AddCharges
               open={open}
@@ -162,6 +141,8 @@ const HomeTable = ({
               updateCharge={updateCharge}
               charges={charges}
               chargeCategories={chargeCategories}
+              total={total}
+              handlePeriodChange={handlePeriodChange}
             />
           )}
         </Menu>

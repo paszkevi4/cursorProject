@@ -30,8 +30,26 @@ const Incomes = (props) => {
     setOpen(false);
   };
 
+  const [filtered, setFiltered] = React.useState(props.incomes); //items
+  const handlePeriodChange = (selectVal = 'FULL_PERIOD') => {
+    if (+selectVal === 7 || +selectVal === 30) {
+      let milliseconds = +selectVal * 24 * 60 * 60 * 1000;
+      let currentDate = new Date();
+      let time = currentDate.setTime(currentDate.getTime() - milliseconds);
+      return setFiltered([
+        ...props.incomes.filter((arr) => {
+          // filtered:  ...items
+          console.log(arr.date.getTime() > time);
+          return arr.date.getTime() > time;
+        }),
+      ]);
+    } else if (selectVal === 'FULL_PERIOD') {
+      return setFiltered([...props.incomes]); //items
+    }
+  };
+
   const { items, requestSort, sortConfig } = useSortTableData(
-    props.incomes,
+    filtered, //props.incomes,
     props.categories
   );
   const getClassNamesFor = (name) => {
@@ -46,7 +64,21 @@ const Incomes = (props) => {
       <div className={classes.homeMenu}>
         <div className={classes.homeSelect}>
           <h3 className={classes.homeMenuTitle}>My Incomes</h3>
-          {/*  <HomeSelect />*/}
+          <select
+              id="datePeriod"
+              name="datePeriod"
+              onChange={(event) => handlePeriodChange(event.target.value)}
+              className="btn btn-sm btn-outline-secondary dropdown-toggle"
+              // selected={"FULL_PERIOD"}
+              defaultValue={'FULL_PERIOD'}
+              // value={filter ? filter.value : "FULL_PERIOD"}
+          >
+            <option value="7">This Week</option>
+            <option value="30">This Month</option>
+            <option value="FULL_PERIOD">Full period</option>
+          </select>
+          {/*<FilterDate filtered={items} />*/}
+
         </div>
         <Button
           className={classes.addButton}
@@ -65,6 +97,7 @@ const Incomes = (props) => {
         updateCharge={props.createIncome}
         charges={props.incomes}
         chargeCategories={props.categories}
+        handlePeriodChange={handlePeriodChange}
       />
       <TableContainer component={Paper} className={classes.tableWrapper}>
         <Table className={classes.table} aria-label="Table of Incomes">
@@ -133,6 +166,7 @@ const Incomes = (props) => {
                   }}
                   charges={props.incomes}
                   chargeCategories={props.categories}
+                  handlePeriodChange={handlePeriodChange}
                 />
               )),
             ]}

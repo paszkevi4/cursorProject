@@ -17,6 +17,7 @@ import Header from '../Common/Header/HedaerContainer';
 //
 //
 import { totalCounter } from '../Common/Functions';
+import { totalIncomes } from '../Common/Functions';
 import { TabsAreaStyles } from '../Styles';
 //
 // totalCounter(props.incomes, props.charges)
@@ -64,6 +65,7 @@ const HomePage = (props) => {
                 createCharge={props.createCharge}
                 avatar={props.avatar}
                 total={totalCounter(props.incomes, props.charges)}
+                totalIncome={totalIncomes(props.incomes)}
               />
             )}
           />

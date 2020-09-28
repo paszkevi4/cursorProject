@@ -35,6 +35,7 @@ const HomeTable = ({
   avatar,
   category,
   total,
+  totalIncome,
   handlePeriodChange,
 }) => {
   // console.log(propsDate.getDay());
@@ -96,6 +97,7 @@ const HomeTable = ({
         icon,
         `${fullDate.year}-${fullDate.month}-${fullDate.day}`
       );
+      handlePeriodChange();
     }
     setAnchorEl(null);
   };
@@ -142,6 +144,7 @@ const HomeTable = ({
               charges={charges}
               chargeCategories={chargeCategories}
               total={total}
+              totalIncome={totalIncome}
               handlePeriodChange={handlePeriodChange}
             />
           )}

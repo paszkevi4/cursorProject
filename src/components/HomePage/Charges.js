@@ -57,6 +57,7 @@ import { TableStyles } from '../Styles';
 const useStyles = makeStyles(TableStyles)
 
 const Charges = (props) => {
+  console.log(props);
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
@@ -132,6 +133,7 @@ const Charges = (props) => {
         charges={props.charges}
         chargeCategories={props.categories}
         total={props.total}
+        totalIncome={props.totalIncome}
         handlePeriodChange={handlePeriodChange}
       />
       <TableContainer component={Paper} className={classes.tableWrapper}>
@@ -199,6 +201,7 @@ const Charges = (props) => {
                   charges={props.charges}
                   chargeCategories={props.categories}
                   total={props.total}
+                  totalIncome={props.totalIncome}
                   handlePeriodChange={handlePeriodChange}
                 />
               )),

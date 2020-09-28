@@ -1,7 +1,7 @@
 import { db } from './firebase';
 
 export const createCharge = (category) => {
-  db.collection('charges')
+  db.collection('charges1')
     .add(category)
     .catch((error) => {
       console.error('Error: ', error);
@@ -9,7 +9,7 @@ export const createCharge = (category) => {
 };
 
 export const updateCharge = (docId, ctegory) => {
-  db.collection('charges')
+  db.collection('charges1')
     .doc(docId)
     .set(ctegory)
     .catch((error) => {
@@ -18,7 +18,7 @@ export const updateCharge = (docId, ctegory) => {
 };
 
 export const deleteCharge = (docId) => {
-  db.collection('charges')
+  db.collection('charges1')
     .doc(docId)
     .delete()
     .catch((error) => {

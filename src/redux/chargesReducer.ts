@@ -100,11 +100,12 @@ export const deleteChargeAC = (index: number): deleteChargeACType => ({
 
 export const setChargesThunk = () => {
   return (dispatch: any) => {
-    db.collection('charges').onSnapshot((ss: any) => {
+    db.collection('charges1').onSnapshot((ss: any) => {
       dispatch(
         fetchChargesAC(
           ss.docs.map((el: any) => {
-            return el.data();
+            const charge = el.data();
+            return { ...charge, docId: el.id };
           }),
         ),
       );

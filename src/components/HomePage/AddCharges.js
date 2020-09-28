@@ -60,7 +60,6 @@ const AddCharges = ({
   handlePeriodChange,
   ...props
 }) => {
-  console.log(props, total);
   const classes = useStyles();
   const today = new Date();
 
@@ -95,14 +94,13 @@ const AddCharges = ({
         if (props.showWarning && ((gap <= props.moneyLimit) || (gapPercent <  props.percentLimit )) ) {
           const isSure = window.confirm('Are you sure?');
           if (isSure) {
-            updateCharge({
-              name: chargeCategories[category].name,
-              icon: chargeCategories[category].icon,
+            const temp = {
               category: category,
               description: description,
               date: new Date(date),
               money: +money,
-            });
+            };
+            updateCharge(temp);
             handleClose();
             resetInputs();
             handleClickAlert();
@@ -111,9 +109,9 @@ const AddCharges = ({
           return null;
         } else {
           updateCharge({
-            name: chargeCategories[category].name,
-            icon: chargeCategories[category].icon,
-            category: category,
+            //   name: chargeCategories[category].name,
+            //   icon: chargeCategories[category].icon,
+            category: category.docId,
             description: description,
             date: new Date(date),
             money: +money,

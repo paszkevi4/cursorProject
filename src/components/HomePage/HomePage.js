@@ -23,7 +23,7 @@ import { TabsAreaStyles } from '../Styles';
 // totalCounter(props.incomes, props.charges)
 //
 //
-const useStyles = makeStyles(TabsAreaStyles)
+const useStyles = makeStyles(TabsAreaStyles);
 
 const HomePage = (props) => {
   const classes = useStyles();

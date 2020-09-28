@@ -27,8 +27,8 @@ const App = (props) => {
     props.setSettingsThunk();
     props.setChargeCategoriesThunk();
     props.setIncomeCategoriesThunk();
-    //props.setChargesThunk();
-    //props.fetchIncomesThunk();
+    props.setChargesThunk();
+    props.fetchIncomesThunk();
   }, []);
 
   return (

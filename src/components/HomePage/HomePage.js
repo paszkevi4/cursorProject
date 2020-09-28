@@ -63,6 +63,7 @@ const HomePage = (props) => {
                 updateCharge={props.updateCharge}
                 createCharge={props.createCharge}
                 avatar={props.avatar}
+                total={totalCounter(props.incomes, props.charges)}
               />
             )}
           />

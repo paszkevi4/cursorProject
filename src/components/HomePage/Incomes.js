@@ -40,9 +40,7 @@ const Incomes = (props) => {
       let time = currentDate.setTime(currentDate.getTime() - milliseconds);
       return setFiltered([
         ...props.incomes.filter((arr) => {
-          // filtered:  ...items
-          console.log(arr.date.getTime() > time);
-          return arr.date.getTime() > time;
+          return arr.date.seconds * 1000 > time;
         }),
       ]);
     } else if (selectVal === 'FULL_PERIOD') {

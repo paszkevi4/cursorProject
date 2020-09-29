@@ -179,7 +179,6 @@ const AddCategory = ({
               error={name.length < 3 ? true : false}
             />
           </div>
-
           <div>
             <TextField
               margin="dense"

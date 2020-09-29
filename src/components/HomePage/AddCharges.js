@@ -38,7 +38,7 @@ const AddCharges = ({
   chargeCategories,
   total,
   totalIncome,
-  handlePeriodChange,
+  // handlePeriodChange,
   ...props
 }) => {
   const classes = useStyles();
@@ -91,7 +91,7 @@ const AddCharges = ({
           handleClose();
           resetInputs();
           handleClickAlert();
-          handlePeriodChange();
+          // handlePeriodChange();
         }
         return null;
       } else {
@@ -106,10 +106,10 @@ const AddCharges = ({
         handleClose();
         resetInputs();
         handleClickAlert();
-        handlePeriodChange();
+        // handlePeriodChange();
       }
     }
-    handlePeriodChange();
+    // handlePeriodChange();
   };
 
   const handleCloseDialog = (e) => {

@@ -95,7 +95,6 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
     ) {
       penultimateWeekIn += el.money;
     }
-    return
   });
 
   charges.map((el) => {
@@ -163,8 +162,8 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
   const maxSum = Math.max(...allMoney);
   const minSum = Math.min(...allMoney);
 
-  const futureWeekIn = penultimateWeekIn === 0 ? lastWeekIn * 2 : (lastWeekIn / penultimateWeekIn) * lastWeekIn;
-  const futureWeekOut = penultimateWeekOut === 0 ? lastWeekOut * 2 : (lastWeekOut / penultimateWeekOut) * lastWeekOut;
+  const futureWeekIn = lastWeekIn > penultimateWeekIn ? lastWeekIn - penultimateWeekIn + lastWeekIn : 0;
+  const futureWeekOut = lastWeekOut > penultimateWeekOut ? lastWeekOut - penultimateWeekOut + lastWeekOut : 0;
 
   const startDataLine = {
     labels: activePeriod === 8 ? allDays : allDates,
@@ -461,11 +460,11 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
             <p>
               If this continues, your incomes will{' '}
               <span>
-                {lastWeekIn < penultimateWeekIn ? 'decrease or remain unchanged' : 'increase'}
+                {lastWeekIn < penultimateWeekIn ? 'decrease' : 'increase'}
               </span>{' '}
               and charges will{' '}
               <span>
-                {lastWeekOut < penultimateWeekOut ? 'decrease or remain unchanged' : 'increase'}
+                {lastWeekOut < penultimateWeekOut ? 'decrease' : 'increase'}
               </span>
               .
             </p>

@@ -4,6 +4,7 @@ import HomeTable from './HomeTable';
 import AddCharges from './AddCharges';
 import { createCharge, updateCharge, deleteCharge } from '../../store/firebase/chargesFB';
 
+
 // Styles
 import { makeStyles } from '@material-ui/core/styles';
 import {

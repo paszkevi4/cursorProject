@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { fetchIncomesAC } from '../../store/redux/incomesReducer';
 import { createIncome, updateIncome, deleteIncome } from '../../store/firebase/incomeFB';
 
+
 import HomeTable from './HomeTable';
 import AddCharges from './AddCharges';
 

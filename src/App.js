@@ -10,6 +10,7 @@ import { connect, Provider } from 'react-redux';
 
 import store from './store/redux/store';
 
+
 //
 // Components
 import Sidebar from './components/Navbar/Navbar';

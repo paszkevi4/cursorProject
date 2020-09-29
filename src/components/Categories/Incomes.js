@@ -9,6 +9,7 @@ import {
   deleteIncomeCategory,
 } from '../../store/firebase/incomeCategoriesFB';
 
+
 import {
   Button,
   Table,

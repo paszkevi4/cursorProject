@@ -11,10 +11,10 @@ import {
   DialogContent,
   DialogTitle,
   TextField,
-  Snackbar
+  Snackbar,
 } from "@material-ui/core";
 
-import MuiAlert from '@material-ui/lab/Alert';
+import MuiAlert from "@material-ui/lab/Alert";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -63,37 +63,46 @@ const AddCategory = ({
     setIcon("");
   };
 
+  const addEditCategoryHandler = () => {
+    if (
+      name.length >= 3 &&
+      name &&
+      icon !== "object" &&
+      icon &&
+      date.length === 10
+    ) {
+      updateCategory({
+        name: name,
+        description: description,
+        date: new Date(date),
+        icon: icons.indexOf(icon),
+      });
+      handleClose();
+      resetInputs();
+      handleClickSuccess();
+    }
+  };
+
   const handleCloseDialog = (e) => {
     if (e.target.innerText === "ADD") {
-      if (name && icon !== "object" && icon) {
-        updateCategory({
-          name: name,
-          description: description,
-          date: new Date(date),
-          icon: icons.indexOf(icon),
-        });
-        handleClose();
-        resetInputs();
-        handleClickSuccess()
-      }
+      addEditCategoryHandler();
     } else if (e.target.innerText === "CANCEL") {
       handleClose();
       resetInputs();
     }
   };
-  useEffect(() => {
-
-    return () => {
-      handleClickSuccess()
-
-    }
-  }, [])
 
   const handleChange = (event) => {
     if (event.target.id === "nameInput") {
       setName(event.target.value);
+      if (event.keyCode === 13) {
+        addEditCategoryHandler();
+      }
     } else if (event.target.id === "descriptionInput") {
       setDescription(event.target.value);
+      if (event.keyCode === 13) {
+        addEditCategoryHandler();
+      }
     } else if (event.target.id === "datePicker") {
       setDate(event.target.value);
     } else if (typeof event.target.value === "object") {
@@ -107,7 +116,7 @@ const AddCategory = ({
   };
 
   const handleCloseSuccess = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
 
@@ -124,40 +133,17 @@ const AddCategory = ({
       >
         <DialogTitle id="add-category-title">{"ADD NEW CATEGORY"}</DialogTitle>
         <DialogContent className={classes.window}>
-          <div>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="nameInput"
-              label="Category name (required)"
-              type="text"
-              fullWidth
-              onChange={handleChange}
-              value={name}
-            />
-          </div>
-
-          <div>
-            <TextField
-              margin="dense"
-              id="descriptionInput"
-              label="Category description"
-              type="text"
-              fullWidth
-              onChange={handleChange}
-              value={description}
-            />
-          </div>
           <div className={classes.pickersBlock}>
             <TextField
+              autoFocus
               className={classes.iconPicker}
               id="selectIcon"
               select
               margin="dense"
-              label="Select category icon (required)"
+              label="Select category icon*"
               value={icon}
               onChange={handleChange}
-              //   helperText="Select category icon"
+              error={typeof icon === "string" ? true : false}
               fullWidth
             >
               {[
@@ -172,11 +158,38 @@ const AddCategory = ({
               className={classes.datePicker}
               margin="dense"
               id="datePicker"
-              label="Current date"
+              label="Current date*"
               type="date"
               fullWidth
               onChange={handleChange}
               value={date}
+              error={date.length !== 10 ? true : false}
+            />
+          </div>
+          <div>
+            <TextField
+              margin="dense"
+              id="nameInput"
+              label="Category name*"
+              type="text"
+              fullWidth
+              onChange={handleChange}
+              onKeyUp={handleChange}
+              value={name}
+              error={name.length < 3 ? true : false}
+            />
+          </div>
+
+          <div>
+            <TextField
+              margin="dense"
+              id="descriptionInput"
+              label="Category description"
+              type="text"
+              fullWidth
+              onChange={handleChange}
+              onKeyUp={handleChange}
+              value={description}
             />
           </div>
         </DialogContent>
@@ -184,12 +197,16 @@ const AddCategory = ({
           <Button onClick={handleCloseDialog} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleCloseDialog} color="primary" autoFocus>
+          <Button onClick={handleCloseDialog} color="primary">
             Add
           </Button>
         </DialogActions>
       </Dialog>
-      <Snackbar open={openSuccess} autoHideDuration={4000} onClose={handleCloseSuccess}>
+      <Snackbar
+        open={openSuccess}
+        autoHideDuration={4000}
+        onClose={handleCloseSuccess}
+      >
         <Alert onClose={handleCloseSuccess} severity="success">
           Added successfully
         </Alert>

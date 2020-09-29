@@ -10,6 +10,8 @@ import TableRow from '@material-ui/core/TableRow';
 import AddCharges from './AddCharges';
 import { CategoryStyles } from '../Styles';
 
+import { Block } from '@material-ui/icons';
+
 /*const useStyles = makeStyles({
   categoryBlock: {
     // display: 'flex',
@@ -23,8 +25,8 @@ import { CategoryStyles } from '../Styles';
 const useStyles = makeStyles(CategoryStyles);
 
 const HomeTable = ({
-  icon,
-  name,
+  icon = <Block />,
+  name = 'deleted category',
   description,
   date,
   money,
@@ -38,20 +40,19 @@ const HomeTable = ({
   totalIncome,
   handlePeriodChange,
 }) => {
-  // console.log(propsDate.getDay());
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = useState(null);
 
   const [open, setOpen] = useState(false);
 
-  const propsDate = new Date(date);
+  const propsDate = new Date(date?.seconds * 1000);
 
   const fullDate = {
     year: propsDate.getFullYear(),
     month:
       propsDate.getMonth() + 1 < 10 ? `0${propsDate.getMonth() + 1}` : propsDate.getMonth() + 1,
-    day: propsDate.getDate() < 10 ? +`0${propsDate.getDate()}` : propsDate.getDate(),
+    day: propsDate.getDate() < 10 ? `0${propsDate.getDate()}` : propsDate.getDate(),
   };
 
   const [currentTable, setCurrentTable] = useState({
@@ -87,12 +88,7 @@ const HomeTable = ({
         currentDate: `${fullDate.year}-${fullDate.month}-${fullDate.day}`,
       });
       console.log(name, description, icon, `${fullDate.year}-${fullDate.month}-${fullDate.day}`);
-      console.log(
-        name,
-        description,
-        icon,
-        `${fullDate.year}-${fullDate.month}-${fullDate.day}`
-      );
+      console.log(name, description, icon, `${fullDate.year}-${fullDate.month}-${fullDate.day}`);
       handlePeriodChange();
     }
     setAnchorEl(null);
@@ -108,7 +104,7 @@ const HomeTable = ({
       </TableCell>
       <TableCell>{description}</TableCell>
       {/*<TableCell>{`${fullDate.year}-${fullDate.month}-${fullDate.day}`}</TableCell>*/}
-      {/* <TableCell>{date.toLocaleDateString()}</TableCell> */}
+      <TableCell>{`${fullDate.day}.${fullDate.month}.${fullDate.year}`}</TableCell>
       <TableCell>{money}</TableCell>
       <TableCell>
         <img src={`${avatar}`} alt="avatar" className={'avatar'} />

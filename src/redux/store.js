@@ -6,10 +6,12 @@ import chargeCategoriesReducer from './chargeCategoriesReducer';
 import chargesReducer from './chargesReducer';
 import incomesReducer from './incomesReducer';
 
+import appReducer from './appReducer';
 import iconsReducer from './iconsReducer';
 import settingsReducer from './settingsReducer';
 
 let reducers = combineReducers({
+  app: appReducer,
   icons: iconsReducer,
   settings: settingsReducer,
   incomes: incomesReducer,

@@ -2,7 +2,10 @@ import React from 'react';
 import HomeTable from './HomeTable';
 import useSortTableData from './sortTable';
 import AddCharges from './AddCharges';
+import { createCharge, updateCharge, deleteCharge } from '../../redux/firebase/chargesFB';
 
+//
+// Styles
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Table from '@material-ui/core/Table';
@@ -14,52 +17,12 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import AddIcon from '@material-ui/icons/Add';
 import { TableStyles } from '../Styles';
-// import FilterDate from "./FilterDate";
-// import Select from "@material-ui/core/Select";
 
-import { createCharge, updateCharge, deleteCharge } from '../../redux/firebase/chargesFB';
-
-/*const useStyles = makeStyles((theme) => ({
-  table: {
-    minWidth: 650,
-  },
-  tableHead: {
-    backgroundColor: 'lightcyan',
-  },
-  addButton: {
-    display: 'flex',
-  },
-  modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    minWidth: 300,
-  },
-  paper: {
-    backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
-  homeSelect: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  homeMenu: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    margin: '20px 0',
-    height: '40px',
-  },
-  homeMenuTitle: {
-    marginRight: '20px',
-  },
-}));*/
+//
 
 const useStyles = makeStyles(TableStyles);
 
 const Charges = (props) => {
-  console.log(props);
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
@@ -184,11 +147,21 @@ const Charges = (props) => {
           <TableBody>
             {[
               // ...items.map((el, i) => (
-              ...props.charges.map((el, i) => (
+              props.charges.map((el, i) => (
                 <HomeTable
+                  // icon={props.categories[el.category]?.icon}
+                  //name={props.categories[el.category]?.name}
                   category={el.category}
-                  icon={props.categories[el.category]?.icon}
-                  name={props.categories[el.category]?.name}
+                  icon={
+                    props.categories.find((innerEl) => {
+                      return innerEl.docId === el.category;
+                    })?.icon
+                  }
+                  name={
+                    props.categories.find((innerEl) => {
+                      return innerEl.docId === el.category;
+                    })?.name
+                  }
                   description={el.description}
                   date={el.date}
                   money={el.money}

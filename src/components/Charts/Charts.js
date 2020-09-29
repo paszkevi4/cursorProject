@@ -73,41 +73,46 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
 
   incomes.map((el) => {
     allMoney.push(+el.money);
-    if (Math.ceil(Math.abs(el.date.getTime() - new Date().getTime()) / (1000 * 3600 * 24)) < activePeriod) {
+    if (Math.ceil(Math.abs(el.date - new Date().getTime()) / (1000 * 3600 * 24)) < activePeriod) {
       trueDataIncomes.push(el);
       trueMoneyIncomes.push(el.money);
       allMoney.push(+el.money);
 
-      if(fullIncomes[el.category]) {
-        fullIncomes[el.category].sum += el.money; 
+      if (fullIncomes[el.category]) {
+        fullIncomes[el.category].sum += el.money;
       }
     }
 
-    if(Math.ceil(Math.abs(el.date.getTime() - new Date().getTime()) / (1000 * 3600 * 24)) < 8) {
-      lastWeekIn += el.money
+    if (Math.ceil(Math.abs(el.date - new Date().getTime()) / (1000 * 3600 * 24)) < 8) {
+      lastWeekIn += el.money;
     }
-    if(Math.ceil(Math.abs(el.date.getTime() - new Date().getTime()) / (1000 * 3600 * 24)) >= 8 && Math.ceil(Math.abs(el.date.getTime() - new Date().getTime()) / (1000 * 3600 * 24)) < 15) {
-      penultimateWeekIn += el.money
+    if (
+      Math.ceil(Math.abs(el.date - new Date().getTime()) / (1000 * 3600 * 24)) >= 8 &&
+      Math.ceil(Math.abs(el.date - new Date().getTime()) / (1000 * 3600 * 24)) < 15
+    ) {
+      penultimateWeekIn += el.money;
     }
-    
   });
 
   charges.map((el) => {
-    if (Math.ceil(Math.abs(el.date.getTime() - new Date().getTime()) / (1000 * 3600 * 24)) < activePeriod) {
+    if (Math.ceil(Math.abs(el.date - new Date().getTime()) / (1000 * 3600 * 24)) < activePeriod) {
       trueDataCharges.push(el);
       trueMoneyCharges.push(el.money);
       allMoney.push(+el.money);
 
-      if(fullCharges[el.category]) {
+      if (fullCharges[el.category]) {
         fullCharges[el.category].sum += el.money;
       }
     }
-    
-    if(Math.ceil(Math.abs(el.date.getTime() - new Date().getTime()) / (1000 * 3600 * 24)) < 8) {
-      lastWeekOut += el.money
+
+    if (Math.ceil(Math.abs(el.date - new Date().getTime()) / (1000 * 3600 * 24)) < 8) {
+      lastWeekOut += el.money;
     }
-    if(Math.ceil(Math.abs(el.date.getTime() - new Date().getTime()) / (1000 * 3600 * 24)) >= 8 && Math.ceil(Math.abs(el.date.getTime() - new Date().getTime()) / (1000 * 3600 * 24)) < 15) {
-      penultimateWeekOut += el.money
+    if (
+      Math.ceil(Math.abs(el.date - new Date().getTime()) / (1000 * 3600 * 24)) >= 8 &&
+      Math.ceil(Math.abs(el.date - new Date().getTime()) / (1000 * 3600 * 24)) < 15
+    ) {
+      penultimateWeekOut += el.money;
     }
   });
 
@@ -140,41 +145,42 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
     }
   });
 
-
   const maxSum = Math.max(...allMoney);
   const minSum = Math.min(...allMoney);
 
-  const futureWeekIn = ((lastWeekIn - penultimateWeekIn) / penultimateWeekIn) * lastWeekIn + lastWeekIn;
-  const futureWeekOut = ((lastWeekOut - penultimateWeekOut) / penultimateWeekOut) * lastWeekOut + lastWeekOut;
+  const futureWeekIn =
+    ((lastWeekIn - penultimateWeekIn) / penultimateWeekIn) * lastWeekIn + lastWeekIn;
+  const futureWeekOut =
+    ((lastWeekOut - penultimateWeekOut) / penultimateWeekOut) * lastWeekOut + lastWeekOut;
 
   const startDataLine = {
-      labels: activePeriod === 8 ? allDays : allDates,
-      datasets: [
-        {
-          label: 'Incomes',
-          lineTension: 0.5,
-          backgroundColor: 'rgb(0,0,0,0)',
-          borderColor: 'rgb(93,143,238)',
-          hoverBorderColor: 'rgba(0,0,0,0)',
-          borderWidth: 4,
-          pointBackgroundColor: 'rgb(93,143,238)',
-          pointBorderColor: 'rgb(93,143,238)',
-          data: isShowIncomes ? moneyIn : null,
-        },
-        {
-          label: 'Charges',
-          lineTension: 0.5,
-          backgroundColor: 'rgb(254,132,2)',
-          borderColor: 'rgb(254,132,2)',
-          hoverBorderColor: 'rgba(0,0,0,0)',
-          borderWidth: 4,
-          borderDash: [15, 5],
-          pointBackgroundColor: 'rgb(254,132,2)',
-          pointBorderColor: 'rgb(254,132,2)',
-          data: isShowCharges ? moneyOut : null,
-          fill: false,
-        },
-      ]
+    labels: activePeriod === 8 ? allDays : allDates,
+    datasets: [
+      {
+        label: 'Incomes',
+        lineTension: 0.5,
+        backgroundColor: 'rgb(0,0,0,0)',
+        borderColor: 'rgb(93,143,238)',
+        hoverBorderColor: 'rgba(0,0,0,0)',
+        borderWidth: 4,
+        pointBackgroundColor: 'rgb(93,143,238)',
+        pointBorderColor: 'rgb(93,143,238)',
+        data: isShowIncomes ? moneyIn : null,
+      },
+      {
+        label: 'Charges',
+        lineTension: 0.5,
+        backgroundColor: 'rgb(254,132,2)',
+        borderColor: 'rgb(254,132,2)',
+        hoverBorderColor: 'rgba(0,0,0,0)',
+        borderWidth: 4,
+        borderDash: [15, 5],
+        pointBackgroundColor: 'rgb(254,132,2)',
+        pointBorderColor: 'rgb(254,132,2)',
+        data: isShowCharges ? moneyOut : null,
+        fill: false,
+      },
+    ],
   };
 
   const summary = {
@@ -182,7 +188,7 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
       display: true,
       text: 'Summary',
       position: 'top',
-      fontSize: 20
+      fontSize: 20,
     },
     legend: {
       display: false,
@@ -209,7 +215,7 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
       ],
     },
     maintainAspectRatio: false,
-  }
+  };
 
   const incomes_cat = {
     title: {
@@ -246,7 +252,7 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
       ],
     },
     maintainAspectRatio: false,
-  }
+  };
 
   const startDataBar = {
     labels: categoriesBar,
@@ -277,7 +283,7 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
       },
     },
     maintainAspectRatio: false,
-  }
+  };
 
   const startDataDoughnut = {
     labels: categoriesDoughnut,
@@ -292,14 +298,14 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
   };
 
   const forecast_money = {
-    title:{
-      display:true,
-      text:'Forecast for incomes and charges',
-      fontSize:20
+    title: {
+      display: true,
+      text: 'Forecast for incomes and charges',
+      fontSize: 20,
     },
-    legend:{
-      display:true,
-      position:'right'
+    legend: {
+      display: true,
+      position: 'right',
     },
     scales: {
       yAxes: [
@@ -318,7 +324,7 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
       ],
     },
     maintainAspectRatio: false,
-  }
+  };
 
   const startForecast = {
     labels: ['Penultimate week', 'Last week', 'Future week'],
@@ -331,7 +337,7 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
         borderWidth: 4,
         pointBackgroundColor: 'rgb(93,143,238)',
         pointBorderColor: 'rgb(93,143,238)',
-        data: [Math.round(penultimateWeekIn), Math.round(lastWeekIn), Math.round(futureWeekIn)]
+        data: [Math.round(penultimateWeekIn), Math.round(lastWeekIn), Math.round(futureWeekIn)],
       },
       {
         label: 'Charges',
@@ -342,10 +348,10 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
         borderWidth: 4,
         pointBackgroundColor: 'rgb(254,132,2)',
         pointBorderColor: 'rgb(254,132,2)',
-        data: [Math.round(penultimateWeekOut), Math.round(lastWeekOut), Math.round(futureWeekOut)]
-      }
-    ]
-  }
+        data: [Math.round(penultimateWeekOut), Math.round(lastWeekOut), Math.round(futureWeekOut)],
+      },
+    ],
+  };
 
   const classes = useStyles();
 
@@ -354,10 +360,7 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
       <div className="charts">
         <div className="line-chart__container">
           <div className="line-chart">
-            <Line
-              data={startDataLine}
-              options={summary}
-            />
+            <Line data={startDataLine} options={summary} />
           </div>
           <div className="chart-buttons">
             <div className="chart-buttons__btn">
@@ -427,27 +430,28 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
         </div>
 
         <div className="bar-chart">
-          <Bar
-            data={startDataBar}
-            options={incomes_cat}
-          />
+          <Bar data={startDataBar} options={incomes_cat} />
         </div>
         <div className="doughnut-chart">
-          <Doughnut
-            data={startDataDoughnut}
-            options={charges_cat}
-          />
+          <Doughnut data={startDataDoughnut} options={charges_cat} />
         </div>
         <div className="forecast__container">
           <div className="forecast-chart">
-            <Line
-              data={startForecast}
-              options={forecast_money}
-            />
+            <Line data={startForecast} options={forecast_money} />
           </div>
           <div className="forecast_descr">
-              <h3>Your budget has changed in the last week</h3>
-              <p>If this continues, your incomes will <span>{lastWeekIn < penultimateWeekIn ? 'decrease or remain unchanged' : 'increase'}</span> and your charges will <span>{lastWeekOut < penultimateWeekOut ? 'decrease or remain unchanged' : 'increase'}</span>.</p>
+            <h3>Your budget has changed in the last week</h3>
+            <p>
+              If this continues, your incomes will{' '}
+              <span>
+                {lastWeekIn < penultimateWeekIn ? 'decrease or remain unchanged' : 'increase'}
+              </span>{' '}
+              and your charges will{' '}
+              <span>
+                {lastWeekOut < penultimateWeekOut ? 'decrease or remain unchanged' : 'increase'}
+              </span>
+              .
+            </p>
           </div>
         </div>
       </div>

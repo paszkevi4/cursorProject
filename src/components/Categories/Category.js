@@ -1,14 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { makeStyles } from '@material-ui/core/styles';
-import { Button, Menu, MenuItem, TableCell, TableRow } from '@material-ui/core/';
-import AddCategory from './AddCategory';
-import { CategoryStyles } from '../Styles';
+import AddCategory from "./AddCategory";
+
+import MoreVertIcon from "@material-ui/icons/MoreVert";
+import {
+  Button,
+  Menu,
+  MenuItem,
+  TableCell,
+  TableRow,
+} from "@material-ui/core/";
+import { makeStyles } from "@material-ui/core/styles";
+import { CategoryStyles } from "../Styles";
 
 const useStyles = makeStyles(CategoryStyles);
 
-const Category = ({ name, description, date, icon, deleteCategory, updateCategory, icons }) => {
+const Category = ({
+  name,
+  description,
+  date,
+  icon,
+  deleteCategory,
+  updateCategory,
+  icons,
+}) => {
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -20,8 +35,13 @@ const Category = ({ name, description, date, icon, deleteCategory, updateCategor
   const fullDate = {
     year: propsDate.getFullYear(),
     month:
-      propsDate.getMonth() + 1 < 10 ? `0${propsDate.getMonth() + 1}` : propsDate.getMonth() + 1,
-    day: propsDate.getDate() < 10 ? `0${propsDate.getDate()}` : propsDate.getDate(),
+      propsDate.getMonth() + 1 < 10
+        ? `0${propsDate.getMonth() + 1}`
+        : propsDate.getMonth() + 1,
+    day:
+      propsDate.getDate() < 10
+        ? `0${propsDate.getDate()}`
+        : propsDate.getDate(),
   };
 
   const [currentCategory, setCurrentCategory] = useState({
@@ -40,9 +60,9 @@ const Category = ({ name, description, date, icon, deleteCategory, updateCategor
   };
 
   const handleActionClose = (e) => {
-    if (e.target.innerText === 'Delete') {
+    if (e.target.innerText === "Delete") {
       deleteCategory();
-    } else if (e.target.innerText === 'Edit') {
+    } else if (e.target.innerText === "Edit") {
       setOpen(true);
       setCurrentCategory({
         currentName: name,
@@ -68,7 +88,8 @@ const Category = ({ name, description, date, icon, deleteCategory, updateCategor
           aria-controls="category-menu"
           aria-haspopup="true"
           onClick={handleActionClick}
-          size="small">
+          size="small"
+        >
           <MoreVertIcon color="action" />
         </Button>
         <Menu
@@ -76,7 +97,8 @@ const Category = ({ name, description, date, icon, deleteCategory, updateCategor
           anchorEl={anchorEl}
           keepMounted
           open={Boolean(anchorEl)}
-          onClose={handleActionClose}>
+          onClose={handleActionClose}
+        >
           <MenuItem onClick={handleActionClose}>Edit</MenuItem>
           <MenuItem onClick={handleActionClose}>Delete</MenuItem>
           {open && (

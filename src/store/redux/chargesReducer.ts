@@ -47,28 +47,7 @@ type actionType =
   | deleteChargeACType
   | sortChargesACType;
 
-let initialState: Array<chargeType> = [
-  { category: 0, description: 'Diner with John', date: new Date(2020, 8, 17), money: 300 },
-  { category: 1, description: 'For clothes', date: new Date(2020, 8, 16), money: 500 },
-  { category: 2, description: '', date: new Date(2020, 8, 14), money: 470 },
-  {
-    category: 3,
-    description: 'Its a looooooooooooooooooooooooooooooong description',
-    date: new Date(2020, 8, 13),
-    money: 390,
-  },
-  { category: 4, description: '', date: new Date(2020, 8, 12), money: 150 },
-  { category: 0, description: 'Diner with John', date: new Date(2020, 8, 2), money: 300 },
-  { category: 1, description: 'For clothes', date: new Date(2020, 7, 28), money: 500 },
-  { category: 2, description: '', date: new Date(2020, 7, 26), money: 470 },
-  {
-    category: 3,
-    description: 'Its a looooooooooooooooooooooooooooooong description',
-    date: new Date(2020, 7, 24),
-    money: 390,
-  },
-  { category: 4, description: '', date: new Date(2020, 7, 22), money: 150 },
-];
+let initialState: Array<chargeType> = [];
 
 const chargesReducer = (state = initialState, action: actionType): Array<chargeType> => {
   switch (action.type) {
@@ -83,6 +62,39 @@ const chargesReducer = (state = initialState, action: actionType): Array<chargeT
       state.splice(action.index, 1);
       return [...state];
     case SORT_CHARGES:
+<<<<<<< HEAD:src/redux/chargesReducer.ts
+      if(action.sortingBy === 'Category'){
+        if(action.wasSorted){
+          return [...state.sort((a: any,b: any) => (a.category.toUpperCase() < b.category.toUpperCase())? -1 : 1)]
+        } 
+        else{
+          return [...state.sort((a: any,b: any) => (a.category.toUpperCase() > b.category.toUpperCase())? -1 : 1)]
+        }  
+      }
+      else if(action.sortingBy === 'Description'){
+        if(action.wasSorted){
+          return [...state.sort((a: any,b: any) => (a.description?.toUpperCase() < b.description?.toUpperCase())? -1 : 1)]
+        } 
+        else{
+          return [...state.sort((a: any,b: any) => (a.description?.toUpperCase() > b.description?.toUpperCase())? -1 : 1)]
+        }  
+      }
+      else if(action.sortingBy === 'Date'){
+        if(action.wasSorted){
+        return [...state.sort((a: any,b: any) => (a.date.seconds < b.date.seconds)? -1 : 1)]
+        } 
+        else{
+          return [...state.sort((a: any,b: any) => (a.date.seconds > b.date.seconds)? -1 : 1)]
+        }       
+      }
+      else if(action.sortingBy === 'Money'){
+        if(action.wasSorted){
+            return [...state.sort((a: any,b: any) => (a.money < b.money)? -1 : 1)]
+        } 
+        else{
+          return [...state.sort((a: any,b: any) => (a.money > b.money)? -1 : 1)]
+        }       
+=======
       if (action.sortingBy === 'Category') {
         if (action.wasSorted) {
           console.log('alphabetic');
@@ -115,6 +127,7 @@ const chargesReducer = (state = initialState, action: actionType): Array<chargeT
         } else {
           return [...state.sort((a: any, b: any) => (a.money > b.money ? -1 : 1))];
         }
+>>>>>>> develop:src/store/redux/chargesReducer.ts
       }
     default:
       return state;

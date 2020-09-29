@@ -47,28 +47,7 @@ type actionType =
   | deleteIncomeACType
   | sortIncomesACType;
 
-let initialState: Array<incomeType> = [
-  { category: 0, description: 'From mom', date: new Date(), money: 500.57 },
-  // { category: 1, description: 'For selling a book', date: new Date(2020, 8, 2), money: 700 },
-  // { category: 2, description: '', date: new Date(2020, 7, 29), money: 320 },
-  // {
-  //   category: 0,
-  //   description: 'Its a looooooooooooooooooooooooooooooong description',
-  //   date: new Date(2020, 7, 23),
-  //   money: 740,
-  // },
-  // { category: 0, description: 'Mom again', date: new Date(2020, 7, 21), money: 430 },
-  // { category: 0, description: 'From mom', date: new Date(2020, 8, 14), money: 500.57 },
-  // { category: 1, description: 'For selling a book', date: new Date(2020, 8, 15), money: 700 },
-  // { category: 2, description: '', date: new Date(2020, 8, 16), money: 320 },
-  // {
-  //   category: 0,
-  //   description: 'Its a looooooooooooooooooooooooooooooong description',
-  //   date: new Date(2020, 8, 18),
-  //   money: 740,
-  // },
-  // { category: 0, description: 'Mom again', date: new Date(2020, 8, 19), money: 430 },
-];
+let initialState: Array<incomeType> = [];
 
 const incomesReducer = (state = initialState, action: actionType): Array<incomeType> => {
   switch (action.type) {
@@ -84,11 +63,12 @@ const incomesReducer = (state = initialState, action: actionType): Array<incomeT
       return [...state];
     case SORT_INCOMES:
       if (action.sortingBy === 'Category') {
-        if (action.wasSorted) {
-          console.log('alphabetic');
-        } else {
-          console.log('non alphabetic');
-        }
+        if(action.wasSorted){
+          return [...state.sort((a: any,b: any) => (a.category.toUpperCase() < b.category.toUpperCase())? -1 : 1)]
+        } 
+        else{
+          return [...state.sort((a: any,b: any) => (a.category.toUpperCase() > b.category.toUpperCase())? -1 : 1)]
+        }  
       } else if (action.sortingBy === 'Description') {
         if (action.wasSorted) {
           return [

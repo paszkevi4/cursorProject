@@ -1,26 +1,13 @@
 import React, { useState } from 'react';
-// import ReactDOM from 'react-dom'
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
+
 import AddCharges from './AddCharges';
+
+import { makeStyles } from '@material-ui/core/styles';
+import {Button,Menu,MenuItem,TableCell,TableRow} from '@material-ui/core/';
 import { CategoryStyles } from '../Styles';
 
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { Block } from '@material-ui/icons';
-
-/*const useStyles = makeStyles({
-  categoryBlock: {
-    // display: 'flex',
-    alignItems: "center",
-  },
-  categoryName: {
-    display: "flex",
-  },
-});*/
 
 const useStyles = makeStyles(CategoryStyles);
 
@@ -38,7 +25,6 @@ const HomeTable = ({
   category,
   total,
   totalIncome,
-  // handlePeriodChange,
 }) => {
   const classes = useStyles();
 
@@ -76,7 +62,6 @@ const HomeTable = ({
   const handleActionClose = (e) => {
     if (e.target.innerText === 'Delete') {
       deleteMoney();
-      // handlePeriodChange();
     } else if (e.target.innerText === 'Edit') {
       setOpen(true);
       setCurrentTable({
@@ -87,9 +72,6 @@ const HomeTable = ({
         currentMoney: money,
         currentDate: `${fullDate.year}-${fullDate.month}-${fullDate.day}`,
       });
-      console.log(name, description, icon, `${fullDate.year}-${fullDate.month}-${fullDate.day}`);
-      console.log(name, description, icon, `${fullDate.year}-${fullDate.month}-${fullDate.day}`);
-      // handlePeriodChange();
     }
     setAnchorEl(null);
   };
@@ -103,7 +85,6 @@ const HomeTable = ({
         </div>
       </TableCell>
       <TableCell>{description}</TableCell>
-      {/*<TableCell>{`${fullDate.year}-${fullDate.month}-${fullDate.day}`}</TableCell>*/}
       <TableCell>{`${fullDate.day}.${fullDate.month}.${fullDate.year}`}</TableCell>
       <TableCell>{money}</TableCell>
       <TableCell>
@@ -135,7 +116,6 @@ const HomeTable = ({
               chargeCategories={chargeCategories}
               total={total}
               totalIncome={totalIncome}
-              // handlePeriodChange={handlePeriodChange}
             />
           )}
         </Menu>

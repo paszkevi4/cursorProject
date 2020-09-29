@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import AddCategory from './AddCategory';
-import Category from './Category';
+import AddCategory from "./AddCategory";
+import Category from "./Category";
 
-import { makeStyles } from '@material-ui/core/styles';
+import {
+  createChargeCategory,
+  updateChargeCategory,
+  deleteChargeCategory,
+} from "../../redux/firebase/chargeCategoriesFB";
+
 import {
   Button,
   Table,
@@ -13,15 +18,11 @@ import {
   TableHead,
   TableRow,
   Paper,
-} from '@material-ui/core/';
-import AddIcon from '@material-ui/icons/Add';
+} from "@material-ui/core/";
+import AddIcon from "@material-ui/icons/Add";
+import { makeStyles } from "@material-ui/core/styles";
+import { TableStyles } from "../Styles";
 
-import {
-  createChargeCategory,
-  updateChargeCategory,
-  deleteChargeCategory,
-} from '../../store/firebase/chargeCategoriesFB';
-import { TableStyles } from '../Styles';
 
 const useStyles = makeStyles(TableStyles);
 
@@ -43,7 +44,8 @@ const Charges = ({ props }) => {
           variant="contained"
           color="primary"
           startIcon={<AddIcon />}
-          onClick={handleClickOpen}>
+          onClick={handleClickOpen}
+        >
           Add more
         </Button>
       </div>
@@ -65,13 +67,13 @@ const Charges = ({ props }) => {
           </TableHead>
           <TableBody>
             {[
-              ...props.chargeCategories.map((el, i, arr) => (
+              ...props.chargeCategories.map((el, i) => (
                 <Category
                   name={el.name}
                   description={el.description}
                   date={el.date}
                   icon={el.icon}
-                  key={`${el.name}${i}`}
+                  key={i}
                   deleteCategory={() => {
                     deleteChargeCategory(el.docId);
                   }}

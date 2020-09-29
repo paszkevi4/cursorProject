@@ -5,10 +5,10 @@ import "./App.css";
 
 //
 // Redux
-import { initializeAppThunk } from "../src/redux/appReducer";
+import { initializeAppThunk } from "../src/store/redux/appReducer";
 import { connect, Provider } from "react-redux";
 
-import store from "./redux/store";
+import store from "./store/redux/store";
 
 //
 // Components

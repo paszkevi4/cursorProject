@@ -6,7 +6,7 @@ import {
   createCharge,
   updateCharge,
   deleteCharge,
-} from "../../redux/firebase/chargesFB";
+} from "../../store/firebase/chargesFB";
 
 // Styles
 import { makeStyles } from "@material-ui/core/styles";

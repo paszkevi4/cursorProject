@@ -6,14 +6,14 @@ import {
   updateChargeAC,
   deleteChargeAC,
   sortChargesAC,
-} from "../../redux/chargesReducer";
+} from "../../store/redux/chargesReducer";
 
 import {
   createIncomeAC,
   updateIncomeAC,
   deleteIncomeAC,
   sortIncomesAC,
-} from "../../redux/incomesReducer";
+} from "../../store/redux/incomesReducer";
 
 
 let mapStateToProps = (state) => {

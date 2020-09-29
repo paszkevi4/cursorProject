@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
-import { fetchIncomesAC } from "../../redux/incomesReducer";
+import { fetchIncomesAC } from "../../store/redux/incomesReducer";
 import {
   createIncome,
   updateIncome,
   deleteIncome,
-} from "../../redux/firebase/incomeFB";
+} from "../../store/firebase/incomeFB";
 
 import HomeTable from "./HomeTable";
 import AddCharges from "./AddCharges";

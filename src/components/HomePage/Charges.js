@@ -37,13 +37,11 @@ const Charges = (props) => {
       let milliseconds = +selectVal * 24 * 60 * 60 * 1000;
       let currentDate = new Date();
       let time = currentDate.setTime(currentDate.getTime() - milliseconds);
-      return setFiltered([
-        ...props.charges.filter((arr) => {
-          // filtered:  ...items
-          console.log(arr.date.getTime() > time);
-          return arr.date.getTime() > time;
+      return setFiltered(
+        props.charges.filter((arr) => {
+          return arr.date.seconds * 1000 > time;
         }),
-      ]);
+      );
     } else if (selectVal === 'FULL_PERIOD') {
       return setFiltered([...props.charges]); //items
     }

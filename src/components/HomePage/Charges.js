@@ -36,6 +36,23 @@ const Charges = (props) => {
     setOpen(false);
   };
 
+  const [filtered, setFiltered] = React.useState(props.charges); //items
+  const handlePeriodChange = (selectVal = 'FULL_PERIOD') => {
+    if (+selectVal === 7 || +selectVal === 30) {
+      let milliseconds = +selectVal * 24 * 60 * 60 * 1000;
+      let currentDate = new Date();
+      let time = currentDate.setTime(currentDate.getTime() - milliseconds);
+      return setFiltered(
+        props.charges.filter((arr) => {
+          return arr.date.seconds * 1000 > time;
+        }),
+      );
+    } else if (selectVal === 'FULL_PERIOD') {
+      return setFiltered([...props.charges]); //items
+    }
+  };
+
+
   const [wasSortedByCategory, setWasSortedByCategory] = useState(false);
   const [wasSortedByDate, setWasSortedByDate] = useState(false);
   const [wasSortedByDescription, setWasSortedByDescription] = useState(false);

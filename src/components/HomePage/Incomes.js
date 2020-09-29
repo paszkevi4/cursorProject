@@ -32,6 +32,7 @@ const Incomes = (props) => {
     setOpen(false);
   };
 
+
   const [wasSortedByCategory, setWasSortedByCategory] = useState(false)
   const [wasSortedByDate, setWasSortedByDate] = useState(false)
   const [wasSortedByDescription, setWasSortedByDescription] = useState(false)
@@ -55,6 +56,22 @@ const sortIncomesFunc = (e)=>{
     setWasSortedByMoney(!wasSortedByMoney);
   }
 }
+
+  const [filtered, setFiltered] = React.useState(props.incomes); //items
+  const handlePeriodChange = (selectVal = 'FULL_PERIOD') => {
+    if (+selectVal === 7 || +selectVal === 30) {
+      let milliseconds = +selectVal * 24 * 60 * 60 * 1000;
+      let currentDate = new Date();
+      let time = currentDate.setTime(currentDate.getTime() - milliseconds);
+      return setFiltered([
+        ...props.incomes.filter((arr) => {
+          return arr.date.seconds * 1000 > time;
+        }),
+      ]);
+    } else if (selectVal === 'FULL_PERIOD') {
+      return setFiltered([...props.incomes]); //items
+    }
+  };
 
   // const [filtered, setFiltered] = React.useState(props.incomes); //items
   // const handlePeriodChange = (selectVal = 'FULL_PERIOD') => {

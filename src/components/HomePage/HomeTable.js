@@ -38,7 +38,7 @@ const HomeTable = ({
   category,
   total,
   totalIncome,
-  handlePeriodChange,
+  // handlePeriodChange,
 }) => {
   const classes = useStyles();
 
@@ -76,7 +76,7 @@ const HomeTable = ({
   const handleActionClose = (e) => {
     if (e.target.innerText === 'Delete') {
       deleteMoney();
-      handlePeriodChange();
+      // handlePeriodChange();
     } else if (e.target.innerText === 'Edit') {
       setOpen(true);
       setCurrentTable({
@@ -89,7 +89,7 @@ const HomeTable = ({
       });
       console.log(name, description, icon, `${fullDate.year}-${fullDate.month}-${fullDate.day}`);
       console.log(name, description, icon, `${fullDate.year}-${fullDate.month}-${fullDate.day}`);
-      handlePeriodChange();
+      // handlePeriodChange();
     }
     setAnchorEl(null);
   };
@@ -135,7 +135,7 @@ const HomeTable = ({
               chargeCategories={chargeCategories}
               total={total}
               totalIncome={totalIncome}
-              handlePeriodChange={handlePeriodChange}
+              // handlePeriodChange={handlePeriodChange}
             />
           )}
         </Menu>

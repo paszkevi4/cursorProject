@@ -1,22 +1,26 @@
-import React from 'react';
-import HomeTable from './HomeTable';
-import useSortTableData from './sortTable';
-import AddCharges from './AddCharges';
-import { createCharge, updateCharge, deleteCharge } from '../../redux/firebase/chargesFB';
+import React, { useEffect, useState } from "react";
+import HomeTable from "./HomeTable";
+import useSortTableData from "./sortTable";
+import AddCharges from "./AddCharges";
+import {
+  createCharge,
+  updateCharge,
+  deleteCharge,
+} from "../../redux/firebase/chargesFB";
 
 //
 // Styles
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import AddIcon from '@material-ui/icons/Add';
-import { TableStyles } from '../Styles';
+import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+import AddIcon from "@material-ui/icons/Add";
+import { TableStyles } from "../Styles";
 
 //
 
@@ -24,41 +28,64 @@ const useStyles = makeStyles(TableStyles);
 
 const Charges = (props) => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
-  const [filtered, setFiltered] = React.useState(props.charges); //items
-  const handlePeriodChange = (selectVal = 'FULL_PERIOD') => {
-    if (+selectVal === 7 || +selectVal === 30) {
-      let milliseconds = +selectVal * 24 * 60 * 60 * 1000;
-      let currentDate = new Date();
-      let time = currentDate.setTime(currentDate.getTime() - milliseconds);
-      return setFiltered([
-        ...props.charges.filter((arr) => {
-          // filtered:  ...items
-          console.log(arr.date.getTime() > time);
-          return arr.date.getTime() > time;
-        }),
-      ]);
-    } else if (selectVal === 'FULL_PERIOD') {
-      return setFiltered([...props.charges]); //items
+
+  const [wasSortedByCategory, setWasSortedByCategory] = useState(false);
+  const [wasSortedByDate, setWasSortedByDate] = useState(false);
+  const [wasSortedByDescription, setWasSortedByDescription] = useState(false);
+  const [wasSortedByMoney, setWasSortedByMoney] = useState(false);
+
+  const sortChargesFunc = (e) => {
+    if (e.target.innerText === "Category") {
+      props.sortCharges("Category", wasSortedByCategory);
+      setWasSortedByCategory(!wasSortedByCategory);
+    } else if (e.target.innerText === "Date") {
+      props.sortCharges("Date", wasSortedByDate);
+      setWasSortedByDate(!wasSortedByDate);
+    } else if (e.target.innerText === "Description") {
+      props.sortCharges("Description", wasSortedByDescription);
+      setWasSortedByDescription(!wasSortedByDescription);
+    } else if (e.target.innerText === "Money") {
+      props.sortCharges("Money", wasSortedByMoney);
+      setWasSortedByMoney(!wasSortedByMoney);
     }
   };
 
-  const { items, requestSort, sortConfig } = useSortTableData(
-    filtered, //props.charges
-    props.categories,
-  );
-  const getClassNamesFor = (name) => {
-    if (!sortConfig) {
-      return;
-    }
-    return sortConfig.key === name ? sortConfig.direction : undefined;
-  };
+  // const [filtered, setFiltered] = React.useState(props.charges); //items
+  // const handlePeriodChange = (selectVal = 'FULL_PERIOD') => {
+  //   if (+selectVal === 7 || +selectVal === 30) {
+  //     let milliseconds = +selectVal * 24 * 60 * 60 * 1000;
+  //     let currentDate = new Date();
+  //     let time = currentDate.setTime(currentDate.getTime() - milliseconds);
+  //     return setFiltered([
+  //       ...props.charges.filter((arr) => {
+  //         // filtered:  ...items
+  //         console.log(arr.date.getTime() > time);
+  //         return arr.date.getTime() > time;
+  //       }),
+  //     ]);
+  //   } else if (selectVal === 'FULL_PERIOD') {
+  //     return setFiltered([...props.charges]); //items
+  //   }
+  // };
+
+  // const { items, requestSort, sortConfig } = useSortTableData(
+  //   filtered, //props.charges
+  //   props.categories,
+  // );
+  // const getClassNamesFor = (name) => {
+  //   if (!sortConfig) {
+  //     return;
+  //   }
+  //   return sortConfig.key === name ? sortConfig.direction : undefined;
+  // };
+
   return (
     <div>
       <div className={classes.homeMenu}>
@@ -67,10 +94,10 @@ const Charges = (props) => {
           <select
             id="datePeriod"
             name="datePeriod"
-            onChange={(event) => handlePeriodChange(event.target.value)}
+            // onChange={(event) => handlePeriodChange(event.target.value)}
             className="btn btn-sm btn-outline-secondary dropdown-toggle"
             // selected={"FULL_PERIOD"}
-            defaultValue={'FULL_PERIOD'}
+            defaultValue={"FULL_PERIOD"}
             // value={filter ? filter.value : "FULL_PERIOD"}
           >
             <option value="7">This Week</option>
@@ -86,7 +113,8 @@ const Charges = (props) => {
           onClick={handleOpen}
           variant="contained"
           color="primary"
-          startIcon={<AddIcon />}>
+          startIcon={<AddIcon />}
+        >
           Add more
         </Button>
       </div>
@@ -98,45 +126,56 @@ const Charges = (props) => {
         chargeCategories={props.categories}
         total={props.total}
         totalIncome={props.totalIncome}
-        handlePeriodChange={handlePeriodChange}
+        // handlePeriodChange={handlePeriodChange}
       />
       <TableContainer component={Paper} className={classes.tableWrapper}>
         <Table className={classes.table} aria-label="Table of Charges">
           <TableHead className={classes.tableHead}>
             <TableRow>
-              <TableCell className={'table-direct'}>
+              <TableCell className={"table-direct"}>
                 <button
                   type="button"
-                  onClick={() => requestSort('category')}
-                  className={getClassNamesFor('category')}>
-                  {' '}
+                  // onClick={() => requestSort('category')}
+                  // className={getClassNamesFor("category")}
+                  onClick={sortChargesFunc}
+                >
+                  {" "}
                   Category
                 </button>
               </TableCell>
-              <TableCell className={'table-direct'}>
+              <TableCell className={"table-direct"}>
                 <button
                   type="button"
-                  onClick={() => requestSort('description')}
-                  className={getClassNamesFor('description')}>
-                  {' '}
+                  onClick={sortChargesFunc}
+
+                  // onClick={() => requestSort('description')}
+                  // className={getClassNamesFor("description")}
+                >
+                  {" "}
                   Description
                 </button>
               </TableCell>
-              <TableCell className={'table-direct'}>
+              <TableCell className={"table-direct"}>
                 <button
                   type="button"
-                  onClick={() => requestSort('date')}
-                  className={getClassNamesFor('date')}>
-                  {' '}
+                  onClick={sortChargesFunc}
+
+                  // onClick={() => requestSort('date')}
+                  // className={getClassNamesFor("date")}
+                >
+                  {" "}
                   Date
                 </button>
               </TableCell>
-              <TableCell className={'table-direct'}>
+              <TableCell className={"table-direct"}>
                 <button
                   type="button"
-                  onClick={() => requestSort('money')}
-                  className={getClassNamesFor('money')}>
-                  {' '}
+                  onClick={sortChargesFunc}
+
+                  // onClick={() => requestSort('money')}
+                  // className={getClassNamesFor("money")}
+                >
+                  {" "}
                   Money
                 </button>
               </TableCell>
@@ -177,7 +216,7 @@ const Charges = (props) => {
                   chargeCategories={props.categories}
                   total={props.total}
                   totalIncome={props.totalIncome}
-                  handlePeriodChange={handlePeriodChange}
+                  // handlePeriodChange={handlePeriodChange}
                 />
               )),
             ]}

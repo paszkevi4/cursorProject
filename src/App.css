@@ -1,21 +1,24 @@
-.App {
+.app {
   text-align: center;
   display: grid;
-  grid-template-columns: 15vw 1fr;
+  grid-template-columns: 300px 1fr;
 }
 
-nav {
-  grid-column: 1/2;
-  background: navy;
-  color: #fff;
-  position: sticky;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
+main {
+  width: 100%;
+  padding: 2vh;
+  padding-left: 0;
+  box-sizing: border-box;
 }
 
-nav a {
-  margin-top: 20px;
-  color: #fff;
-  text-decoration: none;
+@media screen and (max-width: 1024px) {
+  .app {
+    grid-template-columns: 200px 1fr;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .app {
+    grid-template-columns: 100px 1fr;
+  }
 }

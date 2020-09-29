@@ -1,0 +1,51 @@
+.main {
+  width: 400px;
+  margin: 2vh auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.main > div {
+  margin: 10px 0;
+}
+
+.avatar {
+  height: 150px;
+  width: 150px;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.avatar img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 10px 10px 15px -7px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.main_inner {
+  padding: 30px 45px;
+  border-radius: 15px;
+  box-shadow: 4px 4px 15px -0px rgba(0, 0, 0, 0.3);
+}
+
+.main_inner h3 + span {
+  margin-right: 10px;
+}
+
+.main_inner > div {
+  margin: 15px 0;
+}
+
+.settings_button {
+  align-self: flex-end;
+  width: 200px;
+  box-shadow: 4px 4px 15px -0px rgba(0, 0, 0, 0.3);
+}
+
+.settings_button button {
+  align-self: flex-end;
+  width: 100%;
+}

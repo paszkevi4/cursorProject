@@ -1,0 +1,43 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 50px;
+  background: linear-gradient(20deg, #00aa66, #00ee55);
+  border-radius: 25px;
+  height: 30vh;
+  box-shadow: 10px 10px 20px -7px rgba(0, 0, 0);
+  color: #fff;
+}
+
+.header__warning {
+  background: red;
+  background: linear-gradient(20deg, #c4458c, #fc908b);
+}
+
+.header_category {
+  margin: 20px 45px;
+  align-self: flex-start;
+}
+
+.header_balance {
+  margin: 15px 45px;
+  align-self: flex-end;
+}
+
+.header_balance__title {
+  text-align: right;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.header_balance__amount {
+  font-size: 1.7em;
+  font-weight: bold;
+}
+/*  */
+/*  */
+/*  */
+.header_balance__red {
+  color: red;
+}

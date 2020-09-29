@@ -1,10 +1,28 @@
 import HomePage from './HomePage';
 import { connect } from 'react-redux';
-import { setNewChargeAC } from '../../redux/chargesReducer';
-import { setNewIncomeAC } from '../../redux/incomesReducer';
+
+import {
+  createChargeAC,
+  updateChargeAC,
+  deleteChargeAC,
+  sortChargesAC,
+} from '../../store/redux/chargesReducer';
+
+
+import {
+  createIncomeAC,
+  updateIncomeAC,
+  deleteIncomeAC,
+  sortIncomesAC,
+} from '../../store/redux/incomesReducer';
+
 
 let mapStateToProps = (state) => {
   return {
+    icons: state.icons,
+    avatar: state.settings.avatar,
+    incomeCategories: state.incomeCategories,
+    chargeCategories: state.chargeCategories,
     incomes: state.incomes,
     charges: state.charges,
   };
@@ -12,11 +30,29 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
   return {
-    setIncome: (income) => {
-      dispatch(setNewIncomeAC(income));
+    createIncome: (income) => {
+      dispatch(createIncomeAC(income));
     },
-    setCharge: (charge) => {
-      dispatch(setNewChargeAC(charge));
+    updateIncome: (index, income) => {
+      dispatch(updateIncomeAC(index, income));
+    },
+    deleteIncome: (index) => {
+      dispatch(deleteIncomeAC(index));
+    },
+    createCharge: (charge) => {
+      dispatch(createChargeAC(charge));
+    },
+    updateCharge: (index, charge) => {
+      dispatch(updateChargeAC(index, charge));
+    },
+    deleteCharge: (index) => {
+      dispatch(deleteChargeAC(index));
+    },
+    sortCharges: (sortingBy, wasSorted) => {
+      dispatch(sortChargesAC(sortingBy, wasSorted));
+    },
+    sortIncomes: (sortingBy, wasSorted) => {
+      dispatch(sortIncomesAC(sortingBy, wasSorted));
     },
   };
 };

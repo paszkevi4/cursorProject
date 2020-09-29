@@ -49,10 +49,9 @@ PDF - https://trostinsky.github.io/cursor-new-materials/project.pdf
 
 # Team#1. Money Tracker
 
-Thank you for your attention to our project.
+#### Thank you for your attention to our project.
 
 ## About Money Tracker
-##
 
 ### Personalization
 

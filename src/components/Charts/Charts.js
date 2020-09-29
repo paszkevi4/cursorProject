@@ -36,14 +36,16 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
   const trueMoneyChargesDoughnut = [];
   const trueMoneyIncomesBar = [];
   const trueMoneyIncomes = [];
+  const trueMoneyCharges = [];
   const moneyIn = [];
   const moneyOut = [];
-  const trueMoneyCharges = [];
   const allMoney = [];
+
   let lastWeekIn = 0;
   let penultimateWeekIn = 0;
   let lastWeekOut = 0;
   let penultimateWeekOut = 0;
+  
 
   for (let i = 0; i < activePeriod - 1; i++) {
     allDates.push(new Date(Date.now() - i * 1000 * 3600 * 24).toLocaleDateString().slice(0, 5));
@@ -93,6 +95,7 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
     ) {
       penultimateWeekIn += el.money;
     }
+    return
   });
 
   charges.map((el) => {
@@ -120,15 +123,24 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
   });
 
   allDates.forEach((d) => {
-    let elIn = trueDataIncomes.find((el) => new Date(el.date * 1000).getDate() == d.slice(0, 2));
-    let elOut = trueDataCharges.find((el) => new Date(el.date * 1000).getDate() == d.slice(0, 2));
+    let tempIn = 0;
+    let tempOut = 0;
+    let elIn = trueDataIncomes.filter((el) => new Date(el.date * 1000).getDate() == d.slice(0, 2));
+    let elOut = trueDataCharges.filter((el) => new Date(el.date * 1000).getDate() == d.slice(0, 2));
+    
     if (elIn) {
-      moneyIn.push(elIn.money);
+      elIn.map(el => {
+        tempIn += el.money
+      })
+      moneyIn.push(tempIn);
     } else {
       moneyIn.push(0);
     }
     if (elOut) {
-      moneyOut.push(elOut.money);
+      elOut.map(el => {
+        tempOut += el.money 
+      })
+      moneyOut.push(tempOut);
     } else {
       moneyOut.push(0);
     }
@@ -151,10 +163,8 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
   const maxSum = Math.max(...allMoney);
   const minSum = Math.min(...allMoney);
 
-  const futureWeekIn =
-    ((lastWeekIn - penultimateWeekIn) / penultimateWeekIn) * lastWeekIn + lastWeekIn;
-  const futureWeekOut =
-    ((lastWeekOut - penultimateWeekOut) / penultimateWeekOut) * lastWeekOut + lastWeekOut;
+  const futureWeekIn = penultimateWeekIn === 0 ? lastWeekIn * 2 : (lastWeekIn / penultimateWeekIn) * lastWeekIn;
+  const futureWeekOut = penultimateWeekOut === 0 ? lastWeekOut * 2 : (lastWeekOut / penultimateWeekOut) * lastWeekOut;
 
   const startDataLine = {
     labels: activePeriod === 8 ? allDays : allDates,
@@ -371,14 +381,16 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
                 variant="outlined"
                 className={activePeriod === 31 ? 'btn-active' : null}
                 classes={{ root: classes.root, label: classes.label }}
-                onClick={getMonth}>
+                onClick={getMonth}
+              >
                 Month
               </Button>
               <Button
                 variant="outlined"
                 className={activePeriod === 8 ? 'btn-active' : null}
                 classes={{ root: classes.root, label: classes.label }}
-                onClick={getWeek}>
+                onClick={getWeek}
+              >
                 Week
               </Button>
             </div>
@@ -405,14 +417,16 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
               variant="outlined"
               className={activePeriod === 31 ? 'btn-active' : null}
               classes={{ root: classes.root, label: classes.label }}
-              onClick={getMonth}>
+              onClick={getMonth}
+            >
               Month
             </Button>
             <Button
               variant="outlined"
               className={activePeriod === 8 ? 'btn-active' : null}
               classes={{ root: classes.root, label: classes.label }}
-              onClick={getWeek}>
+              onClick={getWeek}
+            >
               Week
             </Button>
           </div>
@@ -449,7 +463,7 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
               <span>
                 {lastWeekIn < penultimateWeekIn ? 'decrease or remain unchanged' : 'increase'}
               </span>{' '}
-              and your charges will{' '}
+              and charges will{' '}
               <span>
                 {lastWeekOut < penultimateWeekOut ? 'decrease or remain unchanged' : 'increase'}
               </span>

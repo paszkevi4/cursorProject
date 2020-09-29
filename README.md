@@ -76,4 +76,4 @@ And the last but not least:
 You can even see the prediction for your future money flow. 
 #### But keep in mind, it depends only on you, so keep abreast of your spendings and incomes. 
 
-![alt text](https://r.jpg)
+![alt text](https://firebasestorage.googleapis.com/v0/b/money-tr4cker.appspot.com/o/images%2Favatarpicker.jpg?alt=media&token=3068dfe3-1dfb-4d00-aa05-08027c79b3c6)

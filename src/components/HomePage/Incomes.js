@@ -16,8 +16,8 @@ import AddIcon from '@material-ui/icons/Add';
 import { TableStyles } from '../Styles';
 
 import { connect } from 'react-redux';
-import { fetchIncomesAC } from '../../redux/incomesReducer';
-import { createIncome, updateIncome, deleteIncome } from '../../redux/firebase/incomeFB';
+import { fetchIncomesAC } from '../../store/redux/incomesReducer';
+import { createIncome, updateIncome, deleteIncome } from '../../store/firebase/incomeFB';
 
 const useStyles = makeStyles(TableStyles);
 

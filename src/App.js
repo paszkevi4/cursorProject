@@ -5,15 +5,15 @@ import './App.css';
 
 //
 // Redux
-import { initializeAppThunk } from '../src/redux/appReducer';
+import { initializeAppThunk } from './store/redux/appReducer';
 import { connect, Provider } from 'react-redux';
-import { setSettingsThunk } from '../src/redux/settingsReducer';
-import { setChargeCategoriesThunk } from '../src/redux/chargeCategoriesReducer';
-import { setIncomeCategoriesThunk } from '../src/redux/incomeCategoriesReducer';
-import { setChargesThunk } from '../src/redux/chargesReducer';
-import { fetchIncomesThunk } from '../src/redux/incomesReducer';
+import { setSettingsThunk } from './store/redux/settingsReducer';
+import { setChargeCategoriesThunk } from './store/redux/chargeCategoriesReducer';
+import { setIncomeCategoriesThunk } from './store/redux/incomeCategoriesReducer';
+import { setChargesThunk } from './store/redux/chargesReducer';
+import { fetchIncomesThunk } from './store/redux/incomesReducer';
 
-import store from './redux/store';
+import store from './store/redux/store';
 
 //
 // Components

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
   handleFireBaseUploadInfo,
   handleFireBaseUploadAvatar,
-} from '../../redux/firebase/profileFB';
+} from '../../store/firebase/profileFB';
 
 // components
 import Avatar from './components/AvatarUpload';

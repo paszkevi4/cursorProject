@@ -7,7 +7,7 @@ import {
   createIncomeCategory,
   updateIncomeCategory,
   deleteIncomeCategory,
-} from "../../redux/firebase/incomeCategoriesFB";
+} from "../../store/firebase/incomeCategoriesFB";
 
 import {
   Button,

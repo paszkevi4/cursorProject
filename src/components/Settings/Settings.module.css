@@ -29,6 +29,10 @@
   box-shadow: 4px 4px 15px -0px rgba(0, 0, 0, 0.3);
 }
 
+.main_inner h3 + span{
+  margin-right: 10px;
+}
+
 .main_inner > div {
   margin: 15px 0;
 }

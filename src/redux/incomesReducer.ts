@@ -40,7 +40,12 @@ type sortIncomesACType = {
   wasSorted: boolean;
 };
 
-type actionType = fetchIncomesACType | createIncomeACType | updateIncomeACType | deleteIncomeACType | sortIncomesACType;
+type actionType =
+  | fetchIncomesACType
+  | createIncomeACType
+  | updateIncomeACType
+  | deleteIncomeACType
+  | sortIncomesACType;
 
 let initialState: Array<incomeType> = [
   { category: 0, description: 'From mom', date: new Date(), money: 500.57 },
@@ -78,44 +83,45 @@ const incomesReducer = (state = initialState, action: actionType): Array<incomeT
       state.splice(action.index, 1);
       return [...state];
     case SORT_INCOMES:
-      if(action.sortingBy === 'Category'){
-        if(action.wasSorted){
+      if (action.sortingBy === 'Category') {
+        if (action.wasSorted) {
           console.log('alphabetic');
-        }
-        else{
+        } else {
           console.log('non alphabetic');
         }
-      }
-      else if(action.sortingBy === 'Description'){
-        if(action.wasSorted){
-          return [...state.sort((a: any,b: any) => (a.description?.toUpperCase() < b.description?.toUpperCase())? -1 : 1)]
-        } 
-        else{
-          return [...state.sort((a: any,b: any) => (a.description?.toUpperCase() > b.description?.toUpperCase())? -1 : 1)]
-        }  
-      }
-      else if(action.sortingBy === 'Date'){
-        if(action.wasSorted){
-        return [...state.sort((a: any,b: any) => (a.date.seconds < b.date.seconds)? -1 : 1)]
-        } 
-        else{
-          return [...state.sort((a: any,b: any) => (a.date.seconds > b.date.seconds)? -1 : 1)]
-        }       
-      }
-      else if(action.sortingBy === 'Money'){
-        if(action.wasSorted){
-            return [...state.sort((a: any,b: any) => (a.money < b.money)? -1 : 1)]
-        } 
-        else{
-          return [...state.sort((a: any,b: any) => (a.money > b.money)? -1 : 1)]
-        }       
+      } else if (action.sortingBy === 'Description') {
+        if (action.wasSorted) {
+          return [
+            ...state.sort((a: any, b: any) =>
+              a.description?.toUpperCase() < b.description?.toUpperCase() ? -1 : 1,
+            ),
+          ];
+        } else {
+          return [
+            ...state.sort((a: any, b: any) =>
+              a.description?.toUpperCase() > b.description?.toUpperCase() ? -1 : 1,
+            ),
+          ];
+        }
+      } else if (action.sortingBy === 'Date') {
+        if (action.wasSorted) {
+          return [...state.sort((a: any, b: any) => (a.date.seconds < b.date.seconds ? -1 : 1))];
+        } else {
+          return [...state.sort((a: any, b: any) => (a.date.seconds > b.date.seconds ? -1 : 1))];
+        }
+      } else if (action.sortingBy === 'Money') {
+        if (action.wasSorted) {
+          return [...state.sort((a: any, b: any) => (a.money < b.money ? -1 : 1))];
+        } else {
+          return [...state.sort((a: any, b: any) => (a.money > b.money ? -1 : 1))];
+        }
       }
     default:
       return state;
   }
 };
 
-const fetchIncomesAC = (incomes: Array<incomeType>): fetchIncomesACType => ({
+export const fetchIncomesAC = (incomes: Array<incomeType>): fetchIncomesACType => ({
   type: FETCH_INCOMES,
   incomes,
 });
@@ -139,7 +145,7 @@ export const deleteIncomeAC = (index: number): deleteIncomeACType => ({
 export const sortIncomesAC = (sortingBy: string, wasSorted: boolean): sortIncomesACType => ({
   type: SORT_INCOMES,
   sortingBy,
-  wasSorted
+  wasSorted,
 });
 
 export const fetchIncomesThunk = () => {

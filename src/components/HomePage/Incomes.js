@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import HomeTable from './HomeTable';
 import AddCharges from './AddCharges';
 //import HomeSelect from './HomeSelect';
@@ -15,6 +15,8 @@ import Paper from '@material-ui/core/Paper';
 import AddIcon from '@material-ui/icons/Add';
 import { TableStyles } from '../Styles';
 
+import { connect } from 'react-redux';
+import { fetchIncomesAC } from '../../redux/incomesReducer';
 import { createIncome, updateIncome, deleteIncome } from '../../redux/firebase/incomeFB';
 
 const useStyles = makeStyles(TableStyles);
@@ -32,44 +34,47 @@ const Incomes = (props) => {
     setOpen(false);
   };
 
+  const [wasSortedByCategory, setWasSortedByCategory] = useState(false);
+  const [wasSortedByDate, setWasSortedByDate] = useState(false);
+  const [wasSortedByDescription, setWasSortedByDescription] = useState(false);
+  const [wasSortedByMoney, setWasSortedByMoney] = useState(false);
 
-  const [wasSortedByCategory, setWasSortedByCategory] = useState(false)
-  const [wasSortedByDate, setWasSortedByDate] = useState(false)
-  const [wasSortedByDescription, setWasSortedByDescription] = useState(false)
-  const [wasSortedByMoney, setWasSortedByMoney] = useState(false)
-  
-const sortIncomesFunc = (e)=>{
-  if(e.target.innerText === 'Category'){
-    props.sortIncomes('Category', wasSortedByCategory)
-    setWasSortedByCategory(!wasSortedByCategory);
-  }
-  else if(e.target.innerText === 'Date'){
-    props.sortIncomes('Date', wasSortedByDate)
-    setWasSortedByDate(!wasSortedByDate);
-  }
-  else if(e.target.innerText === 'Description'){
-    props.sortIncomes('Description', wasSortedByDescription)
-    setWasSortedByDescription(!wasSortedByDescription);
-  }
-  else if(e.target.innerText === 'Money'){
-    props.sortIncomes('Money', wasSortedByMoney)
-    setWasSortedByMoney(!wasSortedByMoney);
-  }
-}
+  const sortIncomesFunc = (e) => {
+    if (e.target.innerText === 'Category') {
+      props.sortIncomes('Category', wasSortedByCategory);
+      setWasSortedByCategory(!wasSortedByCategory);
+    } else if (e.target.innerText === 'Date') {
+      props.sortIncomes('Date', wasSortedByDate);
+      setWasSortedByDate(!wasSortedByDate);
+    } else if (e.target.innerText === 'Description') {
+      props.sortIncomes('Description', wasSortedByDescription);
+      setWasSortedByDescription(!wasSortedByDescription);
+    } else if (e.target.innerText === 'Money') {
+      props.sortIncomes('Money', wasSortedByMoney);
+      setWasSortedByMoney(!wasSortedByMoney);
+    }
+  };
 
   const [filtered, setFiltered] = React.useState(props.incomes); //items
-  const handlePeriodChange = (selectVal = 'FULL_PERIOD') => {
-    if (+selectVal === 7 || +selectVal === 30) {
-      let milliseconds = +selectVal * 24 * 60 * 60 * 1000;
+  const [filteredBy, setFilteredBy] = React.useState('FULL_PERIOD');
+
+  useEffect(() => {
+    handlePeriodChange(filteredBy);
+  }, [props.incomes, filteredBy]);
+
+  const handlePeriodChange = (filteredBy = 'FULL_PERIOD') => {
+    if (+filteredBy === 7 || +filteredBy === 30) {
+      let milliseconds = +filteredBy * 24 * 60 * 60 * 1000;
       let currentDate = new Date();
       let time = currentDate.setTime(currentDate.getTime() - milliseconds);
-      return setFiltered([
-        ...props.incomes.filter((arr) => {
+
+      setFiltered(
+        props.incomes.filter((arr) => {
           return arr.date.seconds * 1000 > time;
         }),
-      ]);
-    } else if (selectVal === 'FULL_PERIOD') {
-      return setFiltered([...props.incomes]); //items
+      );
+    } else if (filteredBy === 'FULL_PERIOD') {
+      return setFiltered(props.incomes); //items
     }
   };
 
@@ -110,7 +115,7 @@ const sortIncomesFunc = (e)=>{
           <select
             id="datePeriod"
             name="datePeriod"
-            // onChange={(event) => handlePeriodChange(event.target.value)}
+            onChange={(event) => setFilteredBy(event.target.value)}
             className="btn btn-sm btn-outline-secondary dropdown-toggle"
             // selected={"FULL_PERIOD"}
             defaultValue={'FULL_PERIOD'}
@@ -149,8 +154,7 @@ const sortIncomesFunc = (e)=>{
                   type="button"
                   // onClick={() => requestSort('category')}
                   // className={getClassNamesFor('category')}
-                  onClick={sortIncomesFunc}
-                  >
+                  onClick={sortIncomesFunc}>
                   {' '}
                   Category
                 </button>
@@ -160,8 +164,7 @@ const sortIncomesFunc = (e)=>{
                   type="button"
                   // onClick={() => requestSort('description')}
                   // className={getClassNamesFor('description')}
-                  onClick={sortIncomesFunc}
-                  >
+                  onClick={sortIncomesFunc}>
                   {' '}
                   Description
                 </button>
@@ -171,8 +174,7 @@ const sortIncomesFunc = (e)=>{
                   type="button"
                   // onClick={() => requestSort('date')}
                   // className={getClassNamesFor('date')}
-                  onClick={sortIncomesFunc}
-                  >
+                  onClick={sortIncomesFunc}>
                   Date
                 </button>
               </TableCell>
@@ -181,8 +183,7 @@ const sortIncomesFunc = (e)=>{
                   type="button"
                   // onClick={() => requestSort('money')}
                   // className={getClassNamesFor('money')}
-                  onClick={sortIncomesFunc}
-                  >
+                  onClick={sortIncomesFunc}>
                   {' '}
                   Money
                 </button>
@@ -194,7 +195,7 @@ const sortIncomesFunc = (e)=>{
           <TableBody>
             {[
               // ...items.map((el, i) => (
-              ...props.incomes.map((el, i) => (
+              filtered.map((el, i) => (
                 <HomeTable
                   // name={props.categories[el.category]?.name}
                   // icon={props.categories[el.category]?.icon}
@@ -233,4 +234,4 @@ const sortIncomesFunc = (e)=>{
   );
 };
 
-export default Incomes;
+export default connect(null, { fetchIncomesAC })(Incomes);

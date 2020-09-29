@@ -1,17 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 
-import { fetchIncomesAC } from "../../redux/incomesReducer";
-import {
-  createIncome,
-  updateIncome,
-  deleteIncome,
-} from "../../redux/firebase/incomeFB";
+import { fetchIncomesAC } from '../../store/redux/incomesReducer';
+import { createIncome, updateIncome, deleteIncome } from '../../store/firebase/incomeFB';
 
-import HomeTable from "./HomeTable";
-import AddCharges from "./AddCharges";
+import HomeTable from './HomeTable';
+import AddCharges from './AddCharges';
 
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles';
 import {
   Button,
   Table,
@@ -21,10 +17,10 @@ import {
   TableHead,
   TableRow,
   Paper,
-} from "@material-ui/core/";
+} from '@material-ui/core/';
 
-import AddIcon from "@material-ui/icons/Add";
-import { TableStyles } from "../Styles";
+import AddIcon from '@material-ui/icons/Add';
+import { TableStyles } from '../Styles';
 
 const useStyles = makeStyles(TableStyles);
 
@@ -44,29 +40,29 @@ const Incomes = (props) => {
   const [wasSortedByMoney, setWasSortedByMoney] = useState(false);
 
   const sortIncomesFunc = (e) => {
-    if (e.target.innerText === "Category") {
-      props.sortIncomes("Category", wasSortedByCategory);
+    if (e.target.innerText === 'Category') {
+      props.sortIncomes('Category', wasSortedByCategory);
       setWasSortedByCategory(!wasSortedByCategory);
-    } else if (e.target.innerText === "Date") {
-      props.sortIncomes("Date", wasSortedByDate);
+    } else if (e.target.innerText === 'Date') {
+      props.sortIncomes('Date', wasSortedByDate);
       setWasSortedByDate(!wasSortedByDate);
-    } else if (e.target.innerText === "Description") {
-      props.sortIncomes("Description", wasSortedByDescription);
+    } else if (e.target.innerText === 'Description') {
+      props.sortIncomes('Description', wasSortedByDescription);
       setWasSortedByDescription(!wasSortedByDescription);
-    } else if (e.target.innerText === "Money") {
-      props.sortIncomes("Money", wasSortedByMoney);
+    } else if (e.target.innerText === 'Money') {
+      props.sortIncomes('Money', wasSortedByMoney);
       setWasSortedByMoney(!wasSortedByMoney);
     }
   };
 
   const [filtered, setFiltered] = React.useState(props.incomes); //items
-  const [filteredBy, setFilteredBy] = React.useState("FULL_PERIOD");
+  const [filteredBy, setFilteredBy] = React.useState('FULL_PERIOD');
 
   useEffect(() => {
     handlePeriodChange(filteredBy);
   }, [props.incomes, filteredBy]);
 
-  const handlePeriodChange = (filteredBy = "FULL_PERIOD") => {
+  const handlePeriodChange = (filteredBy = 'FULL_PERIOD') => {
     if (+filteredBy === 7 || +filteredBy === 30) {
       let milliseconds = +filteredBy * 24 * 60 * 60 * 1000;
       let currentDate = new Date();
@@ -75,9 +71,9 @@ const Incomes = (props) => {
       setFiltered(
         props.incomes.filter((arr) => {
           return arr.date.seconds * 1000 > time;
-        })
+        }),
       );
-    } else if (filteredBy === "FULL_PERIOD") {
+    } else if (filteredBy === 'FULL_PERIOD') {
       return setFiltered(props.incomes); //items
     }
   };
@@ -91,8 +87,7 @@ const Incomes = (props) => {
             name="datePeriod"
             onChange={(event) => setFilteredBy(event.target.value)}
             className="btn btn-sm btn-outline-secondary dropdown-toggle"
-            defaultValue={"FULL_PERIOD"}
-          >
+            defaultValue={'FULL_PERIOD'}>
             <option value="7">This Week</option>
             <option value="30">This Month</option>
             <option value="FULL_PERIOD">Full period</option>
@@ -104,8 +99,7 @@ const Incomes = (props) => {
           onClick={handleClickOpen}
           variant="contained"
           color="primary"
-          startIcon={<AddIcon />}
-        >
+          startIcon={<AddIcon />}>
           Add more
         </Button>
       </div>
@@ -120,31 +114,31 @@ const Incomes = (props) => {
         <Table className={classes.table} aria-label="Table of Incomes">
           <TableHead className={classes.tableHead}>
             <TableRow>
-              <TableCell className={"table-direct"}>
+              <TableCell className={'table-direct'}>
                 <button type="button" onClick={sortIncomesFunc}>
-                  {" "}
+                  {' '}
                   Category
                 </button>
               </TableCell>
-              <TableCell className={"table-direct"}>
+              <TableCell className={'table-direct'}>
                 <button type="button" onClick={sortIncomesFunc}>
-                  {" "}
+                  {' '}
                   Description
                 </button>
               </TableCell>
-              <TableCell className={"table-direct"}>
+              <TableCell className={'table-direct'}>
                 <button type="button" onClick={sortIncomesFunc}>
                   Date
                 </button>
               </TableCell>
-              <TableCell className={"table-direct"}>
+              <TableCell className={'table-direct'}>
                 <button type="button" onClick={sortIncomesFunc}>
-                  {" "}
+                  {' '}
                   Money
                 </button>
               </TableCell>
-              <TableCell className={"table-direct"}>Avatar</TableCell>
-              <TableCell className={"table-direct"}>Action</TableCell>
+              <TableCell className={'table-direct'}>Avatar</TableCell>
+              <TableCell className={'table-direct'}>Action</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

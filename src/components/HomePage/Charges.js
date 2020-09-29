@@ -1,15 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import HomeTable from "./HomeTable";
-import AddCharges from "./AddCharges";
-import {
-  createCharge,
-  updateCharge,
-  deleteCharge,
-} from "../../redux/firebase/chargesFB";
+import HomeTable from './HomeTable';
+import AddCharges from './AddCharges';
+import { createCharge, updateCharge, deleteCharge } from '../../store/firebase/chargesFB';
 
 // Styles
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles';
 import {
   Button,
   Table,
@@ -19,9 +15,9 @@ import {
   TableHead,
   TableRow,
   Paper,
-} from "@material-ui/core/";
-import AddIcon from "@material-ui/icons/Add";
-import { TableStyles } from "../Styles";
+} from '@material-ui/core/';
+import AddIcon from '@material-ui/icons/Add';
+import { TableStyles } from '../Styles';
 
 const useStyles = makeStyles(TableStyles);
 
@@ -36,7 +32,7 @@ const Charges = (props) => {
   };
 
   const [filtered, setFiltered] = useState(props.charges);
-  const [filteredBy, setFilteredBy] = useState("FULL_PERIOD");
+  const [filteredBy, setFilteredBy] = useState('FULL_PERIOD');
 
   window.filteredBy = filteredBy;
 
@@ -44,7 +40,7 @@ const Charges = (props) => {
     handlePeriodChange(filteredBy);
   }, [props.charges, filteredBy]);
 
-  const handlePeriodChange = (filteredBy = "FULL_PERIOD") => {
+  const handlePeriodChange = (filteredBy = 'FULL_PERIOD') => {
     if (+filteredBy === 7 || +filteredBy === 30) {
       let milliseconds = +filteredBy * 24 * 60 * 60 * 1000;
       let currentDate = new Date();
@@ -52,9 +48,9 @@ const Charges = (props) => {
       return setFiltered(
         props.charges.filter((arr) => {
           return arr.date.seconds * 1000 > time;
-        })
+        }),
       );
-    } else if (filteredBy === "FULL_PERIOD") {
+    } else if (filteredBy === 'FULL_PERIOD') {
       return setFiltered([...props.charges]); //items
     }
   };
@@ -65,17 +61,17 @@ const Charges = (props) => {
   const [wasSortedByMoney, setWasSortedByMoney] = useState(false);
 
   const sortChargesFunc = (e) => {
-    if (e.target.innerText === "Category") {
-      props.sortCharges("Category", wasSortedByCategory, filtered);
+    if (e.target.innerText === 'Category') {
+      props.sortCharges('Category', wasSortedByCategory, filtered);
       setWasSortedByCategory(!wasSortedByCategory);
-    } else if (e.target.innerText === "Date") {
-      props.sortCharges("Date", wasSortedByDate, filtered);
+    } else if (e.target.innerText === 'Date') {
+      props.sortCharges('Date', wasSortedByDate, filtered);
       setWasSortedByDate(!wasSortedByDate);
-    } else if (e.target.innerText === "Description") {
-      props.sortCharges("Description", wasSortedByDescription, filtered);
+    } else if (e.target.innerText === 'Description') {
+      props.sortCharges('Description', wasSortedByDescription, filtered);
       setWasSortedByDescription(!wasSortedByDescription);
-    } else if (e.target.innerText === "Money") {
-      props.sortCharges("Money", wasSortedByMoney, filtered);
+    } else if (e.target.innerText === 'Money') {
+      props.sortCharges('Money', wasSortedByMoney, filtered);
       setWasSortedByMoney(!wasSortedByMoney);
     }
   };
@@ -90,8 +86,7 @@ const Charges = (props) => {
             name="datePeriod"
             onChange={(event) => setFilteredBy(event.target.value)}
             className="btn btn-sm btn-outline-secondary dropdown-toggle"
-            defaultValue={"FULL_PERIOD"}
-          >
+            defaultValue={'FULL_PERIOD'}>
             <option value="7">This Week</option>
             <option value="30">This Month</option>
             <option value="FULL_PERIOD">Full period</option>
@@ -104,8 +99,7 @@ const Charges = (props) => {
           onClick={handleOpen}
           variant="contained"
           color="primary"
-          startIcon={<AddIcon />}
-        >
+          startIcon={<AddIcon />}>
           Add more
         </Button>
       </div>
@@ -122,27 +116,27 @@ const Charges = (props) => {
         <Table className={classes.table} aria-label="Table of Charges">
           <TableHead className={classes.tableHead}>
             <TableRow>
-              <TableCell className={"table-direct"}>
+              <TableCell className={'table-direct'}>
                 <button type="button" onClick={sortChargesFunc}>
-                  {" "}
+                  {' '}
                   Category
                 </button>
               </TableCell>
-              <TableCell className={"table-direct"}>
+              <TableCell className={'table-direct'}>
                 <button type="button" onClick={sortChargesFunc}>
-                  {" "}
+                  {' '}
                   Description
                 </button>
               </TableCell>
-              <TableCell className={"table-direct"}>
+              <TableCell className={'table-direct'}>
                 <button type="button" onClick={sortChargesFunc}>
-                  {" "}
+                  {' '}
                   Date
                 </button>
               </TableCell>
-              <TableCell className={"table-direct"}>
+              <TableCell className={'table-direct'}>
                 <button type="button" onClick={sortChargesFunc}>
-                  {" "}
+                  {' '}
                   Money
                 </button>
               </TableCell>

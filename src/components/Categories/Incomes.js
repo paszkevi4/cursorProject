@@ -7,7 +7,7 @@ import {
   createIncomeCategory,
   updateIncomeCategory,
   deleteIncomeCategory,
-} from "../../redux/firebase/incomeCategoriesFB";
+} from '../../store/firebase/incomeCategoriesFB';
 
 import {
   Button,
@@ -18,11 +18,10 @@ import {
   TableHead,
   TableRow,
   Paper,
-} from "@material-ui/core/";
-import { makeStyles } from "@material-ui/core/styles";
-import { TableStyles } from "../Styles";
-import AddIcon from "@material-ui/icons/Add";
-
+} from '@material-ui/core/';
+import { makeStyles } from '@material-ui/core/styles';
+import { TableStyles } from '../Styles';
+import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles(TableStyles);
 

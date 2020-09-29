@@ -1,19 +1,20 @@
-import HomePage from "./HomePage";
-import { connect } from "react-redux";
+import HomePage from './HomePage';
+import { connect } from 'react-redux';
 
 import {
   createChargeAC,
   updateChargeAC,
   deleteChargeAC,
   sortChargesAC,
-} from "../../store/redux/chargesReducer";
+} from '../../store/redux/chargesReducer';
+
 
 import {
   createIncomeAC,
   updateIncomeAC,
   deleteIncomeAC,
   sortIncomesAC,
-} from "../../store/redux/incomesReducer";
+} from '../../store/redux/incomesReducer';
 
 
 let mapStateToProps = (state) => {

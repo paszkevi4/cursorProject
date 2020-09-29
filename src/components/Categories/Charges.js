@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import AddCategory from "./AddCategory";
-import Category from "./Category";
+import AddCategory from './AddCategory';
+import Category from './Category';
 
 import {
   createChargeCategory,
   updateChargeCategory,
   deleteChargeCategory,
-} from "../../store/firebase/chargeCategoriesFB";
+} from '../../store/firebase/chargeCategoriesFB';
+
 
 import {
   Button,
@@ -18,11 +19,10 @@ import {
   TableHead,
   TableRow,
   Paper,
-} from "@material-ui/core/";
-import AddIcon from "@material-ui/icons/Add";
-import { makeStyles } from "@material-ui/core/styles";
-import { TableStyles } from "../Styles";
-
+} from '@material-ui/core/';
+import AddIcon from '@material-ui/icons/Add';
+import { makeStyles } from '@material-ui/core/styles';
+import { TableStyles } from '../Styles';
 
 const useStyles = makeStyles(TableStyles);
 
@@ -44,8 +44,7 @@ const Charges = ({ props }) => {
           variant="contained"
           color="primary"
           startIcon={<AddIcon />}
-          onClick={handleClickOpen}
-        >
+          onClick={handleClickOpen}>
           Add more
         </Button>
       </div>

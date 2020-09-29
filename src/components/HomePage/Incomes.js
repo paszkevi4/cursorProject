@@ -147,9 +147,19 @@ const Incomes = (props) => {
               // ...items.map((el, i) => (
               ...props.incomes.map((el, i) => (
                 <HomeTable
+                  // name={props.categories[el.category]?.name}
+                  // icon={props.categories[el.category]?.icon}
                   category={el.category}
-                  name={props.categories[el.category]?.name}
-                  icon={props.categories[el.category]?.icon}
+                  icon={
+                    props.categories.find((innerEl) => {
+                      return innerEl.docId === el.category;
+                    })?.icon
+                  }
+                  name={
+                    props.categories.find((innerEl) => {
+                      return innerEl.docId === el.category;
+                    })?.name
+                  }
                   description={el.description}
                   date={el.date}
                   money={el.money}

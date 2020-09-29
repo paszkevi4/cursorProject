@@ -89,9 +89,9 @@ const AddCharges = ({
   const handleCloseDialog = (e) => {
     if (e.target.innerText === 'ADD') {
       const gap = total - +money;
-      const gapPercent = ( (total - +money) / totalIncome ) * 100;
-      if (category >= 0 && money) {
-        if (props.showWarning && ((gap <= props.moneyLimit) || (gapPercent <  props.percentLimit )) ) {
+      const gapPercent = ((total - +money) / totalIncome) * 100;
+      if (category && money) {
+        if (props.showWarning && (gap <= props.moneyLimit || gapPercent < props.percentLimit)) {
           const isSure = window.confirm('Are you sure?');
           if (isSure) {
             const temp = {
@@ -111,7 +111,7 @@ const AddCharges = ({
           updateCharge({
             //   name: chargeCategories[category].name,
             //   icon: chargeCategories[category].icon,
-            category: category.docId,
+            category: category,
             description: description,
             date: new Date(date),
             money: +money,
@@ -120,7 +120,6 @@ const AddCharges = ({
           resetInputs();
           handleClickAlert();
           handlePeriodChange();
-
         }
       }
       handlePeriodChange();
@@ -132,9 +131,7 @@ const AddCharges = ({
   };
 
   const handleChange = (event) => {
-    if (typeof event.target.value === 'number') {
-      setCategory(event.target.value);
-    } else if (event.target.id === 'selectName') {
+    if (event.target.id === 'selectName') {
       setName(event.target.value);
     } else if (event.target.id === 'descriptionInput') {
       setDescription(event.target.value);
@@ -142,6 +139,8 @@ const AddCharges = ({
       setDate(event.target.value);
     } else if (event.target.id === 'moneyInput') {
       setMoney(event.target.value);
+    } else {
+      setCategory(event.target.value);
     }
   };
 
@@ -176,8 +175,8 @@ const AddCharges = ({
               onChange={handleChange}
               fullWidth>
               {[
-                ...chargeCategories.map((el, i) => (
-                  <MenuItem key={i} value={i} className={classes.nameSelect}>
+                chargeCategories.map((el, i) => (
+                  <MenuItem key={i} value={el.docId} className={classes.nameSelect}>
                     {el.name}
                   </MenuItem>
                 )),

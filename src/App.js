@@ -5,6 +5,7 @@ import './App.css';
 
 //
 // Redux
+import { initializeAppThunk } from '../src/redux/appReducer';
 import { connect, Provider } from 'react-redux';
 import { setSettingsThunk } from '../src/redux/settingsReducer';
 import { setChargeCategoriesThunk } from '../src/redux/chargeCategoriesReducer';
@@ -24,38 +25,37 @@ import Settings from './components/Settings/SettingsContainer';
 
 const App = (props) => {
   useEffect(() => {
-    props.setSettingsThunk();
-    props.setChargeCategoriesThunk();
-    props.setIncomeCategoriesThunk();
-    props.setChargesThunk();
-    props.fetchIncomesThunk();
+    props.initializeAppThunk();
+    // props.setSettingsThunk();
+    // props.setChargeCategoriesThunk();
+    // props.setIncomeCategoriesThunk();
+    // props.setChargesThunk();
+    // props.fetchIncomesThunk();
   }, []);
 
   return (
     <div className="app">
       <Sidebar />
-      <main>
-        <Route exact path="/">
-          <Redirect to="/homepage" />
-        </Route>
-        <Route path="/homepage" render={() => <HomePage />} />
-        <Route path="/charts" render={() => <Charts />} />
-        <Route path="/categories" render={() => <Categories />} />
-        <Route path="/settings" render={() => <Settings />} />
-      </main>
+      {props.initialized && (
+        <main>
+          <Route exact path="/">
+            <Redirect to="/homepage" />
+          </Route>
+          <Route path="/homepage" render={() => <HomePage />} />
+          <Route path="/charts" render={() => <Charts />} />
+          <Route path="/categories" render={() => <Categories />} />
+          <Route path="/settings" render={() => <Settings />} />
+        </main>
+      )}
     </div>
   );
 };
 
-const AppContainer = connect(null, {
-  setSettingsThunk,
+let mapStateToProps = (state) => ({
+  initialized: state.app.initialized,
+});
 
-  setChargeCategoriesThunk,
-  setIncomeCategoriesThunk,
-
-  setChargesThunk,
-  fetchIncomesThunk,
-})(App);
+const AppContainer = connect(mapStateToProps, { initializeAppThunk })(App);
 
 const MainAppContainer = (props) => {
   return (

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import HomeTable from './HomeTable';
 import useSortTableData from './sortTable';
 import AddCharges from './AddCharges';
-import { createCharge, updateCharge, deleteCharge } from '../../redux/firebase/chargesFB';
+import { createCharge, updateCharge, deleteCharge } from '../../store/firebase/chargesFB';
 
 //
 // Styles

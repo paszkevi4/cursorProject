@@ -1,4 +1,4 @@
-import { db } from './firebase/firebase';
+import { db } from '../firebase/firebase';
 
 const FETCH_CHARGES = 'FETCH_CHARGES';
 const CREATE_CHARGE = 'CREATE_CHARGE';
@@ -40,8 +40,12 @@ type sortChargesACType = {
   wasSorted: boolean;
 };
 
-
-type actionType = fetchChargeACType | createChargeACType | updateChargeACType | deleteChargeACType | sortChargesACType;
+type actionType =
+  | fetchChargeACType
+  | createChargeACType
+  | updateChargeACType
+  | deleteChargeACType
+  | sortChargesACType;
 
 let initialState: Array<chargeType> = [
   { category: 0, description: 'Diner with John', date: new Date(2020, 8, 17), money: 300 },
@@ -79,37 +83,38 @@ const chargesReducer = (state = initialState, action: actionType): Array<chargeT
       state.splice(action.index, 1);
       return [...state];
     case SORT_CHARGES:
-      if(action.sortingBy === 'Category'){
-        if(action.wasSorted){
+      if (action.sortingBy === 'Category') {
+        if (action.wasSorted) {
           console.log('alphabetic');
-        }
-        else{
+        } else {
           console.log('non alphabetic');
         }
-      }
-      else if(action.sortingBy === 'Description'){
-        if(action.wasSorted){
-          return [...state.sort((a: any,b: any) => (a.description?.toUpperCase() < b.description?.toUpperCase())? -1 : 1)]
-        } 
-        else{
-          return [...state.sort((a: any,b: any) => (a.description?.toUpperCase() > b.description?.toUpperCase())? -1 : 1)]
-        }  
-      }
-      else if(action.sortingBy === 'Date'){
-        if(action.wasSorted){
-        return [...state.sort((a: any,b: any) => (a.date.seconds < b.date.seconds)? -1 : 1)]
-        } 
-        else{
-          return [...state.sort((a: any,b: any) => (a.date.seconds > b.date.seconds)? -1 : 1)]
-        }       
-      }
-      else if(action.sortingBy === 'Money'){
-        if(action.wasSorted){
-            return [...state.sort((a: any,b: any) => (a.money < b.money)? -1 : 1)]
-        } 
-        else{
-          return [...state.sort((a: any,b: any) => (a.money > b.money)? -1 : 1)]
-        }       
+      } else if (action.sortingBy === 'Description') {
+        if (action.wasSorted) {
+          return [
+            ...state.sort((a: any, b: any) =>
+              a.description?.toUpperCase() < b.description?.toUpperCase() ? -1 : 1,
+            ),
+          ];
+        } else {
+          return [
+            ...state.sort((a: any, b: any) =>
+              a.description?.toUpperCase() > b.description?.toUpperCase() ? -1 : 1,
+            ),
+          ];
+        }
+      } else if (action.sortingBy === 'Date') {
+        if (action.wasSorted) {
+          return [...state.sort((a: any, b: any) => (a.date.seconds < b.date.seconds ? -1 : 1))];
+        } else {
+          return [...state.sort((a: any, b: any) => (a.date.seconds > b.date.seconds ? -1 : 1))];
+        }
+      } else if (action.sortingBy === 'Money') {
+        if (action.wasSorted) {
+          return [...state.sort((a: any, b: any) => (a.money < b.money ? -1 : 1))];
+        } else {
+          return [...state.sort((a: any, b: any) => (a.money > b.money ? -1 : 1))];
+        }
       }
     default:
       return state;
@@ -140,7 +145,7 @@ export const deleteChargeAC = (index: number): deleteChargeACType => ({
 export const sortChargesAC = (sortingBy: string, wasSorted: boolean): sortChargesACType => ({
   type: SORT_CHARGES,
   sortingBy,
-  wasSorted
+  wasSorted,
 });
 
 // THUNK

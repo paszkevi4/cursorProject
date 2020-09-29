@@ -20,7 +20,7 @@ import {
   createChargeCategory,
   updateChargeCategory,
   deleteChargeCategory,
-} from '../../redux/firebase/chargeCategoriesFB';
+} from '../../store/firebase/chargeCategoriesFB';
 import { TableStyles } from '../Styles';
 
 const useStyles = makeStyles(TableStyles);

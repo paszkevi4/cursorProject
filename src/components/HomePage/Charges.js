@@ -42,7 +42,7 @@ const Charges = (props) => {
   }, [props.charges, filteredBy]);
 
   const handlePeriodChange = (filteredBy = 'FULL_PERIOD') => {
-    if (+filteredBy === 7 || +filteredBy === 30) {
+    if (+filteredBy === 1 || +filteredBy === 7 || +filteredBy === 30) {
       let milliseconds = +filteredBy * 24 * 60 * 60 * 1000;
       let currentDate = new Date();
       let time = currentDate.setTime(currentDate.getTime() - milliseconds);
@@ -52,7 +52,7 @@ const Charges = (props) => {
         }),
       );
     } else if (filteredBy === 'FULL_PERIOD') {
-      return setFiltered([...props.charges]); //items
+      return setFiltered([...props.charges]);
     }
   };
 
@@ -88,6 +88,7 @@ const Charges = (props) => {
             onChange={(event) => setFilteredBy(event.target.value)}
             className="btn btn-sm btn-outline-secondary dropdown-toggle"
             defaultValue={'FULL_PERIOD'}>
+            <option value="1">Today</option>
             <option value="7">This Week</option>
             <option value="30">This Month</option>
             <option value="FULL_PERIOD">Full period</option>

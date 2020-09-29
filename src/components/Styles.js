@@ -11,6 +11,9 @@ export const ModalStyles = {
   iconPicker: {
     color: "grey",
   },
+  chargeConfirm:{
+    zIndex: '999999999'
+  }
 };
 
 export const TabsAreaStyles = {

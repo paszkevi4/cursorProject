@@ -63,6 +63,7 @@ const HomePage = (props) => {
                 deleteMoney={props.deleteCharge}
                 updateCharge={props.updateCharge}
                 createCharge={props.createCharge}
+                sortCharges={props.sortCharges}
                 avatar={props.avatar}
                 total={totalCounter(props.incomes, props.charges)}
                 totalIncome={totalIncomes(props.incomes)}
@@ -79,6 +80,7 @@ const HomePage = (props) => {
                 updateIncome={props.updateIncome}
                 createIncome={props.createIncome}
                 avatar={props.avatar}
+                sortIncomes={props.sortIncomes}
               />
             )}
           />

@@ -134,6 +134,17 @@ const AddCategory = ({
         <DialogTitle id="add-category-title">{"ADD NEW CATEGORY"}</DialogTitle>
         <DialogContent className={classes.window}>
           <div className={classes.pickersBlock}>
+          <TextField
+              className={classes.datePicker}
+              margin="dense"
+              id="datePicker"
+              label="Current date*"
+              type="date"
+              fullWidth
+              onChange={handleChange}
+              value={date}
+              error={date.length !== 10 ? true : false}
+            />
             <TextField
               autoFocus
               className={classes.iconPicker}
@@ -154,17 +165,7 @@ const AddCategory = ({
                 )),
               ]}
             </TextField>
-            <TextField
-              className={classes.datePicker}
-              margin="dense"
-              id="datePicker"
-              label="Current date*"
-              type="date"
-              fullWidth
-              onChange={handleChange}
-              value={date}
-              error={date.length !== 10 ? true : false}
-            />
+            
           </div>
           <div>
             <TextField

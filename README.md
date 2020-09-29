@@ -57,7 +57,7 @@ PDF - https://trostinsky.github.io/cursor-new-materials/project.pdf
 
 We are focused on makeing our application more fine-tuned so you can always define your personal information:
 To change the avatar simply click on it and upload any picture you want.
-Also, you can set up your phone if you want to. But dont worry we are not going to call you in any case.
+Also, you can set up your phone if you want to. But dont worry we are not going to disturb you in any case.
 
 And one of the best feature that makes Money Tracker unique: you can set up warnings to be aware if your budget goes low.
 Your header will turn green or red depends on your balnce, so you won't be able to miss the time you have to stop spending.

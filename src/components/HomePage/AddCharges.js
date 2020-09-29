@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { makeStyles } from "@material-ui/core/styles";
+
 import {
   MenuItem,
   Button,
@@ -12,7 +12,7 @@ import {
   Snackbar,
 } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
-
+import { makeStyles } from "@material-ui/core/styles";
 import { ModalStyles } from "../Styles";
 
 function Alert(props) {
@@ -38,7 +38,6 @@ const AddCharges = ({
   chargeCategories,
   total,
   totalIncome,
-  // handlePeriodChange,
   ...props
 }) => {
   const classes = useStyles();
@@ -91,13 +90,10 @@ const AddCharges = ({
           handleClose();
           resetInputs();
           handleClickAlert();
-          // handlePeriodChange();
         }
         return null;
       } else {
         updateCharge({
-          //   name: chargeCategories[category].name,
-          //   icon: chargeCategories[category].icon,
           category: category,
           description: description,
           date: new Date(date),
@@ -106,10 +102,8 @@ const AddCharges = ({
         handleClose();
         resetInputs();
         handleClickAlert();
-        // handlePeriodChange();
       }
     }
-    // handlePeriodChange();
   };
 
   const handleCloseDialog = (e) => {

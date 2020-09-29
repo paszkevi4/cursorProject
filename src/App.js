@@ -1,36 +1,26 @@
-import React, { useEffect } from 'react';
-import { HashRouter, Route, Redirect } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { HashRouter, Route, Redirect } from "react-router-dom";
 
-import './App.css';
+import "./App.css";
 
 //
 // Redux
-import { initializeAppThunk } from '../src/redux/appReducer';
-import { connect, Provider } from 'react-redux';
-import { setSettingsThunk } from '../src/redux/settingsReducer';
-import { setChargeCategoriesThunk } from '../src/redux/chargeCategoriesReducer';
-import { setIncomeCategoriesThunk } from '../src/redux/incomeCategoriesReducer';
-import { setChargesThunk } from '../src/redux/chargesReducer';
-import { fetchIncomesThunk } from '../src/redux/incomesReducer';
+import { initializeAppThunk } from "../src/redux/appReducer";
+import { connect, Provider } from "react-redux";
 
-import store from './redux/store';
+import store from "./redux/store";
 
 //
 // Components
-import Sidebar from './components/Navbar/Navbar';
-import HomePage from './components/HomePage/HomePageContainer';
-import Charts from './components/Charts/ChartsContainer';
-import Categories from './components/Categories/CategoriesContainer';
-import Settings from './components/Settings/SettingsContainer';
+import Sidebar from "./components/Navbar/Navbar";
+import HomePage from "./components/HomePage/HomePageContainer";
+import Charts from "./components/Charts/ChartsContainer";
+import Categories from "./components/Categories/CategoriesContainer";
+import Settings from "./components/Settings/SettingsContainer";
 
 const App = (props) => {
   useEffect(() => {
     props.initializeAppThunk();
-    // props.setSettingsThunk();
-    // props.setChargeCategoriesThunk();
-    // props.setIncomeCategoriesThunk();
-    // props.setChargesThunk();
-    // props.fetchIncomesThunk();
   }, []);
 
   return (

@@ -43,28 +43,7 @@ type sortChargesACType = {
 
 type actionType = fetchChargeACType | createChargeACType | updateChargeACType | deleteChargeACType | sortChargesACType;
 
-let initialState: Array<chargeType> = [
-  { category: 0, description: 'Diner with John', date: new Date(2020, 8, 17), money: 300 },
-  { category: 1, description: 'For clothes', date: new Date(2020, 8, 16), money: 500 },
-  { category: 2, description: '', date: new Date(2020, 8, 14), money: 470 },
-  {
-    category: 3,
-    description: 'Its a looooooooooooooooooooooooooooooong description',
-    date: new Date(2020, 8, 13),
-    money: 390,
-  },
-  { category: 4, description: '', date: new Date(2020, 8, 12), money: 150 },
-  { category: 0, description: 'Diner with John', date: new Date(2020, 8, 2), money: 300 },
-  { category: 1, description: 'For clothes', date: new Date(2020, 7, 28), money: 500 },
-  { category: 2, description: '', date: new Date(2020, 7, 26), money: 470 },
-  {
-    category: 3,
-    description: 'Its a looooooooooooooooooooooooooooooong description',
-    date: new Date(2020, 7, 24),
-    money: 390,
-  },
-  { category: 4, description: '', date: new Date(2020, 7, 22), money: 150 },
-];
+let initialState: Array<chargeType> = [];
 
 const chargesReducer = (state = initialState, action: actionType): Array<chargeType> => {
   switch (action.type) {
@@ -81,11 +60,11 @@ const chargesReducer = (state = initialState, action: actionType): Array<chargeT
     case SORT_CHARGES:
       if(action.sortingBy === 'Category'){
         if(action.wasSorted){
-          console.log('alphabetic');
-        }
+          return [...state.sort((a: any,b: any) => (a.category.toUpperCase() < b.category.toUpperCase())? -1 : 1)]
+        } 
         else{
-          console.log('non alphabetic');
-        }
+          return [...state.sort((a: any,b: any) => (a.category.toUpperCase() > b.category.toUpperCase())? -1 : 1)]
+        }  
       }
       else if(action.sortingBy === 'Description'){
         if(action.wasSorted){

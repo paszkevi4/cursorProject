@@ -1,28 +1,21 @@
-import React from 'react';
-import { HashRouter, NavLink, Redirect, Route } from 'react-router-dom';
+import React from "react";
+import { HashRouter, NavLink, Redirect, Route } from "react-router-dom";
 
-//
 // Styles
-import './HomePage.css';
-import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
+import "./HomePage.css";
+import Button from "@material-ui/core/Button";
+import { makeStyles } from "@material-ui/core/styles";
 
-//
 // Components
-import Charges from './Charges';
-import Incomes from './Incomes';
-import Header from '../Common/Header/HedaerContainer';
+import Charges from "./Charges";
+import Incomes from "./Incomes";
+import Header from "../Common/Header/HeaderContainer";
 
 //
-//
-//
-import { totalCounter } from '../Common/Functions';
-import { totalIncomes } from '../Common/Functions';
-import { TabsAreaStyles } from '../Styles';
-//
-// totalCounter(props.incomes, props.charges)
-//
-//
+import { totalCounter } from "../Common/Functions";
+import { totalIncomes } from "../Common/Functions";
+import { TabsAreaStyles } from "../Styles";
+
 const useStyles = makeStyles(TabsAreaStyles);
 
 const HomePage = (props) => {
@@ -36,7 +29,8 @@ const HomePage = (props) => {
             <NavLink
               to="/homepage/charges"
               className={classes.toggleButton}
-              activeClassName={classes.toggleButtonActive}>
+              activeClassName={classes.toggleButtonActive}
+            >
               Charges
             </NavLink>
           </Button>
@@ -44,7 +38,8 @@ const HomePage = (props) => {
             <NavLink
               to="/homepage/incomes"
               className={classes.toggleButton}
-              activeClassName={classes.toggleButtonActive}>
+              activeClassName={classes.toggleButtonActive}
+            >
               Incomes
             </NavLink>
           </Button>

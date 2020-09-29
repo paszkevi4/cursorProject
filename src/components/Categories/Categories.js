@@ -1,14 +1,14 @@
-import React from 'react';
-import { NavLink, Route, HashRouter, Redirect } from 'react-router-dom';
+import React from "react";
+import { NavLink, Route, HashRouter, Redirect } from "react-router-dom";
 
-import Charges from './Charges';
-import Incomes from './Incomes';
-import Header from '../Common/Header/HedaerContainer';
+import Charges from "./Charges";
+import Incomes from "./Incomes";
+import Header from "../Common/Header/HeaderContainer";
 
-import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
+import Button from "@material-ui/core/Button";
+import { makeStyles } from "@material-ui/core/styles";
 
-import {TabsAreaStyles } from '../Styles';
+import { TabsAreaStyles } from "../Styles";
 
 const useStyles = makeStyles(TabsAreaStyles);
 
@@ -17,22 +17,14 @@ const Categories = (props) => {
   return (
     <HashRouter>
       <div className={classes.Categories}>
-        {/* <div className={classes.headerBlock}>
-          <div>
-            <h2>Categories</h2>
-          </div>
-          <div className={classes.balanceBlock}>
-            <div className={classes.balanceTitle}>Balance</div>
-            <div className={classes.balanceAmount}>$2,652.07</div>
-          </div>
-        </div> */}
         <Header title="Categories" />
         <div className={classes.sectionToggle}>
           <Button color="primary">
             <NavLink
               to="/categories/charges"
               className={classes.toggleButton}
-              activeClassName={classes.toggleButtonActive}>
+              activeClassName={classes.toggleButtonActive}
+            >
               Charges
             </NavLink>
           </Button>
@@ -40,7 +32,8 @@ const Categories = (props) => {
             <NavLink
               to="/categories/incomes"
               className={classes.toggleButton}
-              activeClassName={classes.toggleButtonActive}>
+              activeClassName={classes.toggleButtonActive}
+            >
               Incomes
             </NavLink>
           </Button>
@@ -49,8 +42,14 @@ const Categories = (props) => {
           <Route exact path="/categories/">
             <Redirect to="/categories/charges" />
           </Route>
-          <Route path="/categories/charges" render={() => <Charges props={props} />} />
-          <Route path="/categories/incomes" render={() => <Incomes props={props} />} />
+          <Route
+            path="/categories/charges"
+            render={() => <Charges props={props} />}
+          />
+          <Route
+            path="/categories/incomes"
+            render={() => <Incomes props={props} />}
+          />
         </div>
       </div>
     </HashRouter>

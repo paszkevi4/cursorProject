@@ -3,7 +3,12 @@ import React, { useState } from "react";
 import AddCategory from "./AddCategory";
 import Category from "./Category";
 
-import { makeStyles } from "@material-ui/core/styles";
+import {
+  createIncomeCategory,
+  updateIncomeCategory,
+  deleteIncomeCategory,
+} from "../../redux/firebase/incomeCategoriesFB";
+
 import {
   Button,
   Table,
@@ -14,15 +19,9 @@ import {
   TableRow,
   Paper,
 } from "@material-ui/core/";
+import { makeStyles } from "@material-ui/core/styles";
+import { TableStyles } from "../Styles";
 import AddIcon from "@material-ui/icons/Add";
-
-import {
-  createIncomeCategory,
-  updateIncomeCategory,
-  deleteIncomeCategory,
-} from "../../redux/firebase/incomeCategoriesFB";
-import {TableStyles} from '../Styles'
-
 
 const useStyles = makeStyles(TableStyles);
 
@@ -67,13 +66,13 @@ const Incomes = ({ props }) => {
           </TableHead>
           <TableBody>
             {[
-              ...props.incomeCategories.map((el, i, arr) => (
+              ...props.incomeCategories.map((el, i) => (
                 <Category
                   name={el.name}
                   description={el.description}
                   date={el.date}
                   icon={el.icon}
-                  key={`${el.name}${i}`}
+                  key={i}
                   deleteCategory={() => {
                     deleteIncomeCategory(el.docId);
                   }}

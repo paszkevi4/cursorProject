@@ -134,7 +134,7 @@ const AddCategory = ({
         <DialogTitle id="add-category-title">{"ADD NEW CATEGORY"}</DialogTitle>
         <DialogContent className={classes.window}>
           <div className={classes.pickersBlock}>
-          <TextField
+            <TextField
               className={classes.datePicker}
               margin="dense"
               id="datePicker"
@@ -165,7 +165,6 @@ const AddCategory = ({
                 )),
               ]}
             </TextField>
-            
           </div>
           <div>
             <TextField

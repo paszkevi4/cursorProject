@@ -1,6 +1,5 @@
-import React from 'react';
-import Categories from './Categories';
-import { connect } from 'react-redux';
+import Categories from "./Categories";
+import { connect } from "react-redux";
 
 let mapStateToProps = (state) => {
   return {

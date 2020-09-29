@@ -62,63 +62,66 @@ const Charts = ({ incomes, charges, incomeCategories, chargeCategories }) => {
   const fullCharges = chargeCategories.slice();
 
   fullIncomes.forEach((el, i) => {
-    el.id = i;
+    el.id = el.docId;
     el.sum = 0;
   });
 
   fullCharges.forEach((el, i) => {
-    el.id = i;
+    el.id = el.docId;
     el.sum = 0;
   });
 
   incomes.map((el) => {
     allMoney.push(+el.money);
-    if (Math.ceil(Math.abs(el.date - new Date().getTime()) / (1000 * 3600 * 24)) < activePeriod) {
+    if (
+      Math.ceil(Math.abs(new Date(el.date * 1000).getDate() - new Date().getDate()) < activePeriod)
+    ) {
       trueDataIncomes.push(el);
       trueMoneyIncomes.push(el.money);
       allMoney.push(+el.money);
-
-      if (fullIncomes[el.category]) {
-        fullIncomes[el.category].sum += el.money;
+      if (fullIncomes.find((innerEl) => innerEl.docId === el.category)) {
+        fullIncomes.find((innerEl) => innerEl.docId === el.category).sum += el.money;
       }
     }
 
-    if (Math.ceil(Math.abs(el.date - new Date().getTime()) / (1000 * 3600 * 24)) < 8) {
+    if (Math.ceil(Math.abs(new Date(el.date * 1000).getDate() - new Date().getDate()) < 8)) {
       lastWeekIn += el.money;
     }
     if (
-      Math.ceil(Math.abs(el.date - new Date().getTime()) / (1000 * 3600 * 24)) >= 8 &&
-      Math.ceil(Math.abs(el.date - new Date().getTime()) / (1000 * 3600 * 24)) < 15
+      Math.ceil(Math.abs(new Date(el.date * 1000).getDate() - new Date().getDate())) >= 8 &&
+      Math.ceil(Math.abs(new Date(el.date * 1000).getDate() - new Date().getDate())) < 15
     ) {
       penultimateWeekIn += el.money;
     }
   });
 
   charges.map((el) => {
-    if (Math.ceil(Math.abs(el.date - new Date().getTime()) / (1000 * 3600 * 24)) < activePeriod) {
+    if (
+      Math.ceil(Math.abs(new Date(el.date * 1000).getDate() - new Date().getDate()) < activePeriod)
+    ) {
       trueDataCharges.push(el);
       trueMoneyCharges.push(el.money);
       allMoney.push(+el.money);
 
-      if (fullCharges[el.category]) {
-        fullCharges[el.category].sum += el.money;
+      if (fullCharges.find((innerEl) => innerEl.docId === el.category)) {
+        fullCharges.find((innerEl) => innerEl.docId === el.category).sum += el.money;
       }
     }
 
-    if (Math.ceil(Math.abs(el.date - new Date().getTime()) / (1000 * 3600 * 24)) < 8) {
+    if (Math.ceil(Math.abs(new Date(el.date * 1000).getDate() - new Date().getDate()) < 8)) {
       lastWeekOut += el.money;
     }
     if (
-      Math.ceil(Math.abs(el.date - new Date().getTime()) / (1000 * 3600 * 24)) >= 8 &&
-      Math.ceil(Math.abs(el.date - new Date().getTime()) / (1000 * 3600 * 24)) < 15
+      Math.ceil(Math.abs(new Date(el.date * 1000).getDate() - new Date().getDate())) >= 8 &&
+      Math.ceil(Math.abs(new Date(el.date * 1000).getDate() - new Date().getDate())) < 15
     ) {
       penultimateWeekOut += el.money;
     }
   });
 
   allDates.forEach((d) => {
-    let elIn = trueDataIncomes.find((el) => el.date.toLocaleDateString().slice(0, 5) === d);
-    let elOut = trueDataCharges.find((el) => el.date.toLocaleDateString().slice(0, 5) === d);
+    let elIn = trueDataIncomes.find((el) => new Date(el.date * 1000).getDate() == d.slice(0, 2));
+    let elOut = trueDataCharges.find((el) => new Date(el.date * 1000).getDate() == d.slice(0, 2));
     if (elIn) {
       moneyIn.push(elIn.money);
     } else {

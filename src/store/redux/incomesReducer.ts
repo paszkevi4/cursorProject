@@ -1,4 +1,4 @@
-import { db } from './firebase/firebase';
+import { db } from '../firebase/firebase';
 
 const FETCH_INCOMES = 'FETCH_INCOMES';
 const CREATE_INCOME = 'SET_INCOME';

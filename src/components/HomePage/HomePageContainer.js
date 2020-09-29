@@ -1,17 +1,20 @@
 import HomePage from "./HomePage";
 import { connect } from "react-redux";
+
 import {
   createChargeAC,
   updateChargeAC,
   deleteChargeAC,
   sortChargesAC,
 } from "../../redux/chargesReducer";
+
 import {
   createIncomeAC,
   updateIncomeAC,
   deleteIncomeAC,
   sortIncomesAC,
 } from "../../redux/incomesReducer";
+
 
 let mapStateToProps = (state) => {
   return {

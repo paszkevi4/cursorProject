@@ -29,7 +29,7 @@ const Header = (props) => {
       <div className={style.header_category}>
         <h2>{props.title}</h2>
       </div>
-      {toWarn && <p> BE aware of low budget</p>}
+      {toWarn && <p>Be aware of low budget</p>}
       <div className={style.header_balance}>
         <h2 className={style.header_balance__title}>Balance</h2>
         <h1 className={style.header_balance__amount}>

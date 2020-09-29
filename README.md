@@ -47,4 +47,33 @@ PDF - https://trostinsky.github.io/cursor-new-materials/project.pdf
 
 - Построить прогностический график на основании доходов/расходов на странице графики. Модель прогнозирования можно выбрать любую, лучше выбирайте какие-то простые линейные модели.Например можно брать медианное и среднее значение за разные недели и смотреть динамику
 
+# Team#1. Money Tracker
+
+#### Thank you for your attention to our project.
+
+## About Money Tracker
+
+### Personalization
+
+We are focused on makeing our application more fine-tuned so you can always define your personal information:
+To change the avatar simply click on it and upload any picture you want.
+Also, you can set up your phone if you want to. But dont worry we are not going to disturb you in any case.
+
+And one of the best feature that makes Money Tracker unique: you can set up warnings to be aware if your budget goes low.
+Your header will turn green or red depends on your balnce, so you won't be able to miss the time you have to stop spending.
+It can be both money and percent amount, or you can even turn warnings at all!!
+
+### Categories
+
+To make it easier to store your charges and incomes we created something called categories. 
+You can create any category you can imagine using our collection of best icons we researched just for you.
+You can store any amount of categories and remove them anytime: your charges will stay stored.
+
+### Charts
+
+After all you can visit your beautiful chart page to check pattern of your spendings and incomes.
+And the last but not least: 
+You can even see the prediction for your future money flow. 
+#### But keep in mind, it depends only on you, so keep abreast of your spendings and incomes. 
+
 ![alt text](https://r.jpg)

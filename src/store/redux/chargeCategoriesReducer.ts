@@ -1,4 +1,4 @@
-import { db } from './firebase/firebase';
+import { db } from '../firebase/firebase';
 import { icons } from './iconsReducer';
 
 const FETCH_CATEGORIES = 'FETCH_CHARGE_CATEGORIES';

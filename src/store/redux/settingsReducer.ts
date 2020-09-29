@@ -1,4 +1,4 @@
-import { db } from './firebase/firebase';
+import { db } from '../firebase/firebase';
 
 const UPDATE_USER = 'UPDATE_USER';
 const UPDATE_USER_NAME = 'UPDATE_USER_NAME';

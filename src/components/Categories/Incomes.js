@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import AddCategory from "./AddCategory";
-import Category from "./Category";
+import AddCategory from './AddCategory';
+import Category from './Category';
 
 import {
   createIncomeCategory,
@@ -23,6 +23,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { TableStyles } from "../Styles";
 import AddIcon from "@material-ui/icons/Add";
 
+
 const useStyles = makeStyles(TableStyles);
 
 const Incomes = ({ props }) => {
@@ -43,8 +44,7 @@ const Incomes = ({ props }) => {
           variant="contained"
           color="primary"
           startIcon={<AddIcon />}
-          onClick={handleClickOpen}
-        >
+          onClick={handleClickOpen}>
           Add more
         </Button>
       </div>
